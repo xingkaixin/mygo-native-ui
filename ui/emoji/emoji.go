@@ -88,9 +88,6 @@ type State struct {
 	list   ui.ListState
 	picked string
 	hover  string
-	// refocus gives the search field the focus back in the next frame,
-	// after a click on a tab or an emoji took it, so typing searches.
-	refocus bool
 }
 
 // Picked returns the emoji picked in the picker built last, in this
@@ -180,10 +177,6 @@ func Picker(c *ui.Context, s *State) ui.Element {
 		ui.Box(c).Padding(t.Space(2), t.Space(2), t.Space(1)).Children(func() {
 			// A SearchField would take the focus in its box, not its text.
 			search := ui.TextInput(c, &s.query).Placeholder("Search").Label("Search emoji").AutoFocus()
-			if s.refocus {
-				search.Focus()
-				s.refocus = false
-			}
 			if search.Shortcut(0, ui.KeyEscape) && s.query != "" {
 				s.query = ""
 				search.SetChanged()
@@ -201,14 +194,14 @@ func Picker(c *ui.Context, s *State) ui.Element {
 		}
 		ui.Row(c).Padding(0, t.Space(2)).Justify(ui.SpaceBetween).Children(func() {
 			for i, g := range groups {
-				tab := ui.ButtonBase(c).Size(t.Space(7), t.Space(7)).Radius(t.Space(1.5)).Label(g.name)
+				tab := ui.ButtonBase(c).Size(t.Space(7), t.Space(7)).Radius(t.Space(1.5)).Label(g.name).KeepFocus()
 				if i == current && s.query == "" {
 					tab.Background(t.Text.Alpha(0.1))
 				} else {
 					tab.Opacity(0.6)
 				}
 				if tab.Clicked() {
-					s.query, s.refocus = "", true
+					s.query = ""
 					s.list.ScrollTo(slices.IndexFunc(rows, func(r row) bool { return r.group == i }), ui.Start)
 				}
 				tab.Children(func() { ui.Text(c, g.icon).FontSize(t.FontSize + 2) })
@@ -224,14 +217,13 @@ func Picker(c *ui.Context, s *State) ui.Element {
 			}
 			ui.Row(c).Children(func() {
 				for _, e := range r.emoji {
-					b := ui.ButtonBase(c.Key(e.char)).Size(cell, cell).Radius(t.Space(1.5)).Label(e.name)
+					b := ui.ButtonBase(c.Key(e.char)).Size(cell, cell).Radius(t.Space(1.5)).Label(e.name).KeepFocus()
 					if b.Hovered() {
 						b.Background(t.Text.Alpha(0.08))
 						hover = e.char
 					}
 					if b.Clicked() {
 						s.pick(e.char)
-						s.refocus = true
 					}
 					b.Children(func() { ui.Text(c, e.char).FontSize(t.FontSize * 1.7) })
 				}
