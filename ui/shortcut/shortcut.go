@@ -96,6 +96,16 @@ func Keys(c *ui.Context, s Shortcut) ui.Element {
 	return row
 }
 
+// MenuText returns s as a menu writes it beside an item: ⇧⌘K on macOS,
+// Ctrl+Shift+K elsewhere, and "" for the zero Shortcut.
+func (s Shortcut) MenuText() string {
+	sep := "+"
+	if mac {
+		sep = ""
+	}
+	return strings.Join(labels(s), sep)
+}
+
 // recorder is what a field keeps from frame to frame: whether it records,
 // and the shortcut its input recorded since the last frame, to write
 // through the field's pointer as it builds.
