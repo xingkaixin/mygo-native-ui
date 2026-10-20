@@ -78,6 +78,8 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/worldmap`](ui/worldmap) | World choropleth in the Equal Earth projection: countries by value on a linear or log scale, a legend, the country under the pointer named, zoom and pan. Embeds Natural Earth's 1:110m countries ([public domain](https://www.naturalearthdata.com/about/terms-of-use/)). | [`examples/worldmap`](examples/worldmap) |
 | [`ui/pixelart`](ui/pixelart) | Pixel art editor: pencil, eraser, fill, lines, rectangles and an eyedropper on two buttons, mirroring, a palette, undo by stroke, zoom, and export at whole multiples. | [`examples/pixelart`](examples/pixelart) |
 | [`ui/compare`](ui/compare) | Before and after pictures: a slider, side by side, onion skin and changed pixels with their count, zoomed and panned together. | [`examples/compare`](examples/compare) |
+| [`ui/forcegraph`](ui/forcegraph) | Force-directed graph, as a notes app's graph view: nodes sized by links and colored by group, neighbors lit on hover, dragging, zoom and pan, positions kept as data changes. | [`examples/forcegraph`](examples/forcegraph) |
+| [`ui/terminal`](ui/terminal) | Terminal emulator, an xterm subset for shells, less, vim and top: 16, 256 and RGB colors, wide characters, line drawing, the alternate screen, scrollback, selection and copy, and bracketed paste. | [`examples/terminal`](examples/terminal) |
 
 ### Menu bar
 
@@ -178,6 +180,8 @@ go run ./examples/candles
 go run ./examples/worldmap
 go run ./examples/pixelart
 go run ./examples/compare [before.png after.png]
+go run ./examples/forcegraph
+go run ./examples/terminal
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
