@@ -80,6 +80,29 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/compare`](ui/compare) | Before and after pictures: a slider, side by side, onion skin and changed pixels with their count, zoomed and panned together. | [`examples/compare`](examples/compare) |
 | [`ui/forcegraph`](ui/forcegraph) | Force-directed graph, as a notes app's graph view: nodes sized by links and colored by group, neighbors lit on hover, dragging, zoom and pan, positions kept as data changes. | [`examples/forcegraph`](examples/forcegraph) |
 | [`ui/terminal`](ui/terminal) | Terminal emulator, an xterm subset for shells, less, vim and top: 16, 256 and RGB colors, wide characters, line drawing, the alternate screen, scrollback, selection and copy, and bracketed paste. | [`examples/terminal`](examples/terminal) |
+| [`ui/uptime`](ui/uptime) | Uptime bars, as on status pages: a banner of how the services are, a row a service with its status and uptime, a bar a day over 90, 60 or 30 days as the width allows, and a card of the day's uptime and incidents on hover. | [`examples/uptime`](examples/uptime) |
+| [`ui/masonry`](ui/masonry) | Masonry board, as Pinterest's: as many columns as fit, each item below the shortest, only the items in view built, reflowing with the top item kept in view. | [`examples/masonry`](examples/masonry) |
+| [`ui/tour`](ui/tour) | Onboarding tour over the app's own UI: the window dimmed around a cut-out that glides from step to step, a popover with the step, "2 of 5", Back, Next and Skip, arrow keys and Esc, targets scrolled into view. | [`examples/tour`](examples/tour) |
+| [`ui/jsondiff`](ui/jsondiff) | Structural diff of two JSON documents in one tree: members added, removed and changed (old → new), arrays by index, unchanged parts folded, counts of each, next and previous change by keys, the JSONPath of the chosen row, and parse errors with their line and column. | [`examples/jsondiff`](examples/jsondiff) |
+| [`ui/orderbook`](ui/orderbook) | Order book: asks above and bids below the mid price and spread, running totals with depth bars, prices grouped by a tick, sizes flashing as they change, a click reporting a level's price, and a depth chart with a crosshair. | [`examples/orderbook`](examples/orderbook) |
+| [`ui/blame`](ui/blame) | Git blame view from `git blame --porcelain`: highlighted lines, each run from one commit with its summary, author and age, a bar deeper for newer commits, a card of the commit on hover, and its lines lit by a click. | [`examples/blame`](examples/blame) |
+| [`ui/filterbuilder`](ui/filterbuilder) | Filter builder, as Notion's and Airtable's: conditions joined by And or Or, nested groups, operators and inputs by field type, and incomplete conditions marked and ignored by Match. | [`examples/filterbuilder`](examples/filterbuilder) |
+| [`ui/certview`](ui/certview) | X.509 certificate chain viewer: whether it verifies against the system roots and why not, the chain from leaf to root, names, validity as a bar with the days left, alternative names, key, signature, usages, and fingerprints to copy. | [`examples/certview`](examples/certview) |
+| [`ui/queryplan`](ui/queryplan) | PostgreSQL query plan from `EXPLAIN (FORMAT JSON)`: a foldable tree with estimated and actual rows, misestimates flagged by their factor, loops, self and total time, cost, each node's share with the slowest marked, and the chosen node's properties. | [`examples/queryplan`](examples/queryplan) |
+| [`ui/minimap`](ui/minimap) | Code minimap beside mygo's editor, as Visual Studio Code's: lines in their tokens' colors, a box over the lines in view dragged to scroll, a click jumping there, and marks for matches, problems and changed lines. | [`examples/minimap`](examples/minimap) |
+| [`ui/merge`](ui/merge) | Merge conflict resolver for git's markers: Current and Incoming side by side with the diff3 base between, the words that differ highlighted, Accept Current, Incoming or both in either order or edit by hand, "2 of 5 conflicts left" with next and previous, and unchanged lines folded. | [`examples/merge`](examples/merge) |
+| [`ui/carousel`](ui/carousel) | Horizontally paged views: dragging or trackpad scrolling with spring snapping, flicks and rubber-banding, arrows on hover, page dots, and ← and →. | [`examples/carousel`](examples/carousel) |
+| [`ui/pivot`](ui/pivot) | Pivot table over records: fields dragged or clicked into Rows, Columns and Values, sum, count, average, min and max, nested groups that fold with subtotals and totals, sorting by label or by a column, and frozen headers. | [`examples/pivot`](examples/pivot) |
+| [`ui/dock`](ui/dock) | IDE-style docking layout: resizable splits down to tabbed panel groups, tabs dragged to join a group, split it at an edge or dock along a side, a translucent preview of where they land, and closing with × or the middle button. | [`examples/dock`](examples/dock) |
+| [`ui/dashboard`](ui/dashboard) | Widget grid, as Grafana's dashboards: widgets dragged by their titles with a placeholder where they land, the others pushed down and the layout packed upward, resized from a corner by whole cells, and widgets moved aside sliding into place. | [`examples/dashboard`](examples/dashboard) |
+| [`ui/sunburst`](ui/sunburst) | Sunburst of sizes, as of a folder: rings of arcs as wide as their share, colored by branch, a click zooming into an arc and the middle back out, and the path, size and share of the item under the pointer in the middle. | [`examples/sunburst`](examples/sunburst) |
+| [`ui/globe`](ui/globe) | Globe in the orthographic projection: worldmap's countries, a graticule, labeled markers and great-circle arcs hidden beyond the horizon, dragging to turn it with inertia, the wheel to zoom, and the country under the pointer named. | [`examples/globe`](examples/globe) |
+| [`ui/whiteboard`](ui/whiteboard) | Infinite whiteboard, as tldraw and FigJam: sticky notes, rectangles, ellipses, text, pen strokes and arrows that stay joined to shapes; zoom and pan over a dot grid, marquee selection, moves that snap with guides, resize handles, text edited in place, and undo. | [`examples/whiteboard`](examples/whiteboard) |
+| [`ui/orgchart`](ui/orgchart) | Organization chart: cards with an avatar, name and title in their team's color, elbow lines from managers to reports, people with no reports stacked under their manager, folding with the count under each, zoom, pan and fit, and arrow keys between people. | [`examples/orgchart`](examples/orgchart) |
+| [`ui/pianokeys`](ui/pianokeys) | Playable piano keyboard: the mouse gliding across keys with velocity by height, computer keys with octave shifts, held and app-lit notes, note on and off in the same frame, and the chord name. | [`examples/pianokeys`](examples/pianokeys) |
+| [`ui/statechart`](ui/statechart) | State machine from Mermaid's stateDiagram-v2, run in place: states laid out left to right with few crossings, arrows named by their events, a composite state in a box, the current state lit, a button for each event it takes, and the last steps. | [`examples/statechart`](examples/statechart) |
+| [`ui/colorwheels`](ui/colorwheels) | Color grading wheels: lift, gamma and gain discs, each with a puck and a luminance slider, and Apply to grade a picture. | [`examples/colorwheels`](examples/colorwheels) |
+| [`ui/player`](ui/player) | Media transport controls: play and pause, skipping 10 seconds, a scrubber with buffered ranges, chapter gaps and a hover readout of time and chapter, elapsed and total or remaining time, a speed menu, a volume slider with mute, and keyboard shortcuts. | [`examples/player`](examples/player) |
 
 ### Menu bar
 
@@ -110,6 +133,8 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/queue`](ui/queue) | Messages sent while an agent works, queued above the field: "3 queued", which folds, Edit in place, Send now and Remove, and reordering by dragging. | [`examples/agent`](examples/agent) |
 | [`ui/modelpicker`](ui/modelpicker) | Model selector for a prompt input: a searchable list grouped by provider, with vision, tools and reasoning icons, the context window and the price in and out. | [`examples/agent`](examples/agent) |
 | [`ui/checkpoint`](ui/checkpoint) | A checkpoint between turns: a rule with its time and what it covers, and Restore, which asks in place. | [`examples/chat`](examples/chat) |
+| [`ui/promptvars`](ui/promptvars) | Prompt template editor: `{{variables}}` highlighted in the template, a field for each in order, those without a value marked, and a filled-in preview to copy. | [`examples/promptvars`](examples/promptvars) |
+| [`ui/branches`](ui/branches) | A chat kept as a tree: edits and retries add versions beside the message, each keeping the conversation after it, and a map of the whole tree with the conversation showing lit, where a click shows a message. | [`examples/chat`](examples/chat) |
 
 Each package's doc comment shows how to use it.
 
@@ -182,6 +207,29 @@ go run ./examples/pixelart
 go run ./examples/compare [before.png after.png]
 go run ./examples/forcegraph
 go run ./examples/terminal
+go run ./examples/uptime
+go run ./examples/masonry
+go run ./examples/tour
+go run ./examples/jsondiff [a.json b.json]
+go run ./examples/orderbook
+go run ./examples/blame [file]
+go run ./examples/filterbuilder
+go run ./examples/certview [host[:port] | file.pem]
+go run ./examples/queryplan [plan.json]
+go run ./examples/minimap [file.go]
+go run ./examples/merge [file]
+go run ./examples/carousel
+go run ./examples/pivot
+go run ./examples/dock
+go run ./examples/sunburst [folder]
+go run ./examples/globe
+go run ./examples/whiteboard [board.json]
+go run ./examples/promptvars
+go run ./examples/orgchart
+go run ./examples/pianokeys
+go run ./examples/statechart
+go run ./examples/colorwheels [picture]
+go run ./examples/player [file.wav]
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
