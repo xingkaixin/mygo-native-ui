@@ -1,14 +1,17 @@
 // Agent plays a coding agent fixing a failing test, as Claude Code and
 // Cursor show one at work: its thinking, a plan, tool calls and a
-// subagent's, a card asking to run a command, and its reply, and beside
-// them the files it changed, with the diff of the one chosen, and how full
-// its context is. Send the message in the field to start it.
+// subagent's, the stack of the panic the tests hit, a card asking to run
+// a command, the tests passing, and its reply, and beside them the files
+// it changed, with the diff of the one chosen, and how full its context
+// is. Send the message in the field to start it.
 //
 //	go run ./examples/agent
 package main
 
 import (
+	"encoding/json"
 	"log"
+	"path/filepath"
 	"slices"
 	"strconv"
 	"strings"
@@ -24,15 +27,21 @@ import (
 	"github.com/xingkaixin/mygo-native-ui/ui/contextmeter"
 	"github.com/xingkaixin/mygo-native-ui/ui/plan"
 	"github.com/xingkaixin/mygo-native-ui/ui/promptinput"
+	"github.com/xingkaixin/mygo-native-ui/ui/stacktrace"
+	"github.com/xingkaixin/mygo-native-ui/ui/testresults"
 	"github.com/xingkaixin/mygo-native-ui/ui/trace"
 )
 
 // entry is a tool call of a run, or with sub, a subagent's task and the
-// calls it made.
+// calls it made; a run of the tests shows the stack it panicked with, or
+// the tests.
 type entry struct {
-	call trace.Call
-	open bool
-	sub  []*entry
+	call    trace.Call
+	open    bool
+	sub     []*entry
+	stack   *stacktrace.Trace
+	tests   []testresults.Suite
+	results testresults.State
 }
 
 // run is the agent's answer to a message, which script plays.
@@ -166,15 +175,33 @@ func (a *app) turn(c *ui.Context, r *run) {
 
 // show shows e, and the calls of a subagent nested in it.
 func show(c *ui.Context, e *entry) {
-	if e.sub == nil {
+	switch {
+	case e.stack != nil:
+		trace.Step(c, e.call.Status, e.call.Name, command(e.call), &e.open, func() {
+			if f, ok := stacktrace.View(c, *e.stack).Chosen(); ok {
+				c.Toast("Open " + filepath.Base(f.File) + " at line " + strconv.Itoa(f.Line))
+			}
+		})
+	case e.tests != nil:
+		trace.Step(c, e.call.Status, e.call.Name, command(e.call), &e.open, func() {
+			testresults.View(c, &e.results, e.tests)
+		})
+	case e.sub == nil:
 		trace.Tool(c, e.call, &e.open)
-		return
+	default:
+		trace.Step(c, e.call.Status, e.call.Name, strconv.Itoa(len(e.sub))+" tools", &e.open, func() {
+			for i, s := range e.sub {
+				show(c.Key(i), s)
+			}
+		})
 	}
-	trace.Step(c, e.call.Status, e.call.Name, strconv.Itoa(len(e.sub))+" tools", &e.open, func() {
-		for i, s := range e.sub {
-			show(c.Key(i), s)
-		}
-	})
+}
+
+// command returns the command call runs.
+func command(call trace.Call) string {
+	var in struct{ Command string }
+	json.Unmarshal([]byte(call.Input), &in)
+	return in.Command
 }
 
 // advance plays the steps of r due by now, and asks for a frame when the
@@ -349,23 +376,71 @@ func ask(a *app, r *run) (time.Duration, bool) {
 		}
 	}
 	r.entries[len(r.entries)-1].call.Status = trace.Running
-	return 1200 * ms, true
+	return 500 * ms, true
+}
+
+// runTests runs the tests of passing one at a time, as go test -v reports
+// them, in the call last started.
+func runTests(a *app, r *run) (time.Duration, bool) {
+	e := r.entries[len(r.entries)-1]
+	if e.tests == nil {
+		e.tests, e.open = []testresults.Suite{{Name: "example.com/notes"}}, true
+	}
+	s := &e.tests[0]
+	if n := len(s.Tests); n > 0 && s.Tests[n-1].Status == testresults.Running {
+		s.Tests[n-1] = passing[n-1]
+	}
+	if len(s.Tests) == len(passing) {
+		e.call.Status, e.call.Output = trace.Done, "ok  \texample.com/notes\t0.011s"
+		a.spend(1_200, 120)
+		return 300 * ms, true
+	}
+	s.Tests = append(s.Tests, testresults.Test{Name: passing[len(s.Tests)].Name})
+	return 220 * ms, false
+}
+
+var passing = []testresults.Test{
+	{Name: "TestSaveKeepsLast", Status: testresults.Passed, Duration: 2 * ms},
+	{Name: "TestSaveEmpty", Status: testresults.Passed, Duration: 1 * ms},
+	{Name: "TestLoad", Status: testresults.Passed, Duration: 1 * ms},
+	{Name: "TestLoadMissingFile", Status: testresults.Passed, Duration: 0},
+	{Name: "TestLoadCorrupt", Status: testresults.Skipped, Output: "load_test.go:41: needs the corrupt fixture; run with -fixtures"},
 }
 
 const testCommand = "go test ./notes/... -count=1"
 
-const reasoning = "The test `TestSaveKeepsLast` fails, so the last note is lost somewhere between `Save` and `Load`. " +
-	"I'll read the test first, then find where notes are saved.\n\n" +
-	"If the loop in `Save` stops one short, that explains it. While I'm there, `Save` writes the file in place, " +
-	"so a crash halfway would leave it broken; writing to a temporary file and renaming it fixes that too."
+const reasoning = "The notes tests fail, so something goes wrong between `Save` and `Load`. " +
+	"I'll run them to see how, read the test, then find where notes are saved.\n\n" +
+	"While I'm there, `Save` writes the file in place, so a crash halfway would leave it broken; " +
+	"writing to a temporary file and renaming it fixes that too."
 
-const reply = "Fixed. `Save` copied the notes with a loop that stopped one short, so the last note never reached the file:\n\n" +
+const reply = "Fixed. `Save` copied the notes with a loop that ran one past the end, so it panicked with an index out of range:\n\n" +
 	"- **notes/store.go**: marshal the notes as they are, and write them with `fsutil.WriteFileAtomic`.\n" +
 	"- **internal/fsutil/atomic.go**: new; writes to a temporary file and renames it over the old one, so a crash can't leave half a file.\n" +
 	"- **notes/store_test.go**: adds `TestSaveEmpty`.\n\n" +
 	"`" + testCommand + "` passes."
 
-const testFail = "--- FAIL: TestSaveKeepsLast (0.00s)\n    store_test.go:19: got 2 notes, want 3\nFAIL\nFAIL\texample.com/notes\t0.012s"
+const testPanic = `--- FAIL: TestSaveKeepsLast (0.00s)
+panic: runtime error: index out of range [3] with length 3 [recovered]
+	panic: runtime error: index out of range [3] with length 3
+
+goroutine 7 [running]:
+testing.tRunner.func1.2({0x1003e5f60, 0x14000116048})
+	/usr/local/go/src/testing/testing.go:1632 +0x1bc
+testing.tRunner.func1()
+	/usr/local/go/src/testing/testing.go:1635 +0x334
+panic({0x1003e5f60?, 0x14000116048?})
+	/usr/local/go/src/runtime/panic.go:785 +0x124
+example.com/notes.Save({0x1400011e0c0, 0x22}, {0x1400010c0f0, 0x3, 0x3})
+	/Users/dev/notes/notes/store.go:18 +0x1d4
+example.com/notes.TestSaveKeepsLast(0x14000130340)
+	/Users/dev/notes/notes/store_test.go:11 +0x10c
+testing.tRunner(0x14000130340, 0x1004ecf08)
+	/usr/local/go/src/testing/testing.go:1690 +0xe4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x314
+exit status 2
+FAIL	example.com/notes	0.012s`
 
 func init() {
 	script = slices.Concat(
@@ -375,7 +450,7 @@ func init() {
 			do(300*ms, func(a *app, r *run) {
 				r.thinking = false
 				r.steps = []plan.Step{
-					{Title: "Read the failing test", Status: trace.Running},
+					{Title: "Run the tests and read the failure", Status: trace.Running},
 					{Title: "Find where notes are saved", Status: trace.Pending},
 					{Title: "Fix the off-by-one in Save", Status: trace.Pending},
 					{Title: "Run the tests again", Status: trace.Pending},
@@ -383,7 +458,15 @@ func init() {
 				a.spend(400, 380)
 			}),
 		},
-		tool("bash", `{"command":"go test ./notes/..."}`, "", testFail, 1100*ms, nil),
+		[]step{
+			start("bash", `{"command":"go test ./notes/..."}`, trace.Running, 1100*ms),
+			do(300*ms, func(a *app, r *run) {
+				e := r.entries[len(r.entries)-1]
+				tr := stacktrace.Parse(testPanic)
+				e.call.Status, e.call.Err, e.stack, e.open = trace.Failed, testPanic, &tr, true
+				a.spend(1_500+len(testPanic)/4, 120)
+			}),
+		},
 		tool("read_file", `{"path":"notes/store_test.go"}`, testBefore, "", 500*ms, nil),
 		[]step{progress(1)},
 		subagent("Explore where notes are saved",
@@ -406,7 +489,7 @@ func init() {
 			progress(3),
 			start("bash", `{"command":"`+testCommand+`"}`, trace.Pending, 0),
 			ask,
-			finish("ok  \texample.com/notes\t0.011s", "", nil),
+			runTests,
 			progress(4),
 			do(0, func(a *app, r *run) { r.replying = true }),
 			stream(reply, func(r *run) *string { return &r.reply }),

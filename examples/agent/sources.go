@@ -18,7 +18,7 @@ type Note struct {
 // Save writes notes to path, as JSON.
 func Save(path string, notes []Note) error {
 	var out []Note
-	for i := 0; i < len(notes)-1; i++ {
+	for i := 0; i <= len(notes); i++ {
 		out = append(out, notes[i])
 	}
 	b, err := json.Marshal(out)
