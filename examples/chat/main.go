@@ -3,13 +3,15 @@
 // the sources it used below it, and the actions of each message: Copy,
 // Edit for the user's, which sends it again as another version, and Retry
 // for the model's, which writes another reply. The arrows go between the
-// versions, each with the conversation that came after it.
+// versions, each with the conversation that came after it. A checkpoint
+// follows each reply, and restoring it drops the conversation after it.
 //
 //	go run ./examples/chat
 package main
 
 import (
 	"log"
+	"strconv"
 	"strings"
 	"time"
 
@@ -17,6 +19,7 @@ import (
 	"github.com/egoist/mygo/ui"
 	"github.com/egoist/mygo/ui/markdown"
 
+	"github.com/xingkaixin/mygo-native-ui/ui/checkpoint"
 	"github.com/xingkaixin/mygo-native-ui/ui/message"
 	"github.com/xingkaixin/mygo-native-ui/ui/promptinput"
 	"github.com/xingkaixin/mygo-native-ui/ui/shimmer"
@@ -38,11 +41,13 @@ type version struct {
 }
 
 // reply is a reply of the model's, words of its answer written so far,
-// and the turn that came after it, nil until the user sends one.
+// when it was through, and the turn that came after it, nil until the
+// user sends one.
 type reply struct {
 	answer      *answer
 	words       int
 	due         time.Time
+	at          time.Time
 	sourcesOpen bool
 	next        *turn
 }
@@ -92,7 +97,7 @@ func (a *app) view(c *ui.Context) {
 	turns := a.thread()
 	busy := a.writing != nil && a.writing.writing()
 	ui.Column(c).Fill().Background(t.Background).Children(func() {
-		ui.List(c, &a.list, len(turns), func(i int) { a.show(c, turns[i]) }).Grow(1).Padding(t.Space(6), t.Space(8), 0)
+		ui.List(c, &a.list, len(turns), func(i int) { a.show(c, turns[i], i) }).Grow(1).Padding(t.Space(6), t.Space(8), 0)
 		ui.Box(c).Padding(t.Space(2), t.Space(8), t.Space(5)).Children(func() {
 			promptinput.View(c, &a.prompt, "Ask anything", busy, nil)
 		})
@@ -109,8 +114,9 @@ func (a *app) view(c *ui.Context) {
 	}
 }
 
-// show shows t, the version of it showing and its reply.
-func (a *app) show(c *ui.Context, t *turn) {
+// show shows t, turn i, the version of it showing and its reply, and
+// once the reply is through, a checkpoint.
+func (a *app) show(c *ui.Context, t *turn, i int) {
 	th := c.Theme()
 	v := t.versions[t.at]
 	r := v.replies[v.at]
@@ -126,6 +132,22 @@ func (a *app) show(c *ui.Context, t *turn) {
 		})
 		if ev.Retried() {
 			a.retry(v)
+			c.Invalidate()
+		}
+		if r.writing() {
+			return
+		}
+		if r.at.IsZero() {
+			r.at = c.Now()
+		}
+		if checkpoint.View(c, r.at, strconv.Itoa(2*(i+1))+" messages").Restored() {
+			r.next = nil
+			// Only the last reply of a conversation can be still coming: one
+			// that is was dropped, or is in a version not showing. Finish it,
+			// so that the field does not wait on it.
+			if a.writing != nil {
+				a.writing.words = a.writing.answer.words()
+			}
 			c.Invalidate()
 		}
 	})
