@@ -1,16 +1,19 @@
 // Chat plays a chat with a model that reads the web, as ChatGPT and
 // Perplexity show one: each reply with citations by its paragraphs and
 // the sources it used below it, and the actions of each message: Copy,
-// Edit for the user's, which sends it again as another version, and Retry
-// for the model's, which writes another reply. The arrows go between the
-// versions, each with the conversation that came after it. A checkpoint
-// follows each reply, and restoring it drops the conversation after it.
+// Edit for the user's, which sends it again as a branch of the
+// conversation, and Retry for the model's, which writes another version
+// of the reply. The arrows go between the versions, each with the
+// conversation that came after it, and Branches in the toolbar opens a
+// map of them all, where a click shows a message. A checkpoint follows
+// each reply, and restoring it drops the conversation after it.
 //
 //	go run ./examples/chat
 package main
 
 import (
 	"log"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -19,6 +22,7 @@ import (
 	"github.com/egoist/mygo/ui"
 	"github.com/egoist/mygo/ui/markdown"
 
+	"github.com/xingkaixin/mygo-native-ui/ui/branches"
 	"github.com/xingkaixin/mygo-native-ui/ui/checkpoint"
 	"github.com/xingkaixin/mygo-native-ui/ui/message"
 	"github.com/xingkaixin/mygo-native-ui/ui/promptinput"
@@ -26,86 +30,81 @@ import (
 	"github.com/xingkaixin/mygo-native-ui/ui/sources"
 )
 
-// turn is a message of the user's and its versions, of which at shows.
-type turn struct {
-	versions []*version
-	at       int
-}
-
-// version is a version of a message, the replies to it, of which at
-// shows.
-type version struct {
-	prompt  string
-	replies []*reply
-	at      int
-}
-
-// reply is a reply of the model's, words of its answer written so far,
-// when it was through, and the turn that came after it, nil until the
-// user sends one.
-type reply struct {
+// msg is a message of the conversation: the user's prompt, or a reply of
+// the model's, words of its answer written so far, and when it was
+// through.
+type msg struct {
+	prompt      string
 	answer      *answer
 	words       int
 	due         time.Time
 	at          time.Time
 	sourcesOpen bool
-	next        *turn
 }
 
-func (r *reply) writing() bool { return r.words < r.answer.words() }
+func (m *msg) writing() bool { return m.words < m.answer.words() }
 
 type app struct {
-	root    *turn
-	list    ui.ListState
-	prompt  promptinput.State
-	writing *reply
+	tree     branches.Tree[msg]
+	list     ui.ListState
+	prompt   promptinput.State
+	writing  *msg
+	branches bool
 }
 
-// thread returns the turns showing, from the first, following the
-// versions and replies showing.
-func (a *app) thread() []*turn {
-	var turns []*turn
-	for t := a.root; t != nil; {
-		turns = append(turns, t)
-		v := t.versions[t.at]
-		t = v.replies[v.at].next
-	}
-	return turns
+// ask adds prompt after message parent, -1 for the first, as the last of
+// its versions, and a reply to it, being written.
+func (a *app) ask(parent int, prompt string) {
+	a.reply(a.tree.Add(a.tree.Add(parent, msg{prompt: prompt}), msg{}), prompt)
 }
 
-// ask returns a version of prompt, its reply being written.
-func (a *app) ask(prompt string) *version {
-	v := &version{prompt: prompt}
-	a.retry(v)
-	return v
+// reply has the model write reply id to prompt, worded as the version it
+// is.
+func (a *app) reply(id int, prompt string) {
+	a.finish()
+	_, n := a.tree.Version(id)
+	m := a.tree.Message(id)
+	m.answer = answerFor(prompt, n-1)
+	a.writing = m
 }
 
-// retry adds a reply to v, being written, and shows it.
-func (a *app) retry(v *version) {
+// finish writes the rest of the reply being written at once, for another
+// to start.
+func (a *app) finish() {
 	if a.writing != nil {
 		a.writing.words = a.writing.answer.words()
 	}
-	r := &reply{answer: answerFor(v.prompt, len(v.replies))}
-	v.replies = append(v.replies, r)
-	v.at = len(v.replies) - 1
-	a.writing = r
 }
 
 func (a *app) view(c *ui.Context) {
 	t := c.Theme()
 	a.advance(c)
-	turns := a.thread()
+	path := a.tree.Path()
 	busy := a.writing != nil && a.writing.writing()
 	ui.Column(c).Fill().Background(t.Background).Children(func() {
-		ui.List(c, &a.list, len(turns), func(i int) { a.show(c, turns[i], i) }).Grow(1).Padding(t.Space(6), t.Space(8), 0)
+		var button ui.Element
+		ui.Toolbar(c, func() {
+			ui.Spacer(c)
+			button = ui.Button(c, "Branches").Expanded(a.branches)
+			if button.Clicked() {
+				a.branches = !a.branches
+			}
+		}).Label("Conversation").Padding(t.Space(2), t.Space(3))
+		ui.Popover(c, button, &a.branches, func() {
+			ui.ScrollBoth(c).MaxWidth(t.Space(100)).MaxHeight(t.Space(120)).Children(func() {
+				if id, ok := branches.Map(c, &a.tree, label).Shown(); ok {
+					a.list.ScrollTo(slices.Index(a.tree.Path(), id)/2, ui.Start)
+				}
+			})
+		})
+		ui.Divider(c)
+		ui.List(c, &a.list, len(path)/2, func(i int) { a.show(c, path[2*i], path[2*i+1], i) }).Grow(1).Padding(t.Space(6), t.Space(8), 0)
 		ui.Box(c).Padding(t.Space(2), t.Space(8), t.Space(5)).Children(func() {
 			promptinput.View(c, &a.prompt, "Ask anything", busy, nil)
 		})
 	})
 	if m, ok := a.prompt.Sent(); ok {
-		last := turns[len(turns)-1]
-		v := last.versions[last.at]
-		v.replies[v.at].next = &turn{versions: []*version{a.ask(m.Text)}}
+		a.ask(path[len(path)-1], m.Text)
 		a.list.ScrollToEnd()
 		c.Invalidate()
 	}
@@ -114,48 +113,61 @@ func (a *app) view(c *ui.Context) {
 	}
 }
 
-// show shows t, turn i, the version of it showing and its reply, and
+// show shows turn i, the user's message u and the reply r to it, and
 // once the reply is through, a checkpoint.
-func (a *app) show(c *ui.Context, t *turn, i int) {
+func (a *app) show(c *ui.Context, u, r, i int) {
 	th := c.Theme()
-	v := t.versions[t.at]
-	r := v.replies[v.at]
+	um, rm := a.tree.Message(u), a.tree.Message(r)
 	ui.Column(c).Gap(th.Space(3)).Padding(0, 0, th.Space(8)).Children(func() {
-		ev := message.User(c, &t.at, len(t.versions), v.prompt)
-		if text, ok := ev.Edited(); ok {
-			t.versions = append(t.versions, a.ask(text))
-			t.at = len(t.versions) - 1
+		at, n := a.tree.Version(u)
+		if text, ok := message.User(c, at, n, um.prompt).Edited(); ok {
+			a.reply(a.tree.Add(a.tree.Branch(u, msg{prompt: text}), msg{}), text)
 			c.Invalidate()
 		}
-		ev = message.Reply(c, &v.at, len(v.replies), r.answer.text(), r.writing(), func() {
-			a.body(c, r)
+		at, n = a.tree.Version(r)
+		ev := message.Reply(c, at, n, rm.answer.text(), rm.writing(), func() {
+			a.body(c, rm)
 		})
 		if ev.Retried() {
-			a.retry(v)
+			a.reply(a.tree.Branch(r, msg{}), um.prompt)
 			c.Invalidate()
 		}
-		if r.writing() {
+		if rm.writing() {
 			return
 		}
-		if r.at.IsZero() {
-			r.at = c.Now()
+		if rm.at.IsZero() {
+			rm.at = c.Now()
 		}
-		if checkpoint.View(c, r.at, strconv.Itoa(2*(i+1))+" messages").Restored() {
-			r.next = nil
+		if checkpoint.View(c, rm.at, strconv.Itoa(2*(i+1))+" messages").Restored() {
+			a.tree.Cut(r)
 			// Only the last reply of a conversation can be still coming: one
 			// that is was dropped, or is in a version not showing. Finish it,
 			// so that the field does not wait on it.
-			if a.writing != nil {
-				a.writing.words = a.writing.answer.words()
-			}
+			a.finish()
 			c.Invalidate()
 		}
 	})
 }
 
+// label names m on the map of branches: the user's prompt, or the first
+// sentence of the reply.
+func label(m *msg) string {
+	if m.answer == nil {
+		return m.prompt
+	}
+	if len(m.answer.paras) == 0 {
+		return "Stopped"
+	}
+	s := strings.ReplaceAll(m.answer.paras[0].text, "`", "")
+	if i := strings.Index(s, ". "); i >= 0 {
+		s = s[:i+1]
+	}
+	return s
+}
+
 // body shows the paragraphs of r written so far, each with its citation,
 // and once written, its sources.
-func (a *app) body(c *ui.Context, r *reply) {
+func (a *app) body(c *ui.Context, r *msg) {
 	t := c.Theme()
 	ans := r.answer
 	ui.Column(c).Gap(t.Space(3)).Children(func() {
@@ -211,9 +223,11 @@ func (a *app) advance(c *ui.Context) {
 
 func main() {
 	a := &app{prompt: promptinput.State{Text: "How do I log structured data?"}}
-	v := a.ask("How do iterators work in Go 1.23?")
-	a.writing.words = a.writing.answer.words()
-	a.root = &turn{versions: []*version{v}}
+	const first = "How do iterators work in Go 1.23?"
+	a.ask(-1, first)
+	path := a.tree.Path()
+	a.reply(a.tree.Branch(path[1], msg{}), first)
+	a.finish()
 	a.list.FollowEnd = true
 	mygo.App.WhenReady(func() {
 		mygo.NewWindow(mygo.WindowOptions{
