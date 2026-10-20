@@ -353,9 +353,10 @@ func (s *State) input(c *ui.Context, canvas ui.Element, marks *[]Mark, k, ox, oy
 	if s.editing == 0 && (canvas.Shortcut(0, ui.KeyBackspace) || canvas.Shortcut(0, ui.KeyDelete)) {
 		s.remove(marks)
 	}
-	pressed := canvas.Pressed()
-	start := pressed && !s.down
-	s.down = pressed
+	start := canvas.Pressed() && !s.down
+	// Pressed ends as the pointer leaves the canvas, but the drag goes on
+	// until it is let go: coming back is no new press.
+	_, _, s.down = canvas.Dragged()
 	if start {
 		canvas.Focus()
 		s.finish(marks)
