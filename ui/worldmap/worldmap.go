@@ -19,6 +19,7 @@ import (
 	_ "embed"
 	"image"
 	"image/draw"
+	"iter"
 	"math"
 	"runtime"
 	"slices"
@@ -34,10 +35,12 @@ import (
 var data string
 
 // country is a country of the map: its code, its name, the rings of its
-// borders in units of the projection, y down, and the box around them,
-// its left, top, right and bottom.
+// borders in degrees of longitude and latitude, and in units of the
+// projection, y down, and the box around them, its left, top, right and
+// bottom.
 type country struct {
 	code, name string
+	lonlat     [][][2]float32
 	rings      [][][2]float32
 	box        [4]float32
 }
@@ -76,17 +79,20 @@ var load = sync.OnceValues(func() ([]country, map[string]int) {
 		default:
 			ct := &countries[len(countries)-1]
 			nums := strings.Fields(line)
+			ll := make([][2]float32, 0, len(nums)/2)
 			ring := make([][2]float32, 0, len(nums)/2)
 			lon, lat := 0, 0
 			for i := 0; i+1 < len(nums); i += 2 {
 				dx, _ := strconv.Atoi(nums[i])
 				dy, _ := strconv.Atoi(nums[i+1])
 				lon, lat = lon+dx, lat+dy
+				ll = append(ll, [2]float32{float32(lon) / 100, float32(lat) / 100})
 				p := project(float64(lon)/100, float64(lat)/100)
 				q := [2]float32{float32(p[0]) + mapW/2, mapH/2 - float32(p[1])}
 				ring = append(ring, q)
 				ct.box = [4]float32{min(ct.box[0], q[0]), min(ct.box[1], q[1]), max(ct.box[2], q[0]), max(ct.box[3], q[1])}
 			}
+			ct.lonlat = append(ct.lonlat, ll)
 			ct.rings = append(ct.rings, ring)
 		}
 	}
@@ -119,6 +125,23 @@ func Name(code string) string {
 		return countries[i].name
 	}
 	return ""
+}
+
+// Borders yields each country of the map, by its ISO 3166-1 alpha-3 code,
+// with the rings of its borders: the longitude and latitude of their
+// points, in degrees, outer rings counterclockwise and holes clockwise.
+// The rings of Russia and Fiji are cut along the antimeridian, and
+// Antarctica's runs along it to the South Pole and back. The rings are
+// the map's own: do not change them.
+func Borders() iter.Seq2[string, [][][2]float32] {
+	return func(yield func(string, [][][2]float32) bool) {
+		countries, _ := load()
+		for _, ct := range countries {
+			if !yield(ct.code, ct.lonlat) {
+				return
+			}
+		}
+	}
 }
 
 // Scale is how values spread over the colors, from the lowest value's
