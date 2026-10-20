@@ -33,6 +33,7 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/flamegraph`](ui/flamegraph) | Flame graph of a profile: each function a bar as wide as its share of the samples, a click zooming to it, and a search lighting the matches with their share. Reads folded stacks. | [`examples/flamegraph`](examples/flamegraph) |
 | [`ui/treemap`](ui/treemap) | Squarified treemap of sizes, as of a folder: items with their names and sizes and the items in them inside, a click going into one, and a path back up. | [`examples/treemap`](examples/treemap) |
 | [`ui/gitgraph`](ui/gitgraph) | Git history as a graph: a lane for each branch, curves where branches part and merge, branch and tag labels, and a commit chosen with a click or the keys. Parses `git log`. | [`examples/gitgraph`](examples/gitgraph) |
+| [`ui/nodegraph`](ui/nodegraph) | Node editor, as of a shader: nodes with inputs, outputs and the app's controls, dragged around a canvas that pans and zooms, and links dragged from output to input, without cycles. | [`examples/nodegraph`](examples/nodegraph) |
 
 ### Menu bar
 
@@ -88,6 +89,7 @@ go run ./examples/weekview
 go run ./examples/flamegraph [file.folded]
 go run ./examples/treemap [folder]
 go run ./examples/gitgraph [repository]
+go run ./examples/nodegraph
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
