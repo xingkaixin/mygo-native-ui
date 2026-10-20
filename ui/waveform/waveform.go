@@ -99,7 +99,7 @@ func View(c *ui.Context, s *State, peaks []Peak) ui.Element {
 		return max(0, min(1, s.offset+float64(x/max(1, w))/s.Zoom()))
 	}
 
-	pressed := ui.Local(view, "pressed", func() bool { return false })
+	pressed := ui.Local(view, "waveform.pressed", func() bool { return false })
 	if _, _, ok := view.Dragged(); ok {
 		px, _, _ := view.PointerPosition()
 		f := at(px, w)
@@ -134,7 +134,7 @@ func View(c *ui.Context, s *State, peaks []Peak) ui.Element {
 	}
 	// Scrolling comes between builds, at the box laid out since, which
 	// only a handle reads then.
-	ref := ui.Local(view, "waveform", func() ui.Handle { return ui.Handle{} })
+	ref := ui.Local(view, "waveform.handle", func() ui.Handle { return ui.Handle{} })
 	view.Bind(ref)
 	view.HandleInput(func(ev ui.InputEvent) bool {
 		if ev.Kind != ui.InputScroll {

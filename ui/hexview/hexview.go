@@ -204,7 +204,7 @@ func (s *State) row(c *ui.Context, data []byte, row int, rowH, textH float32, l 
 	pad := t.Space(3)
 	box := ui.Box(c).Height(rowH).Width(l.width + 2*pad)
 
-	pressed := ui.Local(box, "pressed", func() bool { return false })
+	pressed := ui.Local(box, "hexview.pressed", func() bool { return false })
 	// Dragged goes on while the press does, past the row, where Pressed
 	// stops.
 	if _, _, ok := box.Dragged(); ok {

@@ -94,7 +94,7 @@ func Bar(c *ui.Context, selected *int, n int, tab func(i int) Tab) Events {
 	var ev Events
 
 	bar := ui.ScrollHorizontal(c).Height(h).Background(t.Surface)
-	st := ui.Local(bar, "tabs", func() state { return state{middle: -1} })
+	st := ui.Local(bar, "tabs.state", func() state { return state{middle: -1} })
 	// Scrolling sideways, the bar lays its content out with no width to
 	// share: the tabs share the bar's width in the last frame, and the bar
 	// builds again when it changes.

@@ -89,7 +89,7 @@ func Show(c *ui.Context, open *bool, query *string, items []Item) Events {
 			panel := ui.Column(c).Width(min(600, w-32)).Radius(12).Clip().Background(t.Background).
 				Border(1, t.Border).Shadow(0, 12, 32, 0, ui.RGBA(0, 0, 0, 0.25)).
 				Role(ui.RoleDialog).Label("Command palette")
-			st := ui.Local(panel, "palette", func() state { return state{hovered: -1} })
+			st := ui.Local(panel, "palette.state", func() state { return state{hovered: -1} })
 			rows := find(items, *query)
 			if st.query != *query {
 				st.query, st.highlight = *query, -1

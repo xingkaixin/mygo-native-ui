@@ -173,7 +173,7 @@ func View(c *ui.Context, s *State, w, h float32, content func()) ui.Element {
 	}
 	// Scrolling comes between builds, at the box laid out since, which
 	// only a handle reads then.
-	ref := ui.Local(view, "zoomview", func() ui.Handle { return ui.Handle{} })
+	ref := ui.Local(view, "zoomview.handle", func() ui.Handle { return ui.Handle{} })
 	view.Bind(ref)
 	view.HandleInput(func(ev ui.InputEvent) bool {
 		if ev.Kind != ui.InputScroll {
