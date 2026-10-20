@@ -48,6 +48,9 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/daterange`](ui/daterange) | Range of days on two months side by side, with presets such as Last 7 days, weeks and dates in the user's regional formats. | [`examples/daterange`](examples/daterange) |
 | [`ui/schemaform`](ui/schemaform) | Form built from a JSON Schema in its property order: text, switches, drop-downs, lists and groups, checked as the user edits. | [`examples/schemaform`](examples/schemaform) |
 | [`ui/uploads`](ui/uploads) | Upload queue: progress, speed and time left for each file and in all, cancel and retry. | [`examples/uploads`](examples/uploads) |
+| [`ui/sankey`](ui/sankey) | Flows between stages in columns, bands as wide as their amounts, the pointer lighting a flow or a stage and naming it below. | [`examples/sankey`](examples/sankey) |
+| [`ui/sparkline`](ui/sparkline) | Word-sized line and bar charts with the value under the pointer, and stat cards with their change. | [`examples/sparkline`](examples/sparkline) |
+| [`ui/mindmap`](ui/mindmap) | Mind map of an outline: branches on both sides in their own colors, trees laid out away from the title, folding. | [`examples/mindmap`](examples/mindmap) |
 
 ### Menu bar
 
@@ -115,6 +118,9 @@ go run ./examples/otp
 go run ./examples/daterange
 go run ./examples/schemaform
 go run ./examples/uploads
+go run ./examples/sankey
+go run ./examples/sparkline
+go run ./examples/mindmap
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
