@@ -1,6 +1,6 @@
 # mygo-native-ui
 
-Native UI components for [mygo](https://github.com/egoist/mygo), built only on its public `ui` API.
+Native UI components for [mygo](https://github.com/egoist/mygo), built only on its public packages.
 
 ```sh
 go get github.com/xingkaixin/mygo-native-ui
