@@ -74,6 +74,10 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/worldclock`](ui/worldclock) | Time zone planner: a row a place, 24 hours aligned to one instant, tinted for night and working hours, a line at now, and a time chosen by click, drag or keys. | [`examples/worldclock`](examples/worldclock) |
 | [`ui/keymap`](ui/keymap) | Keyboard map of shortcuts: a US keyboard, modifiers to turn on or hold, keys in their group's colors, conflicts in red, and all of a key's shortcuts on hover. | [`examples/keymap`](examples/keymap) |
 | [`ui/bitfield`](ui/bitfield) | Register bit-field editor: a cell a bit in nibbles and bytes, fields with their values and names, click or drag to set bits, and the value as hex, decimal and binary. | [`examples/bitfield`](examples/bitfield) |
+| [`ui/candles`](ui/candles) | Candlestick chart: a volume pane, moving averages, a crosshair snapping to bars, date ticks that follow the zoom, zooming around the pointer and panning. | [`examples/candles`](examples/candles) |
+| [`ui/worldmap`](ui/worldmap) | World choropleth in the Equal Earth projection: countries by value on a linear or log scale, a legend, the country under the pointer named, zoom and pan. Embeds Natural Earth's 1:110m countries ([public domain](https://www.naturalearthdata.com/about/terms-of-use/)). | [`examples/worldmap`](examples/worldmap) |
+| [`ui/pixelart`](ui/pixelart) | Pixel art editor: pencil, eraser, fill, lines, rectangles and an eyedropper on two buttons, mirroring, a palette, undo by stroke, zoom, and export at whole multiples. | [`examples/pixelart`](examples/pixelart) |
+| [`ui/compare`](ui/compare) | Before and after pictures: a slider, side by side, onion skin and changed pixels with their count, zoomed and panned together. | [`examples/compare`](examples/compare) |
 
 ### Menu bar
 
@@ -167,6 +171,10 @@ go run ./examples/monthview
 go run ./examples/worldclock
 go run ./examples/keymap
 go run ./examples/bitfield
+go run ./examples/candles
+go run ./examples/worldmap
+go run ./examples/pixelart
+go run ./examples/compare [before.png after.png]
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
