@@ -61,6 +61,9 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/signature`](ui/signature) | Signature pad: smoothed ink that thins with speed, undo and clear, export on transparency. | [`examples/signature`](examples/signature) |
 | [`ui/pentool`](ui/pentool) | Bezier pen tool: corners and smooth points, handles that turn together or apart, closed paths, SVG path export. | [`examples/pentool`](examples/pentool) |
 | [`ui/curves`](ui/curves) | Tone curves: RGB and channel curves over a histogram, monotone interpolation, applied to a picture. | [`examples/curves`](examples/curves) |
+| [`ui/wordcloud`](ui/wordcloud) | Word cloud: sized by count, placed on a spiral with no overlaps, a hover count and a chosen word. | [`examples/wordcloud`](examples/wordcloud) |
+| [`ui/spectrum`](ui/spectrum) | Spectrum analyzer: FFT levels on a log frequency axis, as bars with held peaks or as a curve. | [`examples/spectrum`](examples/spectrum) |
+| [`ui/pianoroll`](ui/pianoroll) | Piano roll: notes drawn, moved and sized on a grid, quantize, and a looped synth with a playhead. | [`examples/pianoroll`](examples/pianoroll) |
 
 ### Menu bar
 
@@ -141,6 +144,9 @@ go run ./examples/knob
 go run ./examples/signature
 go run ./examples/pentool
 go run ./examples/curves
+go run ./examples/wordcloud
+go run ./examples/spectrum
+go run ./examples/pianoroll
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
