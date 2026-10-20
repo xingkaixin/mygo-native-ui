@@ -34,7 +34,7 @@ func (a *app) view(c *ui.Context) {
 			ui.Text(c, a.err.Error()).TextColor(t.Danger).Padding(12).Grow(1)
 			return
 		}
-		jsonview.View(c, a.doc, &a.tree).Grow(1)
+		jsonview.View(c, &a.tree, a.doc).Grow(1)
 		ui.Divider(c)
 		path := a.tree.Path()
 		if path == "" {

@@ -5,7 +5,7 @@
 //
 //	doc, err := jsonview.Parse(data)
 //	...
-//	jsonview.View(c, doc, &app.tree).Grow(1)
+//	jsonview.View(c, &app.tree, doc).Grow(1)
 //	ui.Text(c, app.tree.Path()) // $.store.books[0].title
 //
 // The view is a ui.Outline, which builds only the rows in view, so
@@ -228,7 +228,7 @@ func (s *State) chosen() *node {
 // row chosen, and its context menu copies its value or its path: a
 // string's text, a number or keyword as written, an object or array as
 // indented JSON.
-func View(c *ui.Context, doc *Document, s *State) ui.Element {
+func View(c *ui.Context, s *State, doc *Document) ui.Element {
 	t := c.Theme()
 	if s.doc != doc {
 		*s = State{doc: doc, selected: -1}
