@@ -3,7 +3,9 @@
 // subagent's, the stack of the panic the tests hit, a card asking to run
 // a command, the tests passing, and its reply, and beside them the files
 // it changed, with the diff of the one chosen, and how full its context
-// is. Send the message in the field to start it.
+// is. Send the message in the field to start it; messages sent while it
+// works wait in a queue above the field, and go once it is through. The
+// button under the field picks the model, whose prices the cost follows.
 //
 //	go run ./examples/agent
 package main
@@ -25,8 +27,10 @@ import (
 	"github.com/xingkaixin/mygo-native-ui/ui/changes"
 	"github.com/xingkaixin/mygo-native-ui/ui/confirm"
 	"github.com/xingkaixin/mygo-native-ui/ui/contextmeter"
+	"github.com/xingkaixin/mygo-native-ui/ui/modelpicker"
 	"github.com/xingkaixin/mygo-native-ui/ui/plan"
 	"github.com/xingkaixin/mygo-native-ui/ui/promptinput"
+	"github.com/xingkaixin/mygo-native-ui/ui/queue"
 	"github.com/xingkaixin/mygo-native-ui/ui/stacktrace"
 	"github.com/xingkaixin/mygo-native-ui/ui/testresults"
 	"github.com/xingkaixin/mygo-native-ui/ui/trace"
@@ -77,6 +81,7 @@ type app struct {
 	runs    []*run
 	list    ui.ListState
 	prompt  promptinput.State
+	queue   []string
 	model   string
 	usage   contextmeter.Usage
 	always  bool
@@ -85,7 +90,11 @@ type app struct {
 	changes changes.State
 }
 
-var models = []string{"Opus 5.5", "Sonnet 5.5", "Haiku 5.5"}
+var models = []modelpicker.Model{
+	{ID: "claude-opus-5-5", Name: "Opus 5.5", Provider: "Anthropic", Context: 1_000_000, In: 4, Out: 20, Vision: true, Tools: true, Reasoning: true},
+	{ID: "claude-sonnet-5-5", Name: "Sonnet 5.5", Provider: "Anthropic", Context: 1_000_000, In: 2, Out: 10, Vision: true, Tools: true, Reasoning: true},
+	{ID: "claude-haiku-5-5", Name: "Haiku 5.5", Provider: "Anthropic", Context: 1_000_000, In: 0.1, Out: 0.5, Vision: true, Tools: true, Reasoning: true},
+}
 
 func (a *app) view(c *ui.Context) {
 	t := c.Theme()
@@ -93,6 +102,11 @@ func (a *app) view(c *ui.Context) {
 	if len(a.runs) > 0 {
 		r = a.runs[len(a.runs)-1]
 		a.advance(c, r)
+		if r.done() && len(a.queue) > 0 {
+			a.send(c, a.queue[0])
+			a.queue = a.queue[1:]
+			r = a.runs[len(a.runs)-1]
+		}
 	}
 	busy := r != nil && !r.done()
 	ui.Row(c).Fill().AlignItems(ui.Stretch).Background(t.Background).Children(func() {
@@ -104,17 +118,30 @@ func (a *app) view(c *ui.Context) {
 			} else {
 				ui.List(c, &a.list, len(a.runs), func(i int) { a.turn(c, a.runs[i]) }).Grow(1).Padding(t.Space(5), t.Space(6), 0)
 			}
-			ui.Box(c).Padding(t.Space(2), t.Space(6), t.Space(5)).Children(func() {
-				promptinput.View(c, &a.prompt, "Ask the agent", busy, func() {
-					ui.Select(c, &a.model, models).Label("Model")
+			ui.Column(c).Gap(t.Space(2)).Padding(t.Space(2), t.Space(6), t.Space(5)).Children(func() {
+				if text, ok := queue.View(c, &a.queue).SentNow(); ok {
+					if busy {
+						stop(r)
+					}
+					a.send(c, text)
+				}
+				// While the agent works, the field sends what is typed to the
+				// queue, and stops the agent while there is nothing to send.
+				typing := strings.TrimSpace(a.prompt.Text) != "" || len(a.prompt.Attachments) > 0
+				promptinput.View(c, &a.prompt, "Ask the agent", busy && !typing, func() {
+					if modelpicker.View(c, &a.model, models).Changed() {
+						a.spend(0, 0)
+					}
 					ui.Box(c).Grow(1)
 					contextmeter.View(c, a.usage)
 				})
 			})
 			if m, ok := a.prompt.Sent(); ok {
-				a.runs = append(a.runs, &run{prompt: m.Text})
-				a.spend(len(m.Text)/4, 0)
-				c.Invalidate()
+				if busy {
+					a.queue = append(a.queue, m.Text)
+				} else {
+					a.send(c, m.Text)
+				}
 			}
 			if a.prompt.Stopped() && busy {
 				stop(r)
@@ -133,6 +160,13 @@ func (a *app) view(c *ui.Context) {
 			}
 		})
 	})
+}
+
+// send starts a run answering text.
+func (a *app) send(c *ui.Context, text string) {
+	a.runs = append(a.runs, &run{prompt: text})
+	a.spend(len(text)/4, 0)
+	c.Invalidate()
 }
 
 // turn shows the message of r and the agent's answer.
@@ -253,14 +287,17 @@ func stop(r *run) {
 	}
 }
 
-// spend counts tokens read and written into the context, at Sonnet's
-// prices.
+// spend counts tokens read and written into the context, of the model
+// chosen and at its prices, cached tokens at a tenth of the price of
+// those read.
 func (a *app) spend(in, out int) {
+	m := models[slices.IndexFunc(models, func(m modelpicker.Model) bool { return m.ID == a.model })]
 	u := &a.usage
 	u.Input += in
 	u.Output += out
 	u.Used += in + out
-	u.Cost = (3*float64(u.Input) + 15*float64(u.Output) + 0.3*float64(u.Cached)) / 1e6
+	u.Window = m.Context
+	u.Cost = (m.In*float64(u.Input) + m.Out*float64(u.Output) + m.In/10*float64(u.Cached)) / 1e6
 }
 
 // change records the file at path changed from before to after.
@@ -503,9 +540,9 @@ func init() {
 
 func main() {
 	a := &app{
-		model:  models[1],
+		model:  models[1].ID,
 		prompt: promptinput.State{Text: "The notes tests fail since yesterday. Can you fix them?"},
-		usage:  contextmeter.Usage{Used: 18_400, Window: 200_000, Input: 6_400, Cached: 12_000},
+		usage:  contextmeter.Usage{Used: 18_400, Input: 6_400, Cached: 12_000},
 		diffs:  map[string]*editor.DiffState{},
 	}
 	a.spend(0, 0)
