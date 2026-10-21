@@ -103,6 +103,12 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/statechart`](ui/statechart) | State machine from Mermaid's stateDiagram-v2, run in place: states laid out left to right with few crossings, arrows named by their events, a composite state in a box, the current state lit, a button for each event it takes, and the last steps. | [`examples/statechart`](examples/statechart) |
 | [`ui/colorwheels`](ui/colorwheels) | Color grading wheels: lift, gamma and gain discs, each with a puck and a luminance slider, and Apply to grade a picture. | [`examples/colorwheels`](examples/colorwheels) |
 | [`ui/player`](ui/player) | Media transport controls: play and pause, skipping 10 seconds, a scrubber with buffered ranges, chapter gaps and a hover readout of time and chapter, elapsed and total or remaining time, a speed menu, a volume slider with mute, and keyboard shortcuts. | [`examples/player`](examples/player) |
+| [`ui/tex`](ui/tex) | TeX math typesetting, as LaTeX's display math: fractions, roots, scripts, large operators with limits, delimiters that grow, matrices, cases and aligned equations, accents, braces and alphabets in the system's math font, mistakes in red where they are. Fills markdown's `Math` option. | [`examples/tex`](examples/tex) |
+| [`ui/flowchart`](ui/flowchart) | Flowchart from Mermaid's flowchart text: every node shape, solid, dotted and thick links with text and heads, nested subgraphs, a layered layout with few crossings, the pointer lighting a node's links, a click choosing it, and the lines that do not parse. | [`examples/flowchart`](examples/flowchart) |
+| [`ui/spectrogram`](ui/spectrogram) | Spectrogram: levels over time and frequency in magma's colors, the last ten seconds scrolling as a sound plays or a whole clip with a playhead a click moves, a log or linear frequency axis, a dB floor and ceiling with a legend, and the time, frequency, note and level under the pointer. | [`examples/spectrogram`](examples/spectrogram) |
+| [`ui/layers`](ui/layers) | Layers panel of a design tool, as Figma's: frames and groups that fold, an icon by kind, lock and eye buttons on hover, hidden layers dimmed, Cmd- and Shift-click selection, renaming in place, and layers dragged to restack or nest, a line showing where and how deep. | [`examples/layers`](examples/layers) |
+| [`ui/plotter`](ui/plotter) | Function grapher, as Desmos: y = f(x), x = g(y), polar, parametric and implicit curves, constants, breaks at poles and jumps, roots, extrema and intersections as gray dots, tracing, and a grid that follows panning and zooming around the pointer. | [`examples/plotter`](examples/plotter) |
+| [`ui/parallel`](ui/parallel) | Parallel coordinates of many-dimensional rows: an axis per dimension with round ticks or labeled categories, brushes dragged along axes that filter together, moved and resized, names dragged to reorder axes and clicked to flip them, lines colored on a sequential scale, the nearest line lit with its values, and "128 of 1,000". | [`examples/parallel`](examples/parallel) |
 
 ### Menu bar
 
@@ -135,6 +141,7 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/checkpoint`](ui/checkpoint) | A checkpoint between turns: a rule with its time and what it covers, and Restore, which asks in place. | [`examples/chat`](examples/chat) |
 | [`ui/promptvars`](ui/promptvars) | Prompt template editor: `{{variables}}` highlighted in the template, a field for each in order, those without a value marked, and a filled-in preview to copy. | [`examples/promptvars`](examples/promptvars) |
 | [`ui/branches`](ui/branches) | A chat kept as a tree: edits and retries add versions beside the message, each keeping the conversation after it, and a map of the whole tree with the conversation showing lit, where a click shows a message. | [`examples/chat`](examples/chat) |
+| [`ui/mention`](ui/mention) | Mentions in a prompt field, as Cursor's @: a trigger such as `@` or `#` opening a list by the caret that what follows narrows, the matching letters lit, and the item chosen a tinted token with its kind's icon, which the caret steps over and Backspace takes out whole. The app reads the text and the mentions' ranges. | [`examples/mention`](examples/mention) |
 
 Each package's doc comment shows how to use it.
 
@@ -230,6 +237,13 @@ go run ./examples/pianokeys
 go run ./examples/statechart
 go run ./examples/colorwheels [picture]
 go run ./examples/player [file.wav]
+go run ./examples/tex
+go run ./examples/flowchart
+go run ./examples/spectrogram [file.wav]
+go run ./examples/layers
+go run ./examples/plotter
+go run ./examples/parallel
+go run ./examples/mention
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
