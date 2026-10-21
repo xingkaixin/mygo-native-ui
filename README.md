@@ -109,6 +109,17 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/layers`](ui/layers) | Layers panel of a design tool, as Figma's: frames and groups that fold, an icon by kind, lock and eye buttons on hover, hidden layers dimmed, Cmd- and Shift-click selection, renaming in place, and layers dragged to restack or nest, a line showing where and how deep. | [`examples/layers`](examples/layers) |
 | [`ui/plotter`](ui/plotter) | Function grapher, as Desmos: y = f(x), x = g(y), polar, parametric and implicit curves, constants, breaks at poles and jumps, roots, extrema and intersections as gray dots, tracing, and a grid that follows panning and zooming around the pointer. | [`examples/plotter`](examples/plotter) |
 | [`ui/parallel`](ui/parallel) | Parallel coordinates of many-dimensional rows: an axis per dimension with round ticks or labeled categories, brushes dragged along axes that filter together, moved and resized, names dragged to reorder axes and clicked to flip them, lines colored on a sequential scale, the nearest line lit with its values, and "128 of 1,000". | [`examples/parallel`](examples/parallel) |
+| [`ui/logic`](ui/logic) | Logic analyzer and timing diagram: traces with x and z, bus lanes with hex values or labels, a ruler in ns, µs or ms that follows the zoom, cursors A and B snapping to edges with Δ and 1/Δ, and the value under the pointer. Parses WaveDrom's WaveJSON. | [`examples/logic`](examples/logic) |
+| [`ui/scatter`](ui/scatter) | Scatter plot of 100,000 points: translucent dots that read denser where they crowd, colored by category with a legend that hides them, zooming around the pointer and panning, a box or, with Option, a lasso selecting, and the nearest point lit with a card. | [`examples/scatter`](examples/scatter) |
+| [`ui/availability`](ui/availability) | Group availability grid, as When2meet: my slots painted by dragging a rectangle or with the arrows and Space, the group's shaded by how many are free with a legend, the best outlined, who is free on hover, and a person's slots lit from the list. | [`examples/availability`](examples/availability) |
+| [`ui/ruby`](ui/ruby) | Ruby readings above text, as pinyin, zhuyin or furigana: centered at half size, reaching over neighbors or spreading the base when longer, kept on one line with their base, hidden with a tip on hover, and selection copying the bases alone or with their readings. Parses `{東京\|とうきょう}`, `{漢字\|かん\|じ}` and `漢(hàn)` markup. | [`examples/ruby`](examples/ruby) |
+| [`ui/radar`](ui/radar) | Radar chart comparing a few items across measures: a range for each axis or one shared, axes where lower is better running inward, rings at round values, a legend that shows, hides and lights items, a card of every value on the axis under the pointer, and items growing out of the middle. | [`examples/radar`](examples/radar) |
+| [`ui/boxplot`](ui/boxplot) | Distributions of groups side by side as box plots, violins or jittered points: quartiles, Tukey's whiskers and outliers, a log scale, either orientation, and a card of a group's summary or an outlier's value on hover. | [`examples/boxplot`](examples/boxplot) |
+| [`ui/chord`](ui/chord) | Chord diagram of flows between groups: arcs as long as all a group sends and receives, with round ticks and names that keep apart, ribbons as wide as their flows in the sender's color with an arrowhead at the receiver, the pointer lighting a group's ribbons or both ways of a pair with a card, a click keeping a group lit and Esc letting go. | [`examples/chord`](examples/chord) |
+| [`ui/upset`](ui/upset) | UpSet plot of set intersections, which reads where a Venn diagram of more than three sets does not: a row a set with its size, a column of joined dots a combination with a bar of the items in exactly those sets, sorted by size or degree, the pointer lighting a column with "In Chrome and Firefox, not Safari" or the columns of a set, and columns selected with a click and Shift-click. | [`examples/upset`](examples/upset) |
+| [`ui/toc`](ui/toc) | Table of contents beside a document, as documentation sites show it: headings indented by level on a guide line, the section being read lit as the document scrolls with a bar gliding to it, a click scrolling to a heading, and how much is read. Finds the headings of a `markdown.View`. | [`examples/toc`](examples/toc) |
+| [`ui/margincomments`](ui/margincomments) | Comments on ranges of a document in a margin beside it, as Google Docs shows them: tinted ranges, cards level with their first lines that push each other down, the active one level with its range as those above make room, replies, Resolve, and "Add comment" by a selection. The app keeps the threads. | [`examples/margincomments`](examples/margincomments) |
+| [`ui/reader`](ui/reader) | Book reader, as Apple Books: text laid into pages that fit the view, justified or ragged, indented, each chapter starting a page, two side by side when wide, turned with the keys, a click or a swipe as they slide, and a scrubber naming the chapter under the pointer. | [`examples/reader`](examples/reader) |
 
 ### Menu bar
 
@@ -142,6 +153,9 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/promptvars`](ui/promptvars) | Prompt template editor: `{{variables}}` highlighted in the template, a field for each in order, those without a value marked, and a filled-in preview to copy. | [`examples/promptvars`](examples/promptvars) |
 | [`ui/branches`](ui/branches) | A chat kept as a tree: edits and retries add versions beside the message, each keeping the conversation after it, and a map of the whole tree with the conversation showing lit, where a click shows a message. | [`examples/chat`](examples/chat) |
 | [`ui/mention`](ui/mention) | Mentions in a prompt field, as Cursor's @: a trigger such as `@` or `#` opening a list by the caret that what follows narrows, the matching letters lit, and the item chosen a tinted token with its kind's icon, which the caret steps over and Backspace takes out whole. The app reads the text and the mentions' ranges. | [`examples/mention`](examples/mention) |
+| [`ui/logprobs`](ui/logprobs) | A model's output with each token's probability, as logprob viewers show it: tokens tinted deeper the less likely they were, or by the entropy of their alternatives, those below a threshold underlined, a card of the token's probability and top alternatives on hover, pinned by a click and moved with the arrow keys, and the perplexity and least likely token above. The app reads the token pinned. | [`examples/logprobs`](examples/logprobs) |
+| [`ui/replay`](ui/replay) | Replay of a computer-use agent's session: each step's screenshot with what it did over it, rings at clicks, a path for drags, a chip of what it typed or pressed, an arrow for scrolls, play at the session's pace, a scrubber, a filmstrip, and the action in words with its reasoning. | [`examples/replay`](examples/replay) |
+| [`ui/voiceorb`](ui/voiceorb) | Orb of a voice assistant's conversation mode: a glowing sphere whose surface flows in the accent's colors, breathing at rest, swelling and rippling with the voice it hears, swirling as it thinks and pulsing outward as it speaks, along springs, and a still gradient sphere for less motion. | [`examples/voiceorb`](examples/voiceorb) |
 
 Each package's doc comment shows how to use it.
 
@@ -244,6 +258,20 @@ go run ./examples/layers
 go run ./examples/plotter
 go run ./examples/parallel
 go run ./examples/mention
+go run ./examples/logic
+go run ./examples/scatter
+go run ./examples/availability
+go run ./examples/ruby
+go run ./examples/logprobs
+go run ./examples/radar
+go run ./examples/boxplot
+go run ./examples/chord
+go run ./examples/upset
+go run ./examples/replay
+go run ./examples/voiceorb
+go run ./examples/toc
+go run ./examples/margincomments
+go run ./examples/reader
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
