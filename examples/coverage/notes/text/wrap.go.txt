@@ -1,0 +1,64 @@
+// Package text formats the text of notes.
+package text
+
+import (
+	"strings"
+	"unicode/utf8"
+)
+
+// Wrap breaks s into lines of at most width runes, between words. A word
+// longer than width gets a line of its own, cut where it must be.
+func Wrap(s string, width int) []string {
+	if width <= 0 {
+		return []string{s}
+	}
+	var lines []string
+	var line strings.Builder
+	n := 0
+	for _, word := range strings.Fields(s) {
+		w := utf8.RuneCountInString(word)
+		if n > 0 && n+1+w > width {
+			lines = append(lines, line.String())
+			line.Reset()
+			n = 0
+		}
+		for w > width {
+			cut := cutAt(word, width)
+			lines = append(lines, word[:cut])
+			word = word[cut:]
+			w -= width
+		}
+		if n > 0 {
+			line.WriteByte(' ')
+			n++
+		}
+		line.WriteString(word)
+		n += w
+	}
+	if n > 0 {
+		lines = append(lines, line.String())
+	}
+	return lines
+}
+
+// cutAt returns the byte offset of the rune after the first n of s.
+func cutAt(s string, n int) int {
+	for i := range s {
+		if n == 0 {
+			return i
+		}
+		n--
+	}
+	return len(s)
+}
+
+// Indent puts prefix before each line of s that is not empty.
+func Indent(s, prefix string) string {
+	lines := strings.Split(s, "\n")
+	for i, l := range lines {
+		if l != "" {
+			lines[i] = prefix + l
+		}
+	}
+	return strings.Join(lines, "\n")
+}

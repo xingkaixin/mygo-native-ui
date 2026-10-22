@@ -1,0 +1,33 @@
+package text
+
+import (
+	"strings"
+	"unicode"
+)
+
+// Slug turns a title into a name for a URL: lower case letters and
+// digits, the rest as single dashes, at most max bytes long.
+func Slug(title string, max int) string {
+	var b strings.Builder
+	dash := false
+	for _, r := range strings.ToLower(title) {
+		switch {
+		case unicode.IsLetter(r) || unicode.IsDigit(r):
+			if dash && b.Len() > 0 {
+				b.WriteByte('-')
+			}
+			b.WriteRune(r)
+			dash = false
+		default:
+			dash = true
+		}
+	}
+	s := b.String()
+	if max > 0 && len(s) > max {
+		s = strings.TrimRight(s[:max], "-")
+	}
+	if s == "" {
+		return "untitled"
+	}
+	return s
+}

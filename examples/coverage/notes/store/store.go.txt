@@ -1,0 +1,84 @@
+// Package store keeps notes in memory.
+package store
+
+import (
+	"errors"
+	"sort"
+	"strings"
+	"sync"
+)
+
+// ErrNotFound is returned for a note that is not in the store.
+var ErrNotFound = errors.New("note not found")
+
+// Note is a note: its ID, title, body and tags.
+type Note struct {
+	ID    int
+	Title string
+	Body  string
+	Tags  []string
+}
+
+// Store holds notes by their IDs.
+type Store struct {
+	mu    sync.Mutex
+	next  int
+	notes map[int]Note
+}
+
+// New returns an empty store.
+func New() *Store {
+	return &Store{notes: map[int]Note{}}
+}
+
+// Add stores n under a new ID, which it returns.
+func (s *Store) Add(n Note) (int, error) {
+	if strings.TrimSpace(n.Title) == "" {
+		return 0, errors.New("note has no title")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.next++
+	n.ID = s.next
+	n.Tags = Tags(strings.Join(n.Tags, ","))
+	s.notes[n.ID] = n
+	return n.ID, nil
+}
+
+// Get returns the note with id.
+func (s *Store) Get(id int) (Note, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	n, ok := s.notes[id]
+	if !ok {
+		return Note{}, ErrNotFound
+	}
+	return n, nil
+}
+
+// Delete removes the note with id.
+func (s *Store) Delete(id int) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.notes[id]; !ok {
+		return ErrNotFound
+	}
+	delete(s.notes, id)
+	return nil
+}
+
+// Search returns the notes whose title or body holds q, ignoring case,
+// by ID.
+func (s *Store) Search(q string) []Note {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	q = strings.ToLower(q)
+	var found []Note
+	for _, n := range s.notes {
+		if strings.Contains(strings.ToLower(n.Title), q) || strings.Contains(strings.ToLower(n.Body), q) {
+			found = append(found, n)
+		}
+	}
+	sort.Slice(found, func(i, j int) bool { return found[i].ID < found[j].ID })
+	return found
+}
