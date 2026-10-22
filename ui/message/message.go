@@ -186,7 +186,8 @@ func copyButton(c *ui.Context, text string) {
 	}
 	if left := copied - c.Now().Sub(*at); left > 0 {
 		c.After(left)
-		style(c, b, "Copied", func(p *ui.Painter, r ui.Rect, _ ui.Color) { check(p, r, c.Theme().Success) })
+		success := c.Theme().Success
+		style(c, b, "Copied", func(p *ui.Painter, r ui.Rect, _ ui.Color) { check(p, r, success) })
 		return
 	}
 	style(c, b, "Copy", clipboard)
