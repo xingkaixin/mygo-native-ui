@@ -131,6 +131,18 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/gauge`](ui/gauge) | Dial gauge, as on a dashboard or a car's instruments: an arc of 180° to 270° in the app's colored zones, ticks at round values, a needle that springs to the value and pins past either end, the value and unit under the hub, and a held peak. | [`examples/gauge`](examples/gauge) |
 | [`ui/wizard`](ui/wizard) | Setup assistant of steps, as installers walk through: the steps listed down the side or as numbered dots along the top, done ones checked, a check that holds a step with its message by Back and Continue, Enter to continue, and each step sliding in from the side the user goes to. | [`examples/wizard`](examples/wizard) |
 | [`ui/openapi`](ui/openapi) | API reference from an OpenAPI 3.0 or 3.1 document in JSON: operations by tag with their methods in color and a search, parameters, request bodies and responses as trees of their schemas, and Try it, which hands the request to the app and shows the response. | [`examples/openapi`](examples/openapi) |
+| [`ui/vertical`](ui/vertical) | Chinese and Japanese vertical text, as books set it: columns from right to left, punctuation in its vertical forms, Latin runs on their side, short numbers across one cell, line-start and line-end rules, and columns that scroll sideways when they overflow. | [`examples/vertical`](examples/vertical) |
+| [`ui/tilemap`](ui/tilemap) | Slippy map of XYZ raster tiles, as OpenStreetMap's: dragging and flinging to pan, the wheel and buttons to zoom around the pointer, tiles loaded in the background and cached with their parents standing in, markers, flying to a place, a scale bar and the source's attribution. | [`examples/tilemap`](examples/tilemap) |
+| [`ui/flamechart`](ui/flamechart) | Flame chart of a trace over time, as Chrome's Performance panel shows one: a lane for each thread, each call a bar from its start to its end stacked by depth, zoomed around the pointer down to microseconds, a ruler that follows the zoom, a call chosen, and a search dimming the rest. Parses the Trace Event Format. | [`examples/flamechart`](examples/flamechart) |
+| [`ui/coverage`](ui/coverage) | Go test coverage from a `-coverprofile` file: files by package with their share and a bar, sorted by name or coverage, and the source tinted by block to the column, deeper by hit count in count mode, with N and Shift+N through what the tests did not run. | [`examples/coverage`](examples/coverage) |
+| [`ui/cascader`](ui/cascader) | Field choosing a path down a hierarchy, as province, city and district: menus side by side, one a level, the pointer or the arrows opening an option's children in the next; typing finds full paths with the words lit, disabled options are skipped, and children can load lazily behind a spinner. | [`examples/cascader`](examples/cascader) |
+| [`ui/transfer`](ui/transfer) | Transfer list for choosing and ordering items, as table columns or permissions: Available and Chosen side by side, each with a count, a search and a select-all check box; rows move with the buttons, a double click or by dragging, reorder within Chosen, and disabled rows stay put. | [`examples/transfer`](examples/transfer) |
+| [`ui/swipeactions`](ui/swipeactions) | Swipe actions on list rows, as Mail's: a trackpad swipe or a mouse drag reveals colored buttons at either edge, springs open or closed, and runs the edge's first action when swiped all the way; one row open at a time, and the actions also in the context menu. | [`examples/swipeactions`](examples/swipeactions) |
+| [`ui/quadrant`](ui/quadrant) | Quadrant chart, as a priority matrix or Mermaid's quadrantChart: four tinted quadrants with their titles, items as dots whose names keep clear of one another, dragged or moved with the arrow keys, and Mermaid text parsed and written back. | [`examples/quadrant`](examples/quadrant) |
+| [`ui/funnel`](ui/funnel) | Conversion funnel: a centered bar a stage with bands narrowing to the next, each stage's count and share of the first, step conversion and drop-off between stages, down or across, segments compared as grouped bars, and a card on hover. | [`examples/funnel`](examples/funnel) |
+| [`ui/streamgraph`](ui/streamgraph) | Streamgraph of many series over time: smooth layers around a wiggle, silhouette or zero baseline in inside-out or given order, names inside thick layers and the rest in a legend, a rule reading every layer's value on hover, and a click isolating a layer. | [`examples/streamgraph`](examples/streamgraph) |
+| [`ui/ridgeline`](ui/ridgeline) | Distributions of groups as overlapping ridges, a joy plot: a kernel density estimate a group with an adjustable bandwidth, median or quantile marks, colors by group or along a gradient, sorting by median, and a card of a group's density and share below on hover. | [`examples/ridgeline`](examples/ridgeline) |
+| [`ui/dendrogram`](ui/dendrogram) | Hierarchical clustering as a tree: single, complete, average or Ward linkage from vectors or distances, a cut dragged into colored clusters, a subtree lit on hover, left to right or top down, and an optional clustered heatmap. | [`examples/dendrogram`](examples/dendrogram) |
 
 ### Menu bar
 
@@ -169,6 +181,8 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/voiceorb`](ui/voiceorb) | Orb of a voice assistant's conversation mode: a glowing sphere whose surface flows in the accent's colors, breathing at rest, swelling and rippling with the voice it hears, swirling as it thinks and pulsing outward as it speaks, along springs, and a still gradient sphere for less motion. | [`examples/voiceorb`](examples/voiceorb) |
 | [`ui/hunks`](ui/hunks) | Hunk-by-hunk review of one file's diff, as agents ask about each edit and git clients stage: old and new line numbers, removed and added lines tinted, Accept and Reject or Stage and Discard, lines chosen by click, Shift-click or drag, j and k to move, y, n and u to decide and undo, "3 of 7 hunks left", and the patch of what was accepted for `git apply --cached`. | [`examples/hunks`](examples/hunks) |
 | [`ui/evals`](ui/evals) | A run of LLM evals, as eval tools show one: a row a case and a column a model, each cell a check or cross, its score, latency and the start of the output, headers of pass rate, mean score and median latency that stay as it scrolls both ways, All, Failing and Disagree with their counts, and a pane of the prompt, what is expected and the output, diffed word by word against another model's and rated with a thumb. | [`examples/evals`](examples/evals) |
+| [`ui/history`](ui/history) | Chat history sidebar, as AI chat apps list past conversations: New chat and a search, conversations under Pinned, Today, Yesterday, Previous 7 days, Previous 30 days and then by month, the open one lit, a spinner while a reply streams, and a "…" menu to rename in place, pin, or delete after asking in the row; only the rows in view are built. | [`examples/history`](examples/history) |
+| [`ui/ragchunks`](ui/ragchunks) | Chunk inspector for retrieval: the document with its chunks tinted by turns, overlaps hatched and numbers at their starts, beside a list of chunks with their size in characters and tokens; a query's hits rank by score with bars, outlined in the text with the rest dimmed, and a splitter by characters or by separators in turn. | [`examples/ragchunks`](examples/ragchunks) |
 
 Each package's doc comment shows how to use it.
 
@@ -298,6 +312,20 @@ go run ./examples/fretboard
 go run ./examples/gauge
 go run ./examples/wizard
 go run ./examples/openapi
+go run ./examples/vertical
+go run ./examples/tilemap
+go run ./examples/flamechart [trace.json]
+go run ./examples/coverage
+go run ./examples/cascader
+go run ./examples/transfer
+go run ./examples/swipeactions
+go run ./examples/quadrant
+go run ./examples/funnel
+go run ./examples/streamgraph
+go run ./examples/ridgeline
+go run ./examples/dendrogram
+go run ./examples/history
+go run ./examples/ragchunks
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
