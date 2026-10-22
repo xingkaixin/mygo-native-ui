@@ -289,7 +289,7 @@ func View(c *ui.Context, s *State, layers *[]Layer) Events {
 	rows := p.rows
 	s.list.Key = func(i int) any { return rows[i].id }
 	list := ui.List(c, &s.list, len(rows), p.row).Fill().Padding(0, 0, t.Space(4), 0).Focusable().Label("Layers")
-	list.DrawOver(p.line)
+	list.DrawOver(func(pt *ui.Painter, _ ui.Rect) { p.line(pt, t) })
 	// Below the rows, layers go to the end.
 	v, over := ui.DragOver[ref](list)
 	if d, ok := ui.Drop[ref](list); ok {
@@ -604,8 +604,8 @@ func (p *panel) rest(r row) {
 }
 
 // line draws the line where the layers dragged would drop.
-func (p *panel) line(pt *ui.Painter, _ ui.Rect) {
-	g, t := p.tgt, pt.Theme()
+func (p *panel) line(pt *ui.Painter, t *ui.Theme) {
+	g := p.tgt
 	if !g.ok || g.into || g.rect.W == 0 {
 		return
 	}
