@@ -1,0 +1,311 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Notes API",
+    "version": "1.4.0",
+    "description": "Keeps notes, their tags and the people who write them."
+  },
+  "servers": [
+    {"url": "/v1", "description": "The server in this app"},
+    {"url": "https://api.notes.example/v1", "description": "Production"}
+  ],
+  "tags": [
+    {"name": "Notes", "description": "Notes and what they hold."},
+    {"name": "Tags", "description": "The tags notes are filed under."},
+    {"name": "Users", "description": "The people who write notes."}
+  ],
+  "paths": {
+    "/notes": {
+      "get": {
+        "tags": ["Notes"],
+        "summary": "List notes",
+        "operationId": "listNotes",
+        "description": "Returns the notes of the signed-in user, **pinned ones first**, then by the order `sort` asks for. Pass `q` to find notes by the words they hold.",
+        "parameters": [
+          {"name": "q", "in": "query", "description": "Words the title or body must all hold.", "schema": {"type": "string"}, "example": "groceries"},
+          {"name": "tag", "in": "query", "description": "Only notes with this tag.", "schema": {"type": "string"}},
+          {"name": "sort", "in": "query", "description": "The order of the notes after the pinned ones.", "schema": {"type": "string", "enum": ["updated", "created", "title"], "default": "updated"}},
+          {"$ref": "#/components/parameters/Limit"}
+        ],
+        "responses": {
+          "200": {
+            "description": "The notes found",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/NoteList"}}}
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"}
+        }
+      },
+      "post": {
+        "tags": ["Notes"],
+        "summary": "Create a note",
+        "operationId": "createNote",
+        "description": "Creates a note. Tags that do not exist yet are created with it.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NoteInput"},
+              "example": {"title": "Groceries", "body": "- oat milk\n- lemons\n- rye bread", "color": "green", "tags": ["home"]}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The note created",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Note"}}}
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"}
+        }
+      }
+    },
+    "/notes/search": {
+      "get": {
+        "tags": ["Notes"],
+        "summary": "Search notes",
+        "operationId": "searchNotes",
+        "deprecated": true,
+        "description": "Finds notes by the words they hold.\n\nDeprecated since 1.2: use `GET /notes?q=` instead, which sorts and pages its results.",
+        "parameters": [
+          {"name": "q", "in": "query", "required": true, "description": "Words the title or body must all hold.", "schema": {"type": "string", "minLength": 1}, "example": "launch"}
+        ],
+        "responses": {
+          "200": {
+            "description": "The notes found",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/NoteList"}}}
+          }
+        }
+      }
+    },
+    "/notes/{noteId}": {
+      "parameters": [{"$ref": "#/components/parameters/NoteId"}],
+      "get": {
+        "tags": ["Notes"],
+        "summary": "Get a note",
+        "operationId": "getNote",
+        "responses": {
+          "200": {
+            "description": "The note",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Note"}}}
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      },
+      "patch": {
+        "tags": ["Notes"],
+        "summary": "Update a note",
+        "operationId": "updateNote",
+        "description": "Changes the fields given and leaves the others as they are.",
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/NotePatch"}}}
+        },
+        "responses": {
+          "200": {
+            "description": "The note updated",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Note"}}}
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      },
+      "delete": {
+        "tags": ["Notes"],
+        "summary": "Delete a note",
+        "operationId": "deleteNote",
+        "responses": {
+          "204": {"description": "The note was deleted"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/notes/{noteId}/tags": {
+      "parameters": [{"$ref": "#/components/parameters/NoteId"}],
+      "put": {
+        "tags": ["Notes", "Tags"],
+        "summary": "Replace a note's tags",
+        "operationId": "setNoteTags",
+        "requestBody": {
+          "required": true,
+          "description": "The note's tags, in the order to show them.",
+          "content": {
+            "application/json": {
+              "schema": {"type": "array", "items": {"type": "string"}, "maxItems": 10},
+              "example": ["work", "launch"]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The note with its new tags",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Note"}}}
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": ["Tags"],
+        "summary": "List tags",
+        "operationId": "listTags",
+        "description": "Returns every tag in use, by name, with how many notes have it.",
+        "responses": {
+          "200": {
+            "description": "The tags",
+            "content": {"application/json": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Tag"}}}}
+          }
+        }
+      }
+    },
+    "/tags/{name}": {
+      "delete": {
+        "tags": ["Tags"],
+        "summary": "Delete a tag",
+        "operationId": "deleteTag",
+        "description": "Removes the tag from every note that has it. The notes stay.",
+        "parameters": [
+          {"name": "name", "in": "path", "required": true, "schema": {"type": "string"}, "example": "ideas"}
+        ],
+        "responses": {
+          "204": {"description": "The tag was removed"},
+          "404": {
+            "description": "No note has the tag",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get the current user",
+        "operationId": "getMe",
+        "description": "Returns who the session belongs to, with the notes they pinned.",
+        "parameters": [
+          {"name": "X-Request-ID", "in": "header", "description": "An ID to find the request by in the server's logs.", "schema": {"type": "string", "format": "uuid"}},
+          {"name": "session", "in": "cookie", "required": true, "description": "The session the user signed in with.", "schema": {"type": "string"}, "example": "s_demo"}
+        ],
+        "responses": {
+          "200": {
+            "description": "The user",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/User"}}}
+          },
+          "401": {
+            "description": "No session, or one that ended",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Color": {
+        "type": "string",
+        "description": "The color the note shows in.",
+        "enum": ["yellow", "green", "blue", "pink", "gray"],
+        "default": "yellow"
+      },
+      "NoteInput": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {"type": "string", "maxLength": 120, "description": "The note's title.", "example": "Launch checklist"},
+          "body": {"type": "string", "description": "The note's text, in Markdown.", "example": "- [x] Write the release notes\n- [ ] Tell support"},
+          "color": {"$ref": "#/components/schemas/Color"},
+          "tags": {"type": "array", "items": {"type": "string"}, "description": "The tags to file the note under.", "example": ["work"]}
+        }
+      },
+      "NotePatch": {
+        "type": "object",
+        "description": "The fields to change; those left out stay as they are.",
+        "properties": {
+          "title": {"type": "string", "maxLength": 120, "example": "Launch checklist (v2)"},
+          "body": {"type": "string"},
+          "color": {"$ref": "#/components/schemas/Color"},
+          "pinned": {"type": "boolean", "description": "Whether the note shows first.", "example": true}
+        }
+      },
+      "Note": {
+        "description": "A note, as the server keeps it.",
+        "allOf": [
+          {"$ref": "#/components/schemas/NoteInput"},
+          {
+            "type": "object",
+            "required": ["id", "pinned", "author", "createdAt", "updatedAt"],
+            "properties": {
+              "id": {"type": "string", "description": "The note's ID.", "example": "nt_8c1d"},
+              "pinned": {"type": "boolean", "description": "Whether the note shows first."},
+              "author": {"$ref": "#/components/schemas/User"},
+              "createdAt": {"type": "string", "format": "date-time", "example": "2026-10-02T09:14:00Z"},
+              "updatedAt": {"type": "string", "format": "date-time"}
+            }
+          }
+        ]
+      },
+      "NoteList": {
+        "type": "object",
+        "required": ["notes", "total"],
+        "properties": {
+          "notes": {"type": "array", "items": {"$ref": "#/components/schemas/Note"}},
+          "total": {"type": "integer", "description": "How many notes match, on every page."},
+          "next": {"type": ["string", "null"], "description": "The cursor of the next page, or null on the last."}
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "required": ["name", "notes"],
+        "properties": {
+          "name": {"type": "string", "example": "work"},
+          "notes": {"type": "integer", "description": "How many notes have the tag.", "example": 12}
+        }
+      },
+      "User": {
+        "type": "object",
+        "description": "Someone who writes notes.",
+        "required": ["id", "name", "email", "plan"],
+        "properties": {
+          "id": {"type": "string", "example": "us_ada"},
+          "name": {"type": "string", "example": "Ada Park"},
+          "email": {"type": "string", "format": "email", "example": "ada@notes.example"},
+          "plan": {"type": "string", "enum": ["free", "pro", "team"]},
+          "pinned": {"type": "array", "items": {"$ref": "#/components/schemas/Note"}, "description": "The notes the user pinned, newest first. Only the user's own record holds them."}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {
+          "code": {"type": "string", "enum": ["bad_request", "not_found", "unauthorized"]},
+          "message": {"type": "string", "description": "What went wrong, for people to read.", "example": "No note has the ID nt_0000."}
+        }
+      }
+    },
+    "parameters": {
+      "NoteId": {
+        "name": "noteId",
+        "in": "path",
+        "required": true,
+        "description": "The note's ID.",
+        "schema": {"type": "string"},
+        "example": "nt_8c1d"
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "How many notes to return at most.",
+        "schema": {"type": "integer", "minimum": 1, "maximum": 100, "default": 20}
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "No note has that ID",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+      },
+      "BadRequest": {
+        "description": "The request is malformed",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+      }
+    }
+  }
+}
