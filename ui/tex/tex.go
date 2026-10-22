@@ -46,7 +46,8 @@ type cache struct {
 // theme's text and in its colors, in the middle of the width it gets,
 // scrolling sideways when it is wider. Assistive technology reads src.
 func View(c *ui.Context, src string) ui.Element {
-	size := c.Theme().FontSize * 1.2
+	t := c.Theme()
+	size := t.FontSize * 1.2
 	return ui.Row(c).AlignSelf(ui.Stretch).Justify(ui.Center).Children(func() {
 		ui.ScrollHorizontal(c).MaxWidthPercent(100).Children(func() {
 			box := ui.Box(c)
@@ -56,7 +57,7 @@ func View(c *ui.Context, src string) ui.Element {
 			}
 			f := k.f
 			box.Size(f.x1-f.x0, f.y1-f.y0).Role(ui.RoleImage).Label(src).Draw(func(p *ui.Painter, r ui.Rect) {
-				f.paint(p, r.X-f.x0, r.Y-f.y0)
+				f.paint(p, t, r.X-f.x0, r.Y-f.y0)
 			})
 		})
 	})
@@ -81,9 +82,8 @@ func typeset(src string, size float32) *formula {
 	return f
 }
 
-// paint draws f with its origin at x, y.
-func (f *formula) paint(p *ui.Painter, x, y float32) {
-	t := p.Theme()
+// paint draws f with its origin at x, y, in the colors of t.
+func (f *formula) paint(p *ui.Painter, t *ui.Theme, x, y float32) {
 	var path ui.Path
 	for _, it := range f.items {
 		c := it.ink.color(t)
