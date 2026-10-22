@@ -120,6 +120,17 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/toc`](ui/toc) | Table of contents beside a document, as documentation sites show it: headings indented by level on a guide line, the section being read lit as the document scrolls with a bar gliding to it, a click scrolling to a heading, and how much is read. Finds the headings of a `markdown.View`. | [`examples/toc`](examples/toc) |
 | [`ui/margincomments`](ui/margincomments) | Comments on ranges of a document in a margin beside it, as Google Docs shows them: tinted ranges, cards level with their first lines that push each other down, the active one level with its range as those above make room, replies, Resolve, and "Add comment" by a selection. The app keeps the threads. | [`examples/margincomments`](examples/margincomments) |
 | [`ui/reader`](ui/reader) | Book reader, as Apple Books: text laid into pages that fit the view, justified or ragged, indented, each chapter starting a page, two side by side when wide, turned with the keys, a click or a swipe as they slide, and a scrubber naming the chapter under the pointer. | [`examples/reader`](examples/reader) |
+| [`ui/lunar`](ui/lunar) | Month of the Chinese calendar, as Chinese calendar apps show it: the lunar day under each date and the month on 初一, solar terms and festivals in the accent, the year's 干支 and animal, the app's marks on their days, and the chosen day's 干支. Converts days and finds solar terms from 1900 to 2100. | [`examples/lunar`](examples/lunar) |
+| [`ui/masked`](ui/masked) | Masked text field, as for phone numbers, dates and product keys: the slots still empty dimmed, the pattern's characters put in as the user types and stepped over, what does not fit a slot refused, and pastes filtered into the slots. | [`examples/masked`](examples/masked) |
+| [`ui/classdiagram`](ui/classdiagram) | UML class diagram from Mermaid's classDiagram text: each class a box of name, fields and methods with annotations, static and abstract members, inheritance, realization, composition, aggregation, association and dependency ends, cardinalities and labels, a layered layout with parents above and few crossings, a click choosing a class and lighting its relations, and the lines that do not parse. | [`examples/classdiagram`](examples/classdiagram) |
+| [`ui/dot`](ui/dot) | Graph from Graphviz's DOT language: ranks ordered so few edges cross, clusters in boxes, curved edges with their labels beside them, the shapes, styles, arrowheads and colors it names, a node chosen with a click, and the lines that do not parse. | [`examples/dot`](examples/dot) |
+| [`ui/transcript`](ui/transcript) | Speech transcript that follows playback, as transcription apps and podcast players show it: each segment's speaker by a colored dot and its start, the word at the playhead lit, words spoken in full and those to come muted, a dotted underline under words heard with low confidence, a click on a word to seek, scrolling that follows the playhead until the user scrolls away, finding text with "2 of 9", and copying words with their speakers and times. | [`examples/transcript`](examples/transcript) |
+| [`ui/charmap`](ui/charmap) | Unicode character viewer, as macOS's Character Viewer: groups of blocks in a sidebar, their characters in a grid built only as it shows, search by name, by code point or by the character pasted, the characters used lately, and the name, code point, UTF-8 and UTF-16 bytes, category, block and HTML entity of the one chosen. Names come from `golang.org/x/text/unicode/runenames`. | [`examples/charmap`](examples/charmap) |
+| [`ui/staff`](ui/staff) | Music on a staff from ABC notation: clefs, keys, meters, heads, stems, flags, beams, rests, ties, triplets and repeats drawn as paths, systems that fill the width, a click to find a note in the source, wrong lines listed, and a tone per note played at the tempo with the sounding note lit. | [`examples/staff`](examples/staff) |
+| [`ui/fretboard`](ui/fretboard) | Guitar fretboard and chord diagrams: strings of any tuning across frets spaced as on a real neck, with inlays, the notes of a scale or a chord as dots named or numbered from the root, a plucked note and a mark toggled by a click, and chord boxes from shapes such as `x32010` with fingers and barres that strum when clicked. | [`examples/fretboard`](examples/fretboard) |
+| [`ui/gauge`](ui/gauge) | Dial gauge, as on a dashboard or a car's instruments: an arc of 180° to 270° in the app's colored zones, ticks at round values, a needle that springs to the value and pins past either end, the value and unit under the hub, and a held peak. | [`examples/gauge`](examples/gauge) |
+| [`ui/wizard`](ui/wizard) | Setup assistant of steps, as installers walk through: the steps listed down the side or as numbered dots along the top, done ones checked, a check that holds a step with its message by Back and Continue, Enter to continue, and each step sliding in from the side the user goes to. | [`examples/wizard`](examples/wizard) |
+| [`ui/openapi`](ui/openapi) | API reference from an OpenAPI 3.0 or 3.1 document in JSON: operations by tag with their methods in color and a search, parameters, request bodies and responses as trees of their schemas, and Try it, which hands the request to the app and shows the response. | [`examples/openapi`](examples/openapi) |
 
 ### Menu bar
 
@@ -156,6 +167,8 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/logprobs`](ui/logprobs) | A model's output with each token's probability, as logprob viewers show it: tokens tinted deeper the less likely they were, or by the entropy of their alternatives, those below a threshold underlined, a card of the token's probability and top alternatives on hover, pinned by a click and moved with the arrow keys, and the perplexity and least likely token above. The app reads the token pinned. | [`examples/logprobs`](examples/logprobs) |
 | [`ui/replay`](ui/replay) | Replay of a computer-use agent's session: each step's screenshot with what it did over it, rings at clicks, a path for drags, a chip of what it typed or pressed, an arrow for scrolls, play at the session's pace, a scrubber, a filmstrip, and the action in words with its reasoning. | [`examples/replay`](examples/replay) |
 | [`ui/voiceorb`](ui/voiceorb) | Orb of a voice assistant's conversation mode: a glowing sphere whose surface flows in the accent's colors, breathing at rest, swelling and rippling with the voice it hears, swirling as it thinks and pulsing outward as it speaks, along springs, and a still gradient sphere for less motion. | [`examples/voiceorb`](examples/voiceorb) |
+| [`ui/hunks`](ui/hunks) | Hunk-by-hunk review of one file's diff, as agents ask about each edit and git clients stage: old and new line numbers, removed and added lines tinted, Accept and Reject or Stage and Discard, lines chosen by click, Shift-click or drag, j and k to move, y, n and u to decide and undo, "3 of 7 hunks left", and the patch of what was accepted for `git apply --cached`. | [`examples/hunks`](examples/hunks) |
+| [`ui/evals`](ui/evals) | A run of LLM evals, as eval tools show one: a row a case and a column a model, each cell a check or cross, its score, latency and the start of the output, headers of pass rate, mean score and median latency that stay as it scrolls both ways, All, Failing and Disagree with their counts, and a pane of the prompt, what is expected and the output, diffed word by word against another model's and rated with a thumb. | [`examples/evals`](examples/evals) |
 
 Each package's doc comment shows how to use it.
 
@@ -272,6 +285,19 @@ go run ./examples/voiceorb
 go run ./examples/toc
 go run ./examples/margincomments
 go run ./examples/reader
+go run ./examples/hunks
+go run ./examples/lunar
+go run ./examples/masked
+go run ./examples/classdiagram
+go run ./examples/dot
+go run ./examples/transcript
+go run ./examples/evals
+go run ./examples/charmap
+go run ./examples/staff
+go run ./examples/fretboard
+go run ./examples/gauge
+go run ./examples/wizard
+go run ./examples/openapi
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
