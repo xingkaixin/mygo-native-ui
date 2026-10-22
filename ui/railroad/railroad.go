@@ -98,7 +98,7 @@ func View(c *ui.Context, s *State, pattern string) ui.Element {
 		}
 		d := s.d
 		ui.Box(c).Size(d.w, d.h).Draw(func(p *ui.Painter, r ui.Rect) {
-			p.Transform(ui.Translation(r.X, r.Y), 0, 0, func() { paint(p, d) })
+			p.Transform(ui.Translation(r.X, r.Y), 0, 0, func() { paint(p, t, d) })
 		})
 	})
 }
@@ -420,8 +420,7 @@ func (b *builder) group(re *syntax.Regexp, s item) item {
 
 // paint draws d: the frames of groups under the track, and the boxes,
 // labels and marks over it.
-func paint(p *ui.Painter, d *diagram) {
-	t := p.Theme()
+func paint(p *ui.Painter, t *ui.Theme, d *diagram) {
 	text := func(s shape, color ui.Color) {
 		sp := span(t, s.kind, s.text)
 		sp.Color = color
