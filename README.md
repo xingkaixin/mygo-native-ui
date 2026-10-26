@@ -143,6 +143,12 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/streamgraph`](ui/streamgraph) | Streamgraph of many series over time: smooth layers around a wiggle, silhouette or zero baseline in inside-out or given order, names inside thick layers and the rest in a legend, a rule reading every layer's value on hover, and a click isolating a layer. | [`examples/streamgraph`](examples/streamgraph) |
 | [`ui/ridgeline`](ui/ridgeline) | Distributions of groups as overlapping ridges, a joy plot: a kernel density estimate a group with an adjustable bandwidth, median or quantile marks, colors by group or along a gradient, sorting by median, and a card of a group's density and share below on hover. | [`examples/ridgeline`](examples/ridgeline) |
 | [`ui/dendrogram`](ui/dendrogram) | Hierarchical clustering as a tree: single, complete, average or Ward linkage from vectors or distances, a cut dragged into colored clusters, a subtree lit on hover, left to right or top down, and an optional clustered heatmap. | [`examples/dendrogram`](examples/dendrogram) |
+| [`ui/response`](ui/response) | HTTP response viewer, as API clients show one under the request: the status in its class's color, time and size, tabs for the body, cookies and headers, a JSON body pretty, raw or as a tree, other text highlighted, and the time's DNS, connecting, TLS, waiting and downloading phases on hover, measured with `httptrace`. | [`examples/response`](examples/response) |
+| [`ui/matrix`](ui/matrix) | Confusion and correlation matrices: names down the side and slanted across the top, right predictions blue and wrong ones red, counts or shares by actual or predicted class, recall, precision and accuracy in the margins, coefficients from -1 to 1 in two hues, and a cell lit with its row and column, told of on hover and chosen with a click. | [`examples/matrix`](examples/matrix) |
+| [`ui/brush`](ui/brush) | Counts over time as bars, as log explorers show events, stacked by series with a legend, and a window chosen by dragging across them, moved by dragging inside it and resized by its edges in whole bars, the rest dimmed, with how many events it holds and when. | [`examples/brush`](examples/brush) |
+| [`ui/horizon`](ui/horizon) | Horizon chart of many series in little height, as Cubism draws one: a short row a series cut into bands that fold over one another, blue above zero and red below, on one scale or each row's own, names and values over the rows, and a line across every row reading them at the pointer. | [`examples/horizon`](examples/horizon) |
+| [`ui/pagination`](ui/pagination) | Page numbers between Previous and Next, the first, last and nearby pages with ellipses in a constant number of buttons, and a table footer with rows per page and "21–30 of 412"; the arrow keys turn the page. | [`examples/pagination`](examples/pagination) |
+| [`ui/storagebar`](ui/storagebar) | Storage usage bar, as macOS's Storage settings: how much of the capacity is used, the parts in their colors and the space left gray, a legend of sizes in powers of 1,000, and a part lit from the bar or the legend on hover. | [`examples/storagebar`](examples/storagebar) |
 
 ### Menu bar
 
@@ -183,7 +189,10 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/evals`](ui/evals) | A run of LLM evals, as eval tools show one: a row a case and a column a model, each cell a check or cross, its score, latency and the start of the output, headers of pass rate, mean score and median latency that stay as it scrolls both ways, All, Failing and Disagree with their counts, and a pane of the prompt, what is expected and the output, diffed word by word against another model's and rated with a thumb. | [`examples/evals`](examples/evals) |
 | [`ui/history`](ui/history) | Chat history sidebar, as AI chat apps list past conversations: New chat and a search, conversations under Pinned, Today, Yesterday, Previous 7 days, Previous 30 days and then by month, the open one lit, a spinner while a reply streams, and a "…" menu to rename in place, pin, or delete after asking in the row; only the rows in view are built. | [`examples/history`](examples/history) |
 | [`ui/ragchunks`](ui/ragchunks) | Chunk inspector for retrieval: the document with its chunks tinted by turns, overlaps hatched and numbers at their starts, beside a list of chunks with their size in characters and tokens; a query's hits rank by score with bars, outlined in the text with the rest dimmed, and a splitter by characters or by separators in turn. | [`examples/ragchunks`](examples/ragchunks) |
-| [`ui/templatefield`](ui/templatefield) | Single-line field with `{{variables}}`, as in API clients' URL fields: defined and undefined variables in their own colors, a list of variables after `{{` that narrows as you type, and a card with each variable's value and source on hover. |
+| [`ui/templatefield`](ui/templatefield) | Single-line field with `{{variables}}`, as in API clients' URL fields: defined and undefined variables in their own colors, a list of variables after `{{` that narrows as you type, and a card with each variable's value and source on hover. | [`examples/templatefield`](examples/templatefield) |
+| [`ui/schemaeditor`](ui/schemaeditor) | JSON Schema editor for a tool's parameters or a structured output: a row a field with its name, type, whether it is required and its description, objects and arrays nested with guides, the values a string may take, taken names in red, focus on a field just added, and the schema written in field order and parsed back. | [`examples/schemaeditor`](examples/schemaeditor) |
+| [`ui/spanlabel`](ui/spanlabel) | Span labeler for training data, as Prodigy and Label Studio: labels with number keys, spans tinted with their label's name after them, overlapping spans underlined on levels, drags snapped to whole words or to characters in Chinese and Japanese, and a span selected to relabel or delete. | [`examples/spanlabel`](examples/spanlabel) |
+| [`ui/tokenizer`](ui/tokenizer) | A text as a model's tokenizer splits it, as tokenizer playgrounds show it: token and character counts, each token tinted by turns or the list of IDs, partial characters as hex bytes, whitespace shown as marks, and every token with the same ID lit on hover. | [`examples/tokenizer`](examples/tokenizer) |
 
 Each package's doc comment shows how to use it.
 
@@ -325,9 +334,18 @@ go run ./examples/funnel
 go run ./examples/streamgraph
 go run ./examples/ridgeline
 go run ./examples/dendrogram
+go run ./examples/response
+go run ./examples/matrix
+go run ./examples/brush
+go run ./examples/horizon
+go run ./examples/pagination
+go run ./examples/storagebar
 go run ./examples/history
 go run ./examples/ragchunks
 go run ./examples/templatefield
+go run ./examples/schemaeditor
+go run ./examples/spanlabel
+go run ./examples/tokenizer
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
