@@ -5,7 +5,8 @@
 // across the content, from the top ruler a horizontal one and from the
 // left a vertical one; dragging a guide moves it, and dragging it back
 // onto its ruler removes it. Guides stop at whole DIPs of the content,
-// and snap to its edges and middle within 6 DIPs of the view.
+// and snap to its edges and middle, and to the lines in State.Snaps,
+// within 6 DIPs of the view.
 //
 //	rulers.View(c, &app.canvas, 800, 600, &app.guides, func() {
 //		app.artboard(c)
@@ -44,6 +45,9 @@ type Guide struct {
 // view.
 type State struct {
 	Zoom zoomview.State
+	// Snaps are more lines guides snap to, as the edges of the content's
+	// elements, which the app sets.
+	Snaps []Guide
 	// pulling is the index of the guide a ruler's drag pulls out, plus
 	// one.
 	pulling int
@@ -69,7 +73,8 @@ func View(c *ui.Context, s *State, w, h float32, guides *[]Guide, content func()
 		z := s.Zoom.Zoom()
 		px, py, over := area.PointerPosition()
 		// at returns the content's point at the pointer, along x or y,
-		// snapped to the content's edges and middle.
+		// snapped to the nearest of the content's edges and middle and
+		// s.Snaps.
 		at := func(vertical bool) float32 {
 			px, py, _ := area.PointerPosition()
 			ox, oy := s.Zoom.Origin()
@@ -77,12 +82,21 @@ func View(c *ui.Context, s *State, w, h float32, guides *[]Guide, content func()
 			if vertical {
 				v, end = ox+px/z, w
 			}
-			for _, p := range []float32{0, end / 2, end} {
-				if math.Abs(float64(v-p))*float64(z) <= snap {
-					return p
+			to, near := float32(math.Round(float64(v))), float32(snap)/z
+			try := func(p float32) {
+				if d := float32(math.Abs(float64(v - p))); d <= near {
+					to, near = p, d
 				}
 			}
-			return float32(math.Round(float64(v)))
+			for _, p := range []float32{0, end / 2, end} {
+				try(p)
+			}
+			for _, g := range s.Snaps {
+				if g.Vertical == vertical {
+					try(g.Pos)
+				}
+			}
+			return to
 		}
 		// outside reports whether the pointer is over the ruler of a guide.
 		outside := func(vertical bool) bool {
