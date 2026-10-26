@@ -1,0 +1,170 @@
+Pago Pago|American Samoa|Pacific/Pago_Pago
+Honolulu|United States|Pacific/Honolulu
+Papeete|French Polynesia|Pacific/Tahiti
+Taiohae|French Polynesia|Pacific/Marquesas
+Anchorage|United States|America/Anchorage
+Juneau|United States|America/Juneau
+Los Angeles|United States|America/Los_Angeles
+San Francisco|United States|America/Los_Angeles
+Seattle|United States|America/Los_Angeles
+Las Vegas|United States|America/Los_Angeles
+Vancouver|Canada|America/Vancouver
+Tijuana|Mexico|America/Tijuana
+Phoenix|United States|America/Phoenix
+Denver|United States|America/Denver
+Salt Lake City|United States|America/Denver
+Calgary|Canada|America/Edmonton
+Edmonton|Canada|America/Edmonton
+Chicago|United States|America/Chicago
+Dallas|United States|America/Chicago
+Houston|United States|America/Chicago
+Winnipeg|Canada|America/Winnipeg
+Mexico City|Mexico|America/Mexico_City
+Guatemala City|Guatemala|America/Guatemala
+San José|Costa Rica|America/Costa_Rica
+New York|United States|America/New_York
+Washington, D.C.|United States|America/New_York
+Boston|United States|America/New_York
+Atlanta|United States|America/New_York
+Miami|United States|America/New_York
+Detroit|United States|America/Detroit
+Toronto|Canada|America/Toronto
+Montreal|Canada|America/Toronto
+Havana|Cuba|America/Havana
+Kingston|Jamaica|America/Jamaica
+Panama City|Panama|America/Panama
+Bogotá|Colombia|America/Bogota
+Lima|Peru|America/Lima
+Quito|Ecuador|America/Guayaquil
+Caracas|Venezuela|America/Caracas
+Halifax|Canada|America/Halifax
+San Juan|Puerto Rico|America/Puerto_Rico
+Santo Domingo|Dominican Republic|America/Santo_Domingo
+La Paz|Bolivia|America/La_Paz
+Santiago|Chile|America/Santiago
+St. John's|Canada|America/St_Johns
+São Paulo|Brazil|America/Sao_Paulo
+Rio de Janeiro|Brazil|America/Sao_Paulo
+Buenos Aires|Argentina|America/Argentina/Buenos_Aires
+Montevideo|Uruguay|America/Montevideo
+Asunción|Paraguay|America/Asuncion
+Nuuk|Greenland|America/Nuuk
+Fernando de Noronha|Brazil|America/Noronha
+Praia|Cape Verde|Atlantic/Cape_Verde
+Ponta Delgada|Portugal|Atlantic/Azores
+UTC|Coordinated Universal Time|UTC
+Reykjavík|Iceland|Atlantic/Reykjavik
+London|United Kingdom|Europe/London
+Dublin|Ireland|Europe/Dublin
+Lisbon|Portugal|Europe/Lisbon
+Dakar|Senegal|Africa/Dakar
+Accra|Ghana|Africa/Accra
+Abidjan|Côte d'Ivoire|Africa/Abidjan
+Casablanca|Morocco|Africa/Casablanca
+Paris|France|Europe/Paris
+Berlin|Germany|Europe/Berlin
+Madrid|Spain|Europe/Madrid
+Barcelona|Spain|Europe/Madrid
+Rome|Italy|Europe/Rome
+Milan|Italy|Europe/Rome
+Amsterdam|Netherlands|Europe/Amsterdam
+Brussels|Belgium|Europe/Brussels
+Zurich|Switzerland|Europe/Zurich
+Vienna|Austria|Europe/Vienna
+Prague|Czechia|Europe/Prague
+Warsaw|Poland|Europe/Warsaw
+Budapest|Hungary|Europe/Budapest
+Stockholm|Sweden|Europe/Stockholm
+Oslo|Norway|Europe/Oslo
+Copenhagen|Denmark|Europe/Copenhagen
+Belgrade|Serbia|Europe/Belgrade
+Lagos|Nigeria|Africa/Lagos
+Kinshasa|DR Congo|Africa/Kinshasa
+Algiers|Algeria|Africa/Algiers
+Tunis|Tunisia|Africa/Tunis
+Athens|Greece|Europe/Athens
+Helsinki|Finland|Europe/Helsinki
+Kyiv|Ukraine|Europe/Kyiv
+Bucharest|Romania|Europe/Bucharest
+Sofia|Bulgaria|Europe/Sofia
+Riga|Latvia|Europe/Riga
+Vilnius|Lithuania|Europe/Vilnius
+Tallinn|Estonia|Europe/Tallinn
+Cairo|Egypt|Africa/Cairo
+Jerusalem|Israel|Asia/Jerusalem
+Beirut|Lebanon|Asia/Beirut
+Amman|Jordan|Asia/Amman
+Johannesburg|South Africa|Africa/Johannesburg
+Cape Town|South Africa|Africa/Johannesburg
+Harare|Zimbabwe|Africa/Harare
+Istanbul|Türkiye|Europe/Istanbul
+Moscow|Russia|Europe/Moscow
+Saint Petersburg|Russia|Europe/Moscow
+Minsk|Belarus|Europe/Minsk
+Riyadh|Saudi Arabia|Asia/Riyadh
+Doha|Qatar|Asia/Qatar
+Baghdad|Iraq|Asia/Baghdad
+Nairobi|Kenya|Africa/Nairobi
+Addis Ababa|Ethiopia|Africa/Addis_Ababa
+Tehran|Iran|Asia/Tehran
+Dubai|United Arab Emirates|Asia/Dubai
+Abu Dhabi|United Arab Emirates|Asia/Dubai
+Baku|Azerbaijan|Asia/Baku
+Tbilisi|Georgia|Asia/Tbilisi
+Port Louis|Mauritius|Indian/Mauritius
+Kabul|Afghanistan|Asia/Kabul
+Karachi|Pakistan|Asia/Karachi
+Tashkent|Uzbekistan|Asia/Tashkent
+Yekaterinburg|Russia|Asia/Yekaterinburg
+Malé|Maldives|Indian/Maldives
+Mumbai|India|Asia/Kolkata
+New Delhi|India|Asia/Kolkata
+Bengaluru|India|Asia/Kolkata
+Kolkata|India|Asia/Kolkata
+Colombo|Sri Lanka|Asia/Colombo
+Kathmandu|Nepal|Asia/Kathmandu
+Dhaka|Bangladesh|Asia/Dhaka
+Almaty|Kazakhstan|Asia/Almaty
+Yangon|Myanmar|Asia/Yangon
+Bangkok|Thailand|Asia/Bangkok
+Jakarta|Indonesia|Asia/Jakarta
+Ho Chi Minh City|Vietnam|Asia/Ho_Chi_Minh
+Hanoi|Vietnam|Asia/Ho_Chi_Minh
+Novosibirsk|Russia|Asia/Novosibirsk
+Beijing|China|Asia/Shanghai
+Shanghai|China|Asia/Shanghai
+Shenzhen|China|Asia/Shanghai
+Hong Kong|China|Asia/Hong_Kong
+Taipei|Taiwan|Asia/Taipei
+Singapore|Singapore|Asia/Singapore
+Kuala Lumpur|Malaysia|Asia/Kuala_Lumpur
+Manila|Philippines|Asia/Manila
+Perth|Australia|Australia/Perth
+Ulaanbaatar|Mongolia|Asia/Ulaanbaatar
+Eucla|Australia|Australia/Eucla
+Tokyo|Japan|Asia/Tokyo
+Osaka|Japan|Asia/Tokyo
+Seoul|South Korea|Asia/Seoul
+Pyongyang|North Korea|Asia/Pyongyang
+Jayapura|Indonesia|Asia/Jayapura
+Darwin|Australia|Australia/Darwin
+Adelaide|Australia|Australia/Adelaide
+Brisbane|Australia|Australia/Brisbane
+Sydney|Australia|Australia/Sydney
+Melbourne|Australia|Australia/Melbourne
+Hobart|Australia|Australia/Hobart
+Vladivostok|Russia|Asia/Vladivostok
+Port Moresby|Papua New Guinea|Pacific/Port_Moresby
+Guam|United States|Pacific/Guam
+Lord Howe Island|Australia|Australia/Lord_Howe
+Nouméa|New Caledonia|Pacific/Noumea
+Honiara|Solomon Islands|Pacific/Guadalcanal
+Magadan|Russia|Asia/Magadan
+Auckland|New Zealand|Pacific/Auckland
+Wellington|New Zealand|Pacific/Auckland
+Suva|Fiji|Pacific/Fiji
+Petropavlovsk-Kamchatsky|Russia|Asia/Kamchatka
+Chatham Islands|New Zealand|Pacific/Chatham
+Nukuʻalofa|Tonga|Pacific/Tongatapu
+Apia|Samoa|Pacific/Apia
+Kiritimati|Kiribati|Pacific/Kiritimati
