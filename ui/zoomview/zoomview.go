@@ -46,6 +46,17 @@ func (s *State) Zoom() float32 {
 	return s.scale
 }
 
+// Origin returns the point of the content at the view's top left corner:
+// a point x, y of the view shows the content's point Origin() plus x, y
+// divided by Zoom().
+func (s *State) Origin() (x, y float32) {
+	z := s.Zoom()
+	if z <= 0 {
+		return 0, 0
+	}
+	return s.x - s.vw/2/z, s.y - s.vh/2/z
+}
+
 // Fit fits the content in the view, no larger than its own size, and
 // follows the view's size until the user zooms or pans again.
 func (s *State) Fit() { s.scale = 0 }
