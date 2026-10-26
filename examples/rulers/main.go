@@ -1,6 +1,7 @@
 // Rulers shows an artboard on a canvas with rulers: drag from a ruler to
 // pull out a guide, drag a guide to move it or back onto its ruler to
-// remove it. Cmd-scroll to zoom, scroll or drag to pan.
+// remove it. Guides snap to the edges of the artboard's elements.
+// Cmd-scroll to zoom, scroll or drag to pan.
 //
 //	go run ./examples/rulers
 package main
@@ -24,24 +25,36 @@ type app struct {
 
 func (a *app) artboard(c *ui.Context) {
 	ink := ui.Oklch(0.25, 0.03, 260)
-	ui.Column(c).Fill().Background(ui.Oklch(0.98, 0.01, 90)).Padding(40).Gap(24).Children(func() {
-		ui.Row(c).Height(40).AlignItems(ui.Center).Gap(24).Children(func() {
+	board := ui.Column(c).Fill().Background(ui.Oklch(0.98, 0.01, 90)).Padding(40).Gap(24)
+	var snaps []rulers.Guide
+	// edges lets guides snap to the sides of e, as laid out in the last
+	// frame, before the view's zoom.
+	edges := func(e ui.Element) {
+		b, r := board.LayoutBounds(), e.LayoutBounds()
+		x, y := r.X-b.X, r.Y-b.Y
+		snaps = append(snaps,
+			rulers.Guide{Vertical: true, Pos: x}, rulers.Guide{Vertical: true, Pos: x + r.W},
+			rulers.Guide{Pos: y}, rulers.Guide{Pos: y + r.H})
+	}
+	board.Children(func() {
+		edges(ui.Row(c).Height(40).AlignItems(ui.Center).Gap(24).Children(func() {
 			ui.Text(c, "Orchard").Bold().FontSize(20).TextColor(ink).Grow(1)
 			for _, s := range []string{"Menu", "Visit", "About"} {
 				ui.Text(c, s).TextColor(ink.Alpha(0.7))
 			}
-		})
+		}))
 		ui.Row(c).Grow(1).Gap(32).Children(func() {
 			ui.Column(c).Grow(1).Gap(16).Justify(ui.Center).Children(func() {
-				ui.Text(c, "Cider pressed this morning, two streets from the trees.").FontSize(36).Bold().TextColor(ink)
-				ui.Text(c, "Open Thursday to Sunday, ten until the barrels run dry.").FontSize(16).TextColor(ink.Alpha(0.7))
-				ui.Box(c).Size(160, 44).Radius(22).Background(ui.Oklch(0.62, 0.17, 35)).Children(func() {
+				edges(ui.Text(c, "Cider pressed this morning, two streets from the trees.").FontSize(36).Bold().TextColor(ink))
+				edges(ui.Text(c, "Open Thursday to Sunday, ten until the barrels run dry.").FontSize(16).TextColor(ink.Alpha(0.7)))
+				edges(ui.Box(c).Size(160, 44).Radius(22).Background(ui.Oklch(0.62, 0.17, 35)).Children(func() {
 					ui.Text(c, "Find us").Bold().TextColor(ui.Oklch(1, 0, 0)).Fill().TextAlign(ui.Center).Padding(12, 0)
-				})
+				}))
 			})
-			ui.Box(c).Size(280, 360).Radius(16).Background(ui.Oklch(0.78, 0.12, 130))
+			edges(ui.Box(c).Size(280, 360).Radius(16).Background(ui.Oklch(0.78, 0.12, 130)))
 		})
 	})
+	a.canvas.Snaps = snaps
 }
 
 func (a *app) view(c *ui.Context) {
