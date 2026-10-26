@@ -149,6 +149,25 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/horizon`](ui/horizon) | Horizon chart of many series in little height, as Cubism draws one: a short row a series cut into bands that fold over one another, blue above zero and red below, on one scale or each row's own, names and values over the rows, and a line across every row reading them at the pointer. | [`examples/horizon`](examples/horizon) |
 | [`ui/pagination`](ui/pagination) | Page numbers between Previous and Next, the first, last and nearby pages with ellipses in a constant number of buttons, and a table footer with rows per page and "21–30 of 412"; the arrow keys turn the page. | [`examples/pagination`](examples/pagination) |
 | [`ui/storagebar`](ui/storagebar) | Storage usage bar, as macOS's Storage settings: how much of the capacity is used, the parts in their colors and the space left gray, a legend of sizes in powers of 1,000, and a part lit from the bar or the legend on hover. | [`examples/storagebar`](examples/storagebar) |
+| [`ui/request`](ui/request) | HTTP request editor, as API clients have one: the method in its color, a URL whose query and the Params table follow each other, headers, and a body of none, JSON or text, JSON checked and formatted; Cmd-Enter sends, and the request becomes an `http.Request`. | [`examples/request`](examples/request) |
+| [`ui/frames`](ui/frames) | WebSocket and SSE message log, as browsers' developer tools show one: sent and received frames with arrows, time, event and size, a search, All, Sent and Received, following the end, and the chosen frame's data below, JSON formatted and binary as a hex dump. | [`examples/frames`](examples/frames) |
+| [`ui/disasm`](ui/disasm) | Disassembly view: addresses, bytes, mnemonics and operands in columns, labels, comments, the program counter, and arrows of the jumps in lanes beside them; a double click follows a jump, and Escape comes back. | [`examples/disasm`](examples/disasm) |
+| [`ui/barcode`](ui/barcode) | Code 128 and EAN-13 barcodes, with the check digit worked out and the digits under the bars. | [`examples/barcode`](examples/barcode) |
+| [`ui/yearview`](ui/yearview) | Calendar year view: twelve small months in as many columns as fit, today ringed, days with events dotted in their colors, a card of a day's events on hover, and a click choosing a day. | [`examples/yearview`](examples/yearview) |
+| [`ui/agenda`](ui/agenda) | Agenda list of events by day: day headings that stay at the top, Today and Tomorrow, all-day and multi-day events ("Day 2 of 3"), the event going on marked Now, and past events dimmed. | [`examples/agenda`](examples/agenda) |
+| [`ui/notifications`](ui/notifications) | Notification inbox: Today, Yesterday and Earlier, unread dots, actions on each, mark read and remove on hover, and Mark all read. | [`examples/notifications`](examples/notifications) |
+| [`ui/bilingual`](ui/bilingual) | Translation editor, as CAT tools have one: source and target segment by segment, placeholders lit and those missing from the target marked, Cmd-Enter confirming a segment and moving to the next to do, notes, progress, and All or To do. | [`examples/bilingual`](examples/bilingual) |
+| [`ui/subtitle`](ui/subtitle) | Subtitle editor on a waveform: cues as blocks dragged to move or by their edges to retime, `[` and `]` setting the start and end at the playhead, a list of cues to edit with characters per second, and SRT parsed and written. | [`examples/subtitle`](examples/subtitle) |
+| [`ui/bullet`](ui/bullet) | Bullet charts: a measure as a bar over shaded ranges, a target tick, and lower-is-better measures. | [`examples/bullet`](examples/bullet) |
+| [`ui/bump`](ui/bump) | Bump chart of ranks over time: lines between each period's ranks, names at both ends, a card on hover, and a series held lit by a click. | [`examples/bump`](examples/bump) |
+| [`ui/waffle`](ui/waffle) | Waffle chart: a hundred squares shared among parts by the largest remainders, with a legend of percentages and a part lit on hover. | [`examples/waffle`](examples/waffle) |
+| [`ui/beeswarm`](ui/beeswarm) | Beeswarm of samples along an axis, a row a group: dots pushed apart so none hide another, smaller where they crowd, and a dot's value and label on hover. | [`examples/beeswarm`](examples/beeswarm) |
+| [`ui/density`](ui/density) | Density of many points: hexagonal bins in a sequential scale, or contours of a smoothed grid, with a legend and a hexagon's count on hover. | [`examples/density`](examples/density) |
+| [`ui/boxmodel`](ui/boxmodel) | Box model editor, as browsers' developer tools: content, padding, border and margin nested in their colors, each side's size dragged sideways or typed in, Option changing the opposite side with it. | [`examples/boxmodel`](examples/boxmodel) |
+| [`ui/rulers`](ui/rulers) | Rulers around a zoomview, as design tools have them: ticks and numbers following the zoom and pan, a mark at the pointer, and guides pulled out of the rulers, moved, and dragged back to remove. | [`examples/rulers`](examples/rulers) |
+| [`ui/contrast`](ui/contrast) | WCAG 2 contrast checker: text and background wells, a preview of large and normal text and a control, the ratio, AA and AAA for each, and the nearest text color that passes. | [`examples/contrast`](examples/contrast) |
+| [`ui/lightbox`](ui/lightbox) | Photo lightbox over the window: the photo fitted on a dark backdrop to zoom and pan, its caption and place in the set, previous and next by button or arrow key, and a strip of thumbnails. | [`examples/lightbox`](examples/lightbox) |
+| [`ui/tuner`](ui/tuner) | Instrument tuner: the nearest note and octave, the frequency, and a needle from 50 cents flat to 50 sharp, green within 5; pitch detection with YIN. | [`examples/tuner`](examples/tuner) |
 
 ### Menu bar
 
@@ -346,6 +365,25 @@ go run ./examples/templatefield
 go run ./examples/schemaeditor
 go run ./examples/spanlabel
 go run ./examples/tokenizer
+go run ./examples/request
+go run ./examples/frames
+go run ./examples/disasm
+go run ./examples/barcode
+go run ./examples/yearview
+go run ./examples/agenda
+go run ./examples/notifications
+go run ./examples/bilingual
+go run ./examples/subtitle
+go run ./examples/bullet
+go run ./examples/bump
+go run ./examples/waffle
+go run ./examples/beeswarm
+go run ./examples/density
+go run ./examples/boxmodel
+go run ./examples/rulers
+go run ./examples/contrast
+go run ./examples/lightbox
+go run ./examples/tuner
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
