@@ -168,6 +168,18 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/contrast`](ui/contrast) | WCAG 2 contrast checker: text and background wells, a preview of large and normal text and a control, the ratio, AA and AAA for each, and the nearest text color that passes. | [`examples/contrast`](examples/contrast) |
 | [`ui/lightbox`](ui/lightbox) | Photo lightbox over the window: the photo fitted on a dark backdrop to zoom and pan, its caption and place in the set, previous and next by button or arrow key, and a strip of thumbnails. | [`examples/lightbox`](examples/lightbox) |
 | [`ui/tuner`](ui/tuner) | Instrument tuner: the nearest note and octave, the frequency, and a needle from 50 cents flat to 50 sharp, green within 5; pitch detection with YIN. | [`examples/tuner`](examples/tuner) |
+| [`ui/fontpicker`](ui/fontpicker) | Font family picker: each family's name in its own face, a search that narrows the list, monospaced families alone with a toggle, and the arrow keys and Enter to choose. | [`examples/fontpicker`](examples/fontpicker) |
+| [`ui/skeleton`](ui/skeleton) | Loading placeholders: boxes, circles and lines of text in the shape of what is coming, with a shine sweeping across them in step, still for less motion. | [`examples/skeleton`](examples/skeleton) |
+| [`ui/histslider`](ui/histslider) | Range slider over a histogram of the values, as booking sites filter prices: the bars in range lit, and the low and high values written below. | [`examples/histslider`](examples/histslider) |
+| [`ui/keyframes`](ui/keyframes) | Keyframe editor of animated properties: a lane a track with its value at the playhead, keys shaped by their easing, dragged in whole frames, added by double click and eased or deleted from their menu, and a ruler to scrub. | [`examples/keyframes`](examples/keyframes) |
+| [`ui/facepile`](ui/facepile) | Overlapping avatars of who is here, ringed in their cursor colors, those away faded, names on hover, a click to follow one, and "+3" opening a list of everyone. | [`examples/collab`](examples/collab) |
+| [`ui/reactions`](ui/reactions) | Emoji reactions under a message: chips with counts, lit where the user reacted, who reacted on hover, a click adding or taking back, and a button opening the emoji picker. | [`examples/collab`](examples/collab) |
+| [`ui/tzpicker`](ui/tzpicker) | Time zone picker by city: some 170 cities from the furthest behind UTC to the furthest ahead, with their day, time and offset now, and a search by city, country, zone or abbreviation such as `PST`. | [`examples/tzpicker`](examples/tzpicker) |
+| [`ui/password`](ui/password) | New password field: an eye to show what is typed, a meter of four bars from Weak to Strong, and the app's rules checked as the password meets them. | [`examples/password`](examples/password) |
+| [`ui/xypad`](ui/xypad) | XY pad setting two values at once, as a filter's cutoff and resonance: a puck pressed or dragged into place, Shift for fine moves, arrow keys, double click to reset, and linear or log axes. | [`examples/xypad`](examples/xypad) |
+| [`ui/jwt`](ui/jwt) | JSON Web Token decoder: the token's three parts in their colors, whether it has expired or is not valid yet, the header's and payload's claims named, and times as dates and as how long from now. | [`examples/jwt`](examples/jwt) |
+| [`ui/dirdiff`](ui/dirdiff) | Two folders compared as a tree: sizes and times on each side, files added, removed, changed or the same, folders that differ opened, counts of each, and a toggle to only the differences. | [`examples/dirdiff`](examples/dirdiff) |
+| [`ui/scope`](ui/scope) | Oscilloscope: a screen of divisions with up to two channels, a trigger level dragged on the screen, time and volts a division in 1, 2, 5 steps, each channel's frequency and peak-to-peak volts, and XY mode for Lissajous figures. | [`examples/scope`](examples/scope) |
 
 ### Menu bar
 
@@ -212,6 +224,10 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/schemaeditor`](ui/schemaeditor) | JSON Schema editor for a tool's parameters or a structured output: a row a field with its name, type, whether it is required and its description, objects and arrays nested with guides, the values a string may take, taken names in red, focus on a field just added, and the schema written in field order and parsed back. | [`examples/schemaeditor`](examples/schemaeditor) |
 | [`ui/spanlabel`](ui/spanlabel) | Span labeler for training data, as Prodigy and Label Studio: labels with number keys, spans tinted with their label's name after them, overlapping spans underlined on levels, drags snapped to whole words or to characters in Chinese and Japanese, and a span selected to relabel or delete. | [`examples/spanlabel`](examples/spanlabel) |
 | [`ui/tokenizer`](ui/tokenizer) | A text as a model's tokenizer splits it, as tokenizer playgrounds show it: token and character counts, each token tinted by turns or the list of IDs, partial characters as hex bytes, whitespace shown as marks, and every token with the same ID lit on hover. | [`examples/tokenizer`](examples/tokenizer) |
+| [`ui/question`](ui/question) | A question an agent asks the user: options with a line each, one or several chosen, an answer in the user's own words, previews beside the options, the arrows, number keys, Space and Enter, then the answer. | [`examples/question`](examples/question) |
+| [`ui/arena`](ui/arena) | Two answers side by side to vote between, as model arenas: A, B, a tie or both bad by button or key, then the models named and the vote marked. | [`examples/arena`](examples/arena) |
+| [`ui/bboxlabel`](ui/bboxlabel) | Bounding box labeler for object detection data: boxes dragged across a picture with guides, moved and resized by their corners, classes chosen with number keys, and a tag on each box. | [`examples/bboxlabel`](examples/bboxlabel) |
+| [`ui/runs`](ui/runs) | Training curves of runs, as W&B and TensorBoard: a line a run smoothed by an exponential moving average over the raw values, a log scale, each run's value at the step under the pointer, and a legend that hides and shows runs. | [`examples/runs`](examples/runs) |
 
 Each package's doc comment shows how to use it.
 
@@ -384,6 +400,21 @@ go run ./examples/rulers
 go run ./examples/contrast
 go run ./examples/lightbox
 go run ./examples/tuner
+go run ./examples/fontpicker
+go run ./examples/skeleton
+go run ./examples/histslider
+go run ./examples/keyframes
+go run ./examples/collab
+go run ./examples/tzpicker
+go run ./examples/password
+go run ./examples/xypad
+go run ./examples/jwt
+go run ./examples/dirdiff
+go run ./examples/scope
+go run ./examples/question
+go run ./examples/arena
+go run ./examples/bboxlabel
+go run ./examples/runs
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
