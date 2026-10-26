@@ -98,15 +98,28 @@ func View(c *ui.Context, s *State, w, h float32, guides *[]Guide, content func()
 			e        ui.Element
 			vertical bool
 		}{{top, false}, {left, true}} {
-			if _, _, ok := r.e.Dragged(); ok && s.pulling == 0 {
+			if dx, dy, ok := r.e.Dragged(); ok && s.pulling == 0 && (dx != 0 || dy != 0) {
 				*guides = append(*guides, Guide{Vertical: r.vertical, Pos: at(r.vertical)})
 				s.pulling, changed = len(*guides), true
 			}
-			if i := s.pulling - 1; i >= 0 && i < len(*guides) && (*guides)[i].Vertical == r.vertical {
-				follow(r.e, i)
-				if _, _, ok := r.e.DragEnded(); ok {
-					s.pulling = 0
+		}
+		// The pull ends as the ruler is let go, rather than at DragEnded,
+		// which a press that barely moves never reports.
+		if i := s.pulling - 1; i >= len(*guides) {
+			s.pulling = 0
+		} else if i >= 0 {
+			g := &(*guides)[i]
+			ruler := top
+			if g.Vertical {
+				ruler = left
+			}
+			if _, _, ok := ruler.Dragged(); !ok {
+				if outside(g.Vertical) {
+					drop, changed = i, true
 				}
+				s.pulling = 0
+			} else if p := at(g.Vertical); p != g.Pos {
+				g.Pos, changed = p, true
 			}
 		}
 
