@@ -4,7 +4,8 @@
 // the pointer. Dragging from a ruler into the view pulls out a guide
 // across the content, from the top ruler a horizontal one and from the
 // left a vertical one; dragging a guide moves it, and dragging it back
-// onto its ruler removes it. Guides stop at whole DIPs of the content.
+// onto its ruler removes it. Guides stop at whole DIPs of the content,
+// and snap to its edges and middle within 6 DIPs of the view.
 //
 //	rulers.View(c, &app.canvas, 800, 600, &app.guides, func() {
 //		app.artboard(c)
@@ -26,6 +27,10 @@ import (
 
 // size is how thick a ruler is.
 const size = 20
+
+// snap is how near, in DIPs of the view, a guide snaps to the content's
+// edges and middle.
+const snap = 6
 
 // Guide is a line across the content: vertical at X Pos, or horizontal at
 // Y Pos, in the content's DIPs.
@@ -63,14 +68,21 @@ func View(c *ui.Context, s *State, w, h float32, guides *[]Guide, content func()
 		})
 		z := s.Zoom.Zoom()
 		px, py, over := area.PointerPosition()
-		// at returns the content's point at the pointer, along x or y.
+		// at returns the content's point at the pointer, along x or y,
+		// snapped to the content's edges and middle.
 		at := func(vertical bool) float32 {
 			px, py, _ := area.PointerPosition()
 			ox, oy := s.Zoom.Origin()
+			v, end := oy+py/z, h
 			if vertical {
-				return float32(math.Round(float64(ox + px/z)))
+				v, end = ox+px/z, w
 			}
-			return float32(math.Round(float64(oy + py/z)))
+			for _, p := range []float32{0, end / 2, end} {
+				if math.Abs(float64(v-p))*float64(z) <= snap {
+					return p
+				}
+			}
+			return float32(math.Round(float64(v)))
 		}
 		// outside reports whether the pointer is over the ruler of a guide.
 		outside := func(vertical bool) bool {
