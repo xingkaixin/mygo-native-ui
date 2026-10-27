@@ -190,6 +190,25 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/fieldmap`](ui/fieldmap) | Columns of an imported file mapped to fields: lines between them, dragged from a column to a field or chosen from the field's menu, matches by name, samples of what each field takes, and required fields marked until filled. | [`examples/fieldmap`](examples/fieldmap) |
 | [`ui/cidr`](ui/cidr) | Subnet planner, as the Visual Subnet Calculator: subnets divided in halves and joined back, a bar of the network's addresses, the bits of a subnet's address by network, subnet and hosts, and subnets overlapping ranges taken elsewhere marked. IPv4 and IPv6. | [`examples/cidr`](examples/cidr) |
 | [`ui/procmon`](ui/procmon) | Process monitor, as Activity Monitor: CPU with a graph of its last minute, memory, threads, PID and user, sorted by column, a list or a tree of parents and children, a search, Stop after asking, and a graph of the CPU load. | [`examples/procmon`](examples/procmon) |
+| [`ui/recurrence`](ui/recurrence) | Custom repeat rule editor, as Calendar's: frequency and interval, weekday toggles, a grid of month days or "the second Tuesday", months, an end, the rule in words, its next times, and RRULE text. | [`examples/recurrence`](examples/recurrence) |
+| [`ui/chessboard`](ui/chessboard) | Chess board: pieces moved by dragging or two clicks, dots and rings where a piece may go, the last move and check lit, promotion choices, arrows and circles drawn with the right button, and the board turned for black. The app supplies the rules. | [`examples/chessboard`](examples/chessboard) |
+| [`ui/goban`](ui/goban) | Go board of 9, 13 or 19 lines: shaded stones, star points, a ghost stone following the pointer, the last stone ringed, captures and suicide by the rules, and a reader for an SGF game's main line. | [`examples/goban`](examples/goban) |
+| [`ui/xiangqi`](ui/xiangqi) | Chinese chess board: discs on the points with the river, palaces and start marks, files numbered for each side, pieces moved by dragging or two clicks, dots and rings where a piece may go, the last move and check lit. The app supplies the rules. | [`examples/xiangqi`](examples/xiangqi) |
+| [`ui/panorama`](ui/panorama) | 360° photo viewer: an equirectangular picture drawn by a shader as a camera sees it, dragging with momentum, zooming between 30° and 100°, arrow keys, hotspots that report a click, and a compass. | [`examples/panorama`](examples/panorama) |
+| [`ui/displays`](ui/displays) | Display arrangement, as the Displays settings: displays as large as their resolutions, dragged to snap edge to edge and line up, an outline where one lands, and the menu bar dragged to choose the main display. | [`examples/displays`](examples/displays) |
+| [`ui/stringcatalog`](ui/stringcatalog) | String catalog editor, as Xcode's: languages with how much is translated, a row a string with key, comment, source and translation typed in place, a field a plural form by CLDR, New, Translated and Needs Review, search and filters. | [`examples/stringcatalog`](examples/stringcatalog) |
+| [`ui/meshgradient`](ui/meshgradient) | Mesh gradient editor, as SwiftUI's MeshGradient: a grid of colored points blended by a shader, points dragged with edges sliding along the border, a color well for the chosen point, arrow-key nudges, and painting a mesh as a background. | [`examples/meshgradient`](examples/meshgradient) |
+| [`ui/pagesetup`](ui/pagesetup) | Page setup: paper, orientation, margins and scale beside a preview of the app's page, margins dragged on dashed guides, Normal, Narrow and Wide, and inches or millimeters by region. | [`examples/pagesetup`](examples/pagesetup) |
+| [`ui/meteogram`](ui/meteogram) | Hourly weather forecast as a meteogram: sky symbols, a temperature line red above freezing and blue below, precipitation bars, wind arrows and speeds, shaded nights, and an hour's numbers on hover. | [`examples/meteogram`](examples/meteogram) |
+| [`ui/rename`](ui/rename) | Batch rename, as Finder's Rename Items: replace text with an optional regular expression, add text, or format with a counter, each name beside what it becomes with the change lit, and clashes and bad names held back. | [`examples/rename`](examples/rename) |
+| [`ui/venn`](ui/venn) | Euler diagram of two or three sets: circles as large as the sets, overlapping as much as they share, counts in each part, and a part lit on hover and chosen with a click. | [`examples/venn`](examples/venn) |
+| [`ui/periodic`](ui/periodic) | Periodic table of the 118 elements: cells colored by kind, the lanthanides and actinides below, the element under the pointer named at the top, a legend that lights a kind, a search, and an element chosen with a click. | [`examples/periodic`](examples/periodic) |
+| [`ui/molecule`](ui/molecule) | Ball-and-stick molecule viewer: atoms in their CPK colors, single, double and triple bonds, turning by drag, zoom, depth fog, distances and angles measured with clicks, bonds found from covalent radii, and XYZ files. | [`examples/molecule`](examples/molecule) |
+| [`ui/slides`](ui/slides) | Slide show, as Keynote's: a strip of thumbnails, a presenter view with the next slide, notes, a timer and the clock, the slide alone filling the screen, and the keys to move through it. | [`examples/slides`](examples/slides) |
+| [`ui/phoneinput`](ui/phoneinput) | Phone number field: a flag and calling code opening a country list to search, digits grouped as the country writes them while typed, + or 00 picking the country, and E.164 output. | [`examples/phoneinput`](examples/phoneinput) |
+| [`ui/callgrid`](ui/callgrid) | Video call layout: a grid of tiles as large as fit, a speaker view with a strip, a shared screen on the stage, initials while a camera is off, mute and hand badges, a speaking outline, and pinning by double-click. | [`examples/callgrid`](examples/callgrid) |
+| [`ui/hold`](ui/hold) | Hold to confirm and slide to confirm controls for dangerous actions: a button that fills while pressed and drains when let go, and a knob dragged to the end of its track. | [`examples/hold`](examples/hold) |
+| [`ui/stopwatch`](ui/stopwatch) | Stopwatch and timer, as the Clock app: laps with the fastest and slowest lit, and a countdown around a ring with pause, presets, and Finished in the frame it ends. | [`examples/stopwatch`](examples/stopwatch) |
 
 ### Menu bar
 
@@ -435,6 +454,25 @@ go run ./examples/colprofile
 go run ./examples/fieldmap
 go run ./examples/cidr
 go run ./examples/procmon
+go run ./examples/recurrence
+go run ./examples/chessboard
+go run ./examples/goban
+go run ./examples/xiangqi
+go run ./examples/panorama
+go run ./examples/displays
+go run ./examples/stringcatalog
+go run ./examples/meshgradient
+go run ./examples/pagesetup
+go run ./examples/meteogram
+go run ./examples/rename
+go run ./examples/venn
+go run ./examples/periodic
+go run ./examples/molecule
+go run ./examples/slides
+go run ./examples/phoneinput
+go run ./examples/callgrid
+go run ./examples/hold
+go run ./examples/stopwatch
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
