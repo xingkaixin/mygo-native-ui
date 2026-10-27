@@ -180,6 +180,16 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/jwt`](ui/jwt) | JSON Web Token decoder: the token's three parts in their colors, whether it has expired or is not valid yet, the header's and payload's claims named, and times as dates and as how long from now. | [`examples/jwt`](examples/jwt) |
 | [`ui/dirdiff`](ui/dirdiff) | Two folders compared as a tree: sizes and times on each side, files added, removed, changed or the same, folders that differ opened, counts of each, and a toggle to only the differences. | [`examples/dirdiff`](examples/dirdiff) |
 | [`ui/scope`](ui/scope) | Oscilloscope: a screen of divisions with up to two channels, a trigger level dragged on the screen, time and volts a division in 1, 2, 5 steps, each channel's frequency and peak-to-peak volts, and XY mode for Lissajous figures. | [`examples/scope`](examples/scope) |
+| [`ui/wheelpicker`](ui/wheelpicker) | Picker wheels, as iOS's: choices round a drum with the chosen one in a shared band, dragged and flicked to settle on a choice, a choice a scroll notch, clicks above and below the band, arrow keys, and wheels that go round for hours and minutes. | [`examples/wheelpicker`](examples/wheelpicker) |
+| [`ui/radialmenu`](ui/radialmenu) | Pie menu, as Blender's and Maya's marking menus: items round the pointer where the right button presses, a stroke toward one choosing it on release, a click choosing once open, rings of items within items, and the arrow keys and Enter. | [`examples/radialmenu`](examples/radialmenu) |
+| [`ui/switcher`](ui/switcher) | Switcher as ⌘Tab's and Ctrl+Tab's: Tab with a modifier held goes through the items, most recent first, letting go chooses, a quick press goes back to the one before, and the row of items shows only while the modifier stays down. | [`examples/switcher`](examples/switcher) |
+| [`ui/gridpicker`](ui/gridpicker) | Table size picker, as Insert Table in Word and Notion: cells lit from the corner to the pointer, the grid growing past it, the size below, and the arrow keys and Enter. | [`examples/gridpicker`](examples/gridpicker) |
+| [`ui/odometer`](ui/odometer) | A number whose digits roll on wheels as it changes, up as it grows and down as it shrinks, with separators and places coming and going at the left. | [`examples/odometer`](examples/odometer) |
+| [`ui/packet`](ui/packet) | Packet details over its bytes, as Wireshark's panes: protocol fields in a tree whose choice selects their bytes in a hex dump, a click on a byte finding its field, and a dissector of Ethernet, ARP, IPv4, IPv6, TCP, UDP, ICMP and HTTP/1. | [`examples/packet`](examples/packet) |
+| [`ui/colprofile`](ui/colprofile) | Table whose header sums up each column, as Data Wrangler: histograms of numbers, the most common values of text, the share of empty cells, and a click on a bar or a value keeping its rows, shown over all the rows in every histogram. | [`examples/colprofile`](examples/colprofile) |
+| [`ui/fieldmap`](ui/fieldmap) | Columns of an imported file mapped to fields: lines between them, dragged from a column to a field or chosen from the field's menu, matches by name, samples of what each field takes, and required fields marked until filled. | [`examples/fieldmap`](examples/fieldmap) |
+| [`ui/cidr`](ui/cidr) | Subnet planner, as the Visual Subnet Calculator: subnets divided in halves and joined back, a bar of the network's addresses, the bits of a subnet's address by network, subnet and hosts, and subnets overlapping ranges taken elsewhere marked. IPv4 and IPv6. | [`examples/cidr`](examples/cidr) |
+| [`ui/procmon`](ui/procmon) | Process monitor, as Activity Monitor: CPU with a graph of its last minute, memory, threads, PID and user, sorted by column, a list or a tree of parents and children, a search, Stop after asking, and a graph of the CPU load. | [`examples/procmon`](examples/procmon) |
 
 ### Menu bar
 
@@ -415,6 +425,16 @@ go run ./examples/question
 go run ./examples/arena
 go run ./examples/bboxlabel
 go run ./examples/runs
+go run ./examples/wheelpicker
+go run ./examples/radialmenu
+go run ./examples/switcher
+go run ./examples/gridpicker
+go run ./examples/odometer
+go run ./examples/packet
+go run ./examples/colprofile
+go run ./examples/fieldmap
+go run ./examples/cidr
+go run ./examples/procmon
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
