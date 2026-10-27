@@ -542,7 +542,7 @@ func arrow(p *ui.Painter, a, b ui.Rect, q float32) {
 	x1, y1 = x1-ux*q*0.1, y1-uy*q*0.1
 	bx, by := x1-ux*head, y1-uy*head
 	color := ui.RGBA(21, 120, 27, 0.75)
-	p.Line(x0+ux*q*0.2, y0+uy*q*0.2, bx, by, q*0.16, color)
+	p.StrokePolyline([][2]float32{{x0 + ux*q*0.2, y0 + uy*q*0.2}, {bx, by}}, q*0.16, color)
 	var tip ui.Path
 	tip.MoveTo(x1, y1).LineTo(bx-uy*half, by+ux*half).LineTo(bx+uy*half, by-ux*half).Close()
 	p.FillPath(&tip, color)
