@@ -6,7 +6,7 @@
 // are, three the angle at the middle one; clicking empty space clears
 // them.
 //
-//	m := molecule.Molecule{Atoms: atoms, Bonds: molecule.Connect(atoms)}
+//	m, err := molecule.ParseXYZ(file)
 //	molecule.View(c, &app.viewer, m).Grow(1)
 //
 // Coordinates are in ångströms.
@@ -16,6 +16,8 @@ import (
 	"fmt"
 	"math"
 	"slices"
+	"strconv"
+	"strings"
 
 	"github.com/egoist/mygo/ui"
 )
@@ -67,6 +69,35 @@ func Connect(atoms []Atom) []Bond {
 }
 
 func sq(v float64) float64 { return v * v }
+
+// ParseXYZ returns the molecule of an XYZ file, its bonds joined as
+// Connect joins them: a line with the number of atoms, a comment, then a
+// line for each atom with its element and coordinates.
+func ParseXYZ(src string) (Molecule, error) {
+	lines := strings.Split(strings.TrimSpace(src), "\n")
+	n, err := strconv.Atoi(strings.TrimSpace(lines[0]))
+	if err != nil {
+		return Molecule{}, fmt.Errorf("xyz: atom count %q", lines[0])
+	}
+	if len(lines) < n+2 {
+		return Molecule{}, fmt.Errorf("xyz: %d atoms, %d lines", n, len(lines)-2)
+	}
+	atoms := make([]Atom, n)
+	for i, line := range lines[2 : n+2] {
+		f := strings.Fields(line)
+		if len(f) < 4 {
+			return Molecule{}, fmt.Errorf("xyz: line %d: %q", i+3, line)
+		}
+		var xyz [3]float64
+		for k := range 3 {
+			if xyz[k], err = strconv.ParseFloat(f[k+1], 64); err != nil {
+				return Molecule{}, fmt.Errorf("xyz: line %d: %w", i+3, err)
+			}
+		}
+		atoms[i] = Atom{Element: f[0], X: xyz[0], Y: xyz[1], Z: xyz[2]}
+	}
+	return Molecule{Atoms: atoms, Bonds: Connect(atoms)}, nil
+}
 
 // colors are the elements' colors, as CPK has them.
 var colors = map[string]ui.Color{
