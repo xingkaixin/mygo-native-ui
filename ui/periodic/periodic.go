@@ -2,9 +2,11 @@
 // with its atomic number, symbol, and its name and weight where there is
 // room, colored by its kind, the lanthanides and actinides in two rows
 // below. Hovering a cell names the element in the gap at the top, and a
-// click chooses it; hovering a kind in the legend dims the others.
+// click chooses it; hovering a kind in the legend dims the others, and a
+// search dims the elements whose name, symbol or number do not match it.
 //
-//	periodic.View(c, &app.table).Grow(1)
+//	ui.SearchField(c, &app.query)
+//	periodic.View(c, &app.table, app.query).Grow(1)
 //	if app.table.Chosen > 0 {
 //		e := periodic.Elements[app.table.Chosen-1]
 //	}
@@ -12,6 +14,8 @@ package periodic
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/egoist/mygo/ui"
 )
@@ -40,9 +44,19 @@ func grid(z int) (col, row float32) {
 	return float32(g - 1), float32(p - 1)
 }
 
-// View creates the table. Changed reports a new choice. Give it a size,
-// or grow it in its parent.
-func View(c *ui.Context, s *State) ui.Element {
+// matches reports whether e's name or symbol starts with query, or its
+// number is query.
+func matches(e Element, query string) bool {
+	q := strings.ToLower(strings.TrimSpace(query))
+	if n, err := strconv.Atoi(q); err == nil {
+		return e.Number == n
+	}
+	return strings.HasPrefix(strings.ToLower(e.Name), q) || strings.HasPrefix(strings.ToLower(e.Symbol), q)
+}
+
+// View creates the table, dimming the elements that do not match query.
+// Changed reports a new choice. Give it a size, or grow it in its parent.
+func View(c *ui.Context, s *State, query string) ui.Element {
 	t := c.Theme()
 	view := ui.Box(c).Role(ui.RoleGroup).Label("Periodic table")
 	b := view.LayoutBounds()
@@ -92,7 +106,7 @@ func View(c *ui.Context, s *State) ui.Element {
 		for _, e := range Elements {
 			q := at(cell(grid(e.Number)))
 			col := e.Category.color()
-			dim := kind >= 0 && int(e.Category) != kind
+			dim := kind >= 0 && int(e.Category) != kind || !matches(e, query)
 			fill, ink := col.Alpha(0.24), t.Text
 			if dim {
 				fill, ink = col.Alpha(0.06), t.TextMuted.Alpha(0.5)
