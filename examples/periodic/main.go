@@ -1,6 +1,6 @@
 // Periodic shows the periodic table: hover an element to name it, click
-// it to read its group, period and block below, and hover a kind in the
-// legend to find its elements.
+// it to read its group, period and block below, hover a kind in the
+// legend to find its elements, and search by name, symbol or number.
 //
 //	go run ./examples/periodic
 package main
@@ -30,12 +30,14 @@ func block(e periodic.Element) string {
 
 type app struct {
 	table periodic.State
+	query string
 }
 
 func (a *app) view(c *ui.Context) {
 	t := c.Theme()
 	ui.Column(c).Fill().Background(t.Background).Padding(t.Space(6)).Gap(t.Space(4)).Children(func() {
-		periodic.View(c, &a.table).Grow(1)
+		ui.SearchField(c, &a.query).Width(t.Space(60)).Placeholder("Name, symbol or number")
+		periodic.View(c, &a.table, a.query).Grow(1)
 		ui.Row(c).Gap(t.Space(6)).Height(t.Space(10)).AlignItems(ui.Center).Children(func() {
 			if a.table.Chosen == 0 {
 				ui.Text(c, "Click an element").TextColor(t.TextMuted)
