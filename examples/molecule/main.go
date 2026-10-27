@@ -1,5 +1,5 @@
 // Molecule shows five molecules built from their geometry: methane,
-// water, benzene with its alternating double bonds, cyclohexane as a
+// water read from an XYZ file, benzene with its alternating double bonds, cyclohexane as a
 // chair, and buckminsterfullerene. Drag to turn one, scroll to zoom, and
 // click two or three atoms to measure a bond or an angle.
 //
@@ -28,14 +28,19 @@ func methane() molecule.Molecule {
 	return molecule.Molecule{Atoms: atoms, Bonds: molecule.Connect(atoms)}
 }
 
+const waterXYZ = `3
+Water, 104.5° between bonds of 0.96 Å
+O   0.0000   0.0000  0.0000
+H   0.7591  -0.5877  0.0000
+H  -0.7591  -0.5877  0.0000
+`
+
 func water() molecule.Molecule {
-	half := 104.5 / 2 * math.Pi / 180
-	atoms := []atom{
-		{Element: "O"},
-		{Element: "H", X: 0.96 * math.Sin(half), Y: -0.96 * math.Cos(half)},
-		{Element: "H", X: -0.96 * math.Sin(half), Y: -0.96 * math.Cos(half)},
+	m, err := molecule.ParseXYZ(waterXYZ)
+	if err != nil {
+		log.Fatal(err)
 	}
-	return molecule.Molecule{Atoms: atoms, Bonds: molecule.Connect(atoms)}
+	return m
 }
 
 func benzene() molecule.Molecule {
