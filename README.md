@@ -289,6 +289,37 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/deptree`](ui/deptree) | Dependency tree, as `npm ls` and `cargo tree`: packages with their versions and sizes, repeats marked deduped, packages installed at more than one version flagged, a search that keeps the paths down to matches, and the chosen package's size with all it brings in, dependents and every path that installs it. | [`examples/deptree`](examples/deptree) |
 | [`ui/smith`](ui/smith) | Smith chart of impedance sweeps: constant resistance circles and reactance arcs with labels, traces from their first to their last frequency, a shaded VSWR circle, and on hover the nearest point's frequency, impedance, Γ, VSWR, return loss and equivalent inductor or capacitor. | [`examples/smith`](examples/smith) |
 | [`ui/abacus`](ui/abacus) | Soroban that reads its number: rods with a bead worth five above the beam and four worth one below, slid to the beam by a click, dots every third rod, each rod's digit and the number above, and the arrows and digit keys on a focused rod. | [`examples/abacus`](examples/abacus) |
+| [`ui/meshview`](ui/meshview) | 3D mesh viewer, as a CAD viewport or Quick Look: lit faces, smooth across shallow angles and creased at sharp ones, turning and tilting by drag, zoom by wheel or pinch, and a view cube whose faces turn the model to that side. | [`examples/meshview`](examples/meshview) |
+| [`ui/colorblind`](ui/colorblind) | Color vision deficiency simulator wrapping any part of an app, as Sim Daltonism: protan, deutan and tritan vision by Machado's model with a severity from 0 to 1, and achromatopsia, while what it wraps still takes input. | [`examples/colorblind`](examples/colorblind) |
+| [`ui/totp`](ui/totp) | Authenticator list of one-time codes: issuer, account and the code in two groups, a ring counting down to the next code, red with the next code shown in the last five seconds, a click to copy, and a filter. | [`examples/totp`](examples/totp) |
+| [`ui/marey`](ui/marey) | Train graph, as Marey drew the Paris–Lyon timetable: stations down the side by distance, hours across, each train a line from stop to stop in its service's color, its times on hover, scrolling through the day and zooming by pinch. | [`examples/marey`](examples/marey) |
+| [`ui/pinout`](ui/pinout) | Pinout of a board or chip, as pinout.xyz: pins colored by what they carry with their functions as tags, a pin and its row lit on hover, and a tag or legend entry lighting every pin of its bus or kind. | [`examples/pinout`](examples/pinout) |
+| [`ui/graphql`](ui/graphql) | GraphQL schema explorer, as GraphiQL's docs: root types and types by kind, fields with arguments and types, enum values, union members and implementations, type names as links with Back, deprecations struck through, and a search. | [`examples/graphql`](examples/graphql) |
+| [`ui/rack`](ui/rack) | Rack elevation, as NetBox: devices in the units they fill, colored by role with a status light, units used and power drawn against the budget, a device's details on hover, and dragging a device to free units, the slot green or red. | [`examples/rack`](examples/rack) |
+| [`ui/segments`](ui/segments) | Segment displays of clocks and meters: seven-segment digits, fourteen-segment letters or a 5×7 dot matrix, unlit segments faint, red, green or amber LED, cyan VFD or LCD looks, decimal points and colons, and long text scrolling. | [`examples/segments`](examples/segments) |
+| [`ui/exif`](ui/exif) | Photo info panel, as Photos and Lightroom: camera and lens, aperture, shutter, ISO and focal length as tiles, date, size, exposure, location to copy, and every tag by directory, read from JPEG and TIFF files. | [`examples/exif`](examples/exif) |
+| [`ui/identicon`](ui/identicon) | GitHub-style identicon from any string: a mirrored five-by-five grid in one color picked from a hash, so the same name always draws the same picture. | [`examples/identicon`](examples/identicon) |
+| [`ui/randomart`](ui/randomart) | SSH key random art, as ssh-keygen prints it: the bishop's walk over a 17×9 field from a SHA256 fingerprint, the squares tinted by visits, and the fingerprint below. | [`examples/randomart`](examples/randomart) |
+| [`ui/orrery`](ui/orrery) | Orrery of the eight planets on a date from JPL orbital elements: orbits on a square-root scale, scrolling through the days, zoom by pinch, and a planet's distance from the Sun and the Earth and its light time on hover. | [`examples/orrery`](examples/orrery) |
+| [`ui/avionics`](ui/avionics) | Primary flight display of a glass cockpit: an attitude indicator with a pitch ladder and bank arc, an airspeed tape colored by the aircraft's V-speeds, altitude and vertical speed tapes, and a heading tape. | [`examples/avionics`](examples/avionics) |
+| [`ui/vectorfield`](ui/vectorfield) | Vector field plot: arrows colored by strength, specks drifting with the flow and trailing behind, a streamline through a clicked point, and the field read out under the pointer. | [`examples/vectorfield`](examples/vectorfield) |
+| [`ui/automaton`](ui/automaton) | Cellular automata of Life's kind by any B/S rule on a wrapping board: cells brightening when born and deepening with age, fading ghosts, patterns such as the Gosper gun, and dragging to paint cells alive or dead. | [`examples/automaton`](examples/automaton) |
+| [`ui/sorting`](ui/sorting) | Sorting algorithms at work on bars: the compared pair and moved bars lit, comparison and move counts, a green sweep when done, and several views racing bubble, insertion, selection, shell, merge, quick and heap sort. | [`examples/sorting`](examples/sorting) |
+| [`ui/fourier`](ui/fourier) | Epicycles drawing a closed path by its Fourier series: a chain of circles turning at each term's frequency, fewer terms rounding the corners off, and a path drawn with the pointer replacing it. | [`examples/fourier`](examples/fourier) |
+| [`ui/arcdiagram`](ui/arcdiagram) | Arc diagram of a network: nodes in a row sized by links and colored by group, links as arcs as wide as their weights, and a node's arcs and neighbors lit on hover with its links in and out. | [`examples/arcdiagram`](examples/arcdiagram) |
+| [`ui/hypnogram`](ui/hypnogram) | Night's sleep by stage, as sleep trackers: time asleep, a lane for awake, REM, core and deep with each spell joined to the next, the spell under the pointer, and each stage's time and share. | [`examples/hypnogram`](examples/hypnogram) |
+| [`ui/splom`](ui/splom) | Scatterplot matrix: every pair of columns plotted with histograms on the diagonal, points colored by group, and a rectangle brushed in any plot lighting its rows in all of them. | [`examples/splom`](examples/splom) |
+| [`ui/familytree`](ui/familytree) | Family tree of descendants: a card a person with their years, couples side by side, children bracketed below, and a click on a person reading out their life and lighting their line of descent. | [`examples/familytree`](examples/familytree) |
+| [`ui/fishbone`](ui/fishbone) | Ishikawa cause-and-effect diagram: the effect at the head, bones of categories slanting off the spine above and below, their causes along them, and a click marking a likely root cause. | [`examples/fishbone`](examples/fishbone) |
+| [`ui/screenplay`](ui/screenplay) | Screenplay from Fountain text, set as scripts are typed: scene headings numbered in both margins, character cues, dialogue and parentheticals at their columns, a title page, and scenes to jump to and characters by lines beside it. | [`examples/screenplay`](examples/screenplay) |
+| [`ui/lyrics`](ui/lyrics) | Synced lyrics, as music players: the sung line large with its words lighting up from enhanced LRC times, the view gliding to keep it in place, breathing dots in breaks, and a click on a line to seek. | [`examples/lyrics`](examples/lyrics) |
+| [`ui/loudness`](ui/loudness) | EBU R128 loudness meter: momentary and short-term bars against a target, integrated loudness, loudness range and sample peak, and the last minute as a graph, measured with the K-weighting and gating of BS.1770. | [`examples/loudness`](examples/loudness) |
+| [`ui/timesheet`](ui/timesheet) | Weekly timesheet: a row for each project and task, today marked and the weekend shaded, row and day totals, the week against the hours due, and hours typed in place as 1:30, 1.5 or 90m. | [`examples/timesheet`](examples/timesheet) |
+| [`ui/mailthread`](ui/mailthread) | Email thread, as mail apps: newest and unread messages open and the rest folded to a line, the middle of a long thread collapsed to a count, quoted text behind •••, recipients and attachments. | [`examples/mailthread`](examples/mailthread) |
+| [`ui/storymap`](ui/storymap) | User story map: activities and their steps along the top, story cards under each step cut across by releases, and cards dragged between steps, releases and places with a dashed slot where they land. | [`examples/storymap`](examples/storymap) |
+| [`ui/mancala`](ui/mancala) | Mancala by the rules of Kalah: pits that can be played lit under the pointer, seeds sown one at a time, extra turns and captures, and each store's count with the result. | [`examples/mancala`](examples/mancala) |
+| [`ui/draughts`](ui/draughts) | English draughts: forced and multiple jumps, kings crowned on the far row, a lifted piece's landing squares marked, moves sliding with taken pieces fading, and each side's count with the result. | [`examples/draughts`](examples/draughts) |
+| [`ui/tangram`](ui/tangram) | Tangram: the seven tans dragged onto a silhouette, snapping corner to corner, turned an eighth by a click and over by a right-click, and run together into one shape once they fill it. | [`examples/tangram`](examples/tangram) |
 
 ### Menu bar
 
@@ -653,6 +684,37 @@ go run ./examples/chmod
 go run ./examples/deptree
 go run ./examples/smith
 go run ./examples/abacus
+go run ./examples/meshview
+go run ./examples/colorblind
+go run ./examples/totp
+go run ./examples/marey
+go run ./examples/pinout
+go run ./examples/graphql
+go run ./examples/rack
+go run ./examples/segments
+go run ./examples/exif
+go run ./examples/identicon
+go run ./examples/randomart
+go run ./examples/orrery
+go run ./examples/avionics
+go run ./examples/vectorfield
+go run ./examples/automaton
+go run ./examples/sorting
+go run ./examples/fourier
+go run ./examples/arcdiagram
+go run ./examples/hypnogram
+go run ./examples/splom
+go run ./examples/familytree
+go run ./examples/fishbone
+go run ./examples/screenplay
+go run ./examples/lyrics
+go run ./examples/loudness
+go run ./examples/timesheet
+go run ./examples/mailthread
+go run ./examples/storymap
+go run ./examples/mancala
+go run ./examples/draughts
+go run ./examples/tangram
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
