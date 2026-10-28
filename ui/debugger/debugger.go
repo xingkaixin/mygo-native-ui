@@ -445,8 +445,8 @@ func Breakpoints(c *ui.Context, bps *[]Breakpoint) Events {
 					}
 					x.Draw(func(p *ui.Painter, r ui.Rect) {
 						cx, cy, d := r.X+r.W/2, r.Y+r.H/2, float32(3.5)
-						p.Line(cx-d, cy-d, cx+d, cy+d, 1.4, t.TextMuted)
-						p.Line(cx-d, cy+d, cx+d, cy-d, 1.4, t.TextMuted)
+						p.StrokePolyline([][2]float32{{cx - d, cy - d}, {cx + d, cy + d}}, 1.4, t.TextMuted)
+						p.StrokePolyline([][2]float32{{cx - d, cy + d}, {cx + d, cy - d}}, 1.4, t.TextMuted)
 					})
 					if x.Clicked() {
 						remove = i
