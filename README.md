@@ -274,6 +274,21 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/iconpicker`](ui/iconpicker) | Icon picker: a search over the icons' names and keywords, a grid of the icons found with their names on hover, the arrow keys and Enter from the search, and the icon chosen large with its name. | [`examples/iconpicker`](examples/iconpicker) |
 | [`ui/typescale`](ui/typescale) | Modular type scale: a base size and a ratio by its musical name, a row for each step with its name, pixels, rems and a line of sample text at its size, and the steps as CSS custom properties with Copy. | [`examples/typescale`](examples/typescale) |
 | [`ui/msa`](ui/msa) | Multiple sequence alignment viewer: names down the left, residues in Clustal or base colors scrolling sideways under a ruler, a consensus with a bar of its share, identity shading, a residue's place on hover, and a column to choose. | [`examples/msa`](examples/msa) |
+| [`ui/updater`](ui/updater) | Software update prompt, as Sparkle's: the new version and the installed one, the release notes of each version since in Markdown, Skip This Version, Remind Me Later and Install Update, a download bar with Cancel, Install and Relaunch, Try Again after a failure, and a check box to update without asking. | [`examples/updater`](examples/updater) |
+| [`ui/licenses`](ui/licenses) | Open-source acknowledgements, as an About window's: a search, a chip for each license with its count that filters, packages with their versions and licenses tinted permissive, weak copyleft or strong copyleft, and the chosen package's license text with a link. | [`examples/licenses`](examples/licenses) |
+| [`ui/permissions`](ui/permissions) | First-run permissions, as an app asks for the camera, the microphone or screen recording: a row each with its icon, a Required tag and why, Allow, Open System Settings after a no, a check once allowed, and Continue once the required ones are. | [`examples/permissions`](examples/permissions) |
+| [`ui/spc`](ui/spc) | Control chart of a process, as Shewhart's individuals chart: a center line and limits from a baseline's moving range, one-, two- and three-sigma lines, points breaking Western Electric rules 1 to 4 in red with the rule's number, and a card of a point's value, sigmas and rules. | [`examples/spc`](examples/spc) |
+| [`ui/mosaic`](ui/mosaic) | Marimekko chart: a column a category as wide as its share of the total, split into blocks a series as tall as their share of the column, names and shares where they fit, a legend, and a series lit with a card on hover. | [`examples/mosaic`](examples/mosaic) |
+| [`ui/pyramid`](ui/pyramid) | Population pyramid: back-to-back bars a group, the youngest at the bottom, on one scale, counts or shares, an earlier count as a step outline over the bars, and a card of both sides' counts, shares and change on hover. | [`examples/pyramid`](examples/pyramid) |
+| [`ui/ternary`](ui/ternary) | Ternary plot of mixtures of three parts, as the soil texture triangle: a grid every tenth with labels and arrows along the edges, named regions such as the twelve USDA soil classes, dots at their mixtures, and a card of a dot's shares and region on hover. | [`examples/ternary`](examples/ternary) |
+| [`ui/floorplan`](ui/floorplan) | Floor plan to furnish: rooms with thick walls, their names and areas, doors with their swing, a grid and a scale bar, wall lengths on hover, and furniture to scale dragged on a 5 cm grid, turned with a double click or R, and outlined in red when it crosses a wall or another piece. | [`examples/floorplan`](examples/floorplan) |
+| [`ui/patchbay`](ui/patchbay) | Patch cables between module jacks, as a modular synthesizer: panels of inputs and outputs, sagging colored cords, a cable pulled from a jack with the jacks it fits ringed, an input taking one cable, and a patched cable pulled out to move or drop. | [`examples/patchbay`](examples/patchbay) |
+| [`ui/karnaugh`](ui/karnaugh) | Karnaugh map of two to four inputs beside its truth table: cells in Gray code that a click turns 0, 1 or don't care, the simplest sum of products with a loop in its color for each product, split where it wraps, and a cell and its row lit together. | [`examples/karnaugh`](examples/karnaugh) |
+| [`ui/tactics`](ui/tactics) | Football tactics board: the pitch to scale with its lines, players as numbered discs in their side's color with their names, the ball, both dragged, and runs and passes drawn as arrows on the grass, a double click removing one. | [`examples/tactics`](examples/tactics) |
+| [`ui/chmod`](ui/chmod) | Unix permission editor: read, write and execute tiles for owner, group and others with each row's octal digit, setuid, setgid and sticky, a typed octal number, the mode as `ls -l` writes it, the octal and symbolic `chmod` commands, and a warning when others can write. | [`examples/chmod`](examples/chmod) |
+| [`ui/deptree`](ui/deptree) | Dependency tree, as `npm ls` and `cargo tree`: packages with their versions and sizes, repeats marked deduped, packages installed at more than one version flagged, a search that keeps the paths down to matches, and the chosen package's size with all it brings in, dependents and every path that installs it. | [`examples/deptree`](examples/deptree) |
+| [`ui/smith`](ui/smith) | Smith chart of impedance sweeps: constant resistance circles and reactance arcs with labels, traces from their first to their last frequency, a shaded VSWR circle, and on hover the nearest point's frequency, impedance, Γ, VSWR, return loss and equivalent inductor or capacitor. | [`examples/smith`](examples/smith) |
+| [`ui/abacus`](ui/abacus) | Soroban that reads its number: rods with a bead worth five above the beam and four worth one below, slid to the beam by a click, dots every third rod, each rod's digit and the number above, and the arrows and digit keys on a focused rod. | [`examples/abacus`](examples/abacus) |
 
 ### Menu bar
 
@@ -329,6 +344,9 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/triage`](ui/triage) | Labeling queue, one item at a time: a strip of the items filled as they get labels, the item on a card, labels by click or number key going on to the next unlabeled item, ← and →, Skip, and the counts when all are done. | [`examples/triage`](examples/triage) |
 | [`ui/xyplot`](ui/xyplot) | X/Y plot comparing pictures over two settings, as seeds by guidance: a grid headed by their values, spinners for pictures still coming, the row and column lit on hover, a cell opened large with the arrows through the grid, Swap axes, and a size slider. | [`examples/xyplot`](examples/xyplot) |
 | [`ui/tooltoggles`](ui/tooltoggles) | Tool switches grouped by the server that gives them, as an agent's MCP servers: a switch for all of a server's tools and one for each, how many are on, a tag on tools that write, and a search. | [`examples/tooltoggles`](examples/tooltoggles) |
+| [`ui/attention`](ui/attention) | Attention heads of a transformer, as BertViz: a layer, chips to show heads in their colors, lines from each token to the tokens it attends to as strong as the weight, a token's lines alone on hover, and the heads averaged as a matrix. | [`examples/attention`](examples/attention) |
+| [`ui/embeddings`](ui/embeddings) | Embedding projector, as TensorFlow's: items as dots in their group's color, a search that rings matches, chips that hide groups, nearest neighbors by cosine similarity drawn on hover, and a chosen item's neighbors listed with their similarity. | [`examples/embeddings`](examples/embeddings) |
+| [`ui/sampling`](ui/sampling) | What sampling settings do to the next token: temperature, top-k, top-p and min-p sliders over the candidates, each with its probability and its share once the others are cut, cut candidates tagged with what cut them, and how many are left with their entropy. | [`examples/sampling`](examples/sampling) |
 
 Each package's doc comment shows how to use it.
 
@@ -617,6 +635,24 @@ go run ./examples/calculator
 go run ./examples/iconpicker
 go run ./examples/typescale
 go run ./examples/msa
+go run ./examples/updater
+go run ./examples/licenses
+go run ./examples/permissions
+go run ./examples/attention
+go run ./examples/embeddings
+go run ./examples/sampling
+go run ./examples/spc
+go run ./examples/mosaic
+go run ./examples/pyramid
+go run ./examples/ternary
+go run ./examples/floorplan
+go run ./examples/patchbay
+go run ./examples/karnaugh
+go run ./examples/tactics
+go run ./examples/chmod
+go run ./examples/deptree
+go run ./examples/smith
+go run ./examples/abacus
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
