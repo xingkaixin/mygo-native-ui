@@ -351,6 +351,18 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/slopegraph`](ui/slopegraph) | Slope graph and dumbbell chart of before and after values: lines colored by rise or fall with labels kept apart, or a row each on a shared axis, the item pointed at marked with its change | [`examples/slopegraph`](examples/slopegraph) |
 | [`ui/hexbin`](ui/hexbin) | Hexagonal binning of many points: bins of a set radius shaded by count on a log scale, a key of the shades, and the bin pointed at outlined with its count | [`examples/hexbin`](examples/hexbin) |
 | [`ui/voronoi`](ui/voronoi) | Voronoi diagram of sites dragged, added and removed, each cell shaded and the one pointed at lit, with the Delaunay triangulation drawn over it | [`examples/voronoi`](examples/voronoi) |
+| [`ui/jumpbar`](ui/jumpbar) | Path bar, as Windows Explorer's address bar: a click on a name goes up to it, the chevron after a name opens a menu of the items under it with the one in the path checked, and the middle of a long path folds into a menu. | [`examples/jumpbar`](examples/jumpbar) |
+| [`ui/scheduler`](ui/scheduler) | Resource scheduler for a day, as room booking tools: a row a resource, dragging along a row books it in 15-minute steps, bookings dragged to move them in time and between rows and by their ends to stretch them, overlaps in red, and Delete to remove one. | [`examples/scheduler`](examples/scheduler) |
+| [`ui/roc`](ui/roc) | ROC and precision-recall curves of a classifier's scores with AUC and average precision, a threshold set by a slider or by pressing along a curve, marked on both, and the confusion counts, precision, recall and F1 at it. | [`examples/roc`](examples/roc) |
+| [`ui/calibration`](ui/calibration) | Reliability diagram of models' probabilities: bins of equal width, each bin's mean probability against its share of positives with the diagonal, counts as bars along the bottom, each model's expected calibration error, and the bin pointed at read out. | [`examples/calibration`](examples/calibration) |
+| [`ui/forest`](ui/forest) | Forest plot of a meta-analysis: a row a study with its estimate as a square sized by weight on its 95% interval, numbers and weights beside it, the fixed-effect pooled estimate as a diamond, and differences on a linear axis or ratios on a log one. | [`examples/forest`](examples/forest) |
+| [`ui/survival`](ui/survival) | Kaplan–Meier survival curves: a step line a group with its 95% band and ticks where subjects left the study, each group's median, the numbers at risk under the time axis, and each group's survival at the time pointed at. | [`examples/survival`](examples/survival) |
+| [`ui/ecdf`](ui/ecdf) | Empirical cumulative distributions of samples, each value a step, with each sample's share at or below the value pointed at, and a QQ plot against the normal with a line through the quartiles. | [`examples/ecdf`](examples/ecdf) |
+| [`ui/pareto`](ui/pareto) | Pareto chart: causes as bars from the largest down, the cumulative share as a line on a second axis, an 80% line, the vital few in the accent, and the cause pointed at or chosen by the arrows read out. | [`examples/pareto`](examples/pareto) |
+| [`ui/volcano`](ui/volcano) | Volcano plot of a differential expression test: log2 fold change against −log10 p, genes past both thresholds colored up or down and the most significant named, thresholds set by sliders, and the gene pointed at read out. | [`examples/volcano`](examples/volcano) |
+| [`ui/wordtree`](ui/wordtree) | Word tree of a phrase in a body of text: the words after it branching right and those before it branching left, merged while sentences agree and sized by how many go through, and a click growing the phrase to a word. | [`examples/wordtree`](examples/wordtree) |
+| [`ui/exposure`](ui/exposure) | Exposure aids over a picture, as camera monitors show them: zebra stripes above a set level, false color with its key from crushed blacks through middle gray and skin to clipped whites, focus peaking on sharp edges, and the level pointed at in IRE. | [`examples/exposure`](examples/exposure) |
+| [`ui/panner`](ui/panner) | Surround panner for 5.1 and 7.1: a puck dragged around the listener, nudged by the arrows and sent home by a double click, speakers lit by their gains from constant-power panning by pairs, and meters in decibels. | [`examples/panner`](examples/panner) |
 
 ### Menu bar
 
@@ -777,6 +789,18 @@ go run ./examples/unitconv
 go run ./examples/slopegraph
 go run ./examples/hexbin
 go run ./examples/voronoi
+go run ./examples/jumpbar
+go run ./examples/scheduler
+go run ./examples/roc
+go run ./examples/calibration
+go run ./examples/forest
+go run ./examples/survival
+go run ./examples/ecdf
+go run ./examples/pareto
+go run ./examples/volcano
+go run ./examples/wordtree
+go run ./examples/exposure
+go run ./examples/panner
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
