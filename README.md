@@ -209,6 +209,14 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/callgrid`](ui/callgrid) | Video call layout: a grid of tiles as large as fit, a speaker view with a strip, a shared screen on the stage, initials while a camera is off, mute and hand badges, a speaking outline, and pinning by double-click. | [`examples/callgrid`](examples/callgrid) |
 | [`ui/hold`](ui/hold) | Hold to confirm and slide to confirm controls for dangerous actions: a button that fills while pressed and drains when let go, and a knob dragged to the end of its track. | [`examples/hold`](examples/hold) |
 | [`ui/stopwatch`](ui/stopwatch) | Stopwatch and timer, as the Clock app: laps with the fastest and slowest lit, and a countdown around a ring with pause, presets, and Finished in the frame it ends. | [`examples/stopwatch`](examples/stopwatch) |
+| [`ui/splitflap`](ui/splitflap) | Split-flap display, as station boards and Vestaboard: a flap for each character whose halves fall over in 3D, one character after another around its drum, and a drum of digits for clocks. | [`examples/splitflap`](examples/splitflap) |
+| [`ui/flashcards`](ui/flashcards) | Deck of flashcards, as Anki: a card turned over in 3D by a click or Space, then thrown right when known and left to see again, by drag, flick or arrow keys, tilting and marked as it goes, the next cards moving up. | [`examples/flashcards`](examples/flashcards) |
+| [`ui/sheet`](ui/sheet) | Bottom sheet, as Maps on iPhone: detents of DIPs or fractions of the view, dragged and flicked between with rubber banding, a grabber that raises it, and the view under it dimmed near the top. | [`examples/sheet`](examples/sheet) |
+| [`ui/hanzi`](ui/hanzi) | Stroke order of Chinese characters, as Hanzi Writer: strokes drawn in order along their medians on a 米字格 grid, and a quiz that judges each stroke traced, showing where it goes after three misses. | [`examples/hanzi`](examples/hanzi) |
+| [`ui/hud`](ui/hud) | Volume and brightness HUD, as macOS: a square of Liquid Glass with an icon and sixteen notches that comes up as the level changes, fades out after, and sets the level by dragging. | [`examples/hud`](examples/hud) |
+| [`ui/notebook`](ui/notebook) | Notebook, as Jupyter: code cells with execution counts, editors and outputs, Markdown cells rendered until double-clicked, Shift+Enter and Cmd+Enter to run, and cells added, moved and deleted. The app runs the code. | [`examples/notebook`](examples/notebook) |
+| [`ui/ramp`](ui/ramp) | OKLCH color ramp editor, as Radix Colors are made: swatches with WCAG contrast, curves of lightness, chroma and hue whose points are dragged, the sRGB gamut shaded on the chroma curve, and steps fitted into it. | [`examples/ramp`](examples/ramp) |
+| [`ui/crossword`](ui/crossword) | Crossword, as the NYT Mini: numbered squares, the word and square being filled lit, typing that moves on through words, arrows, Tab and Space, clue lists that go to a word, Check, and Solved in the frame the last letter is right. | [`examples/crossword`](examples/crossword) |
 
 ### Menu bar
 
@@ -473,6 +481,14 @@ go run ./examples/phoneinput
 go run ./examples/callgrid
 go run ./examples/hold
 go run ./examples/stopwatch
+go run ./examples/splitflap
+go run ./examples/flashcards
+go run ./examples/sheet
+go run ./examples/hanzi
+go run ./examples/hud
+go run ./examples/notebook
+go run ./examples/ramp
+go run ./examples/crossword
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
