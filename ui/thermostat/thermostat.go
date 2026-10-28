@@ -227,7 +227,10 @@ func View(c *ui.Context, s *State, room float64, th *Thermostat) ui.Element {
 				if set.Mode == Off {
 					col = t.TextMuted.Alpha(0.2)
 				}
-				p.Line(cx+cos*in, cy+sin*in, cx+cos*ring, cy+sin*ring, w, col)
+				var tick ui.Path
+				tick.MoveTo(cx+cos*in, cy+sin*in)
+				tick.LineTo(cx+cos*ring, cy+sin*ring)
+				p.StrokePath(&tick, w, col)
 			}
 			if set.Mode == Off {
 				return
