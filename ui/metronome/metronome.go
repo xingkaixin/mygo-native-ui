@@ -278,7 +278,10 @@ func pendulum(c *ui.Context, s *State, bpm float64, swinging bool) ui.Element {
 		sin, cos := float32(math.Sin(angle)), float32(math.Cos(angle))
 		at := func(d float32) (float32, float32) { return px + d*sin, py - d*cos }
 		tx, ty := at(rod)
-		p.Line(px, py, tx, ty, 2.5, t.Text)
+		var rodPath ui.Path
+		rodPath.MoveTo(px, py)
+		rodPath.LineTo(tx, ty)
+		p.StrokePath(&rodPath, 2.5, t.Text)
 		// A real metronome slows as its weight is slid up the rod.
 		wd := rod * float32(0.3+0.6*(fastest-bpm)/(fastest-slowest))
 		wx, wy := at(wd)
