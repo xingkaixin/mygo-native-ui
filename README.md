@@ -252,6 +252,28 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/cardinput`](ui/cardinput) | Payment card field: a card that shows what is typed in its brand's colors and turns over for the security code, digits grouped by brand, the Luhn check, the expiry checked against the month, and focus moving on as each field is whole. | [`examples/cardinput`](examples/cardinput) |
 | [`ui/cards`](ui/cards) | Playing cards and a hand: corner indices, pips and framed court cards, a back that turns over, and a fanned hand where the card pointed at rises, a dragged card takes a new place, and a card dragged up or double-clicked is played. | [`examples/cards`](examples/cards) |
 | [`ui/dice`](ui/dice) | Dice tray: six-sided dice with pips and the others as shapes with numbers, tumbling one after another on Roll or Space, a click to hold a die through a roll, and the total. | [`examples/dice`](examples/dice) |
+| [`ui/metronome`](ui/metronome) | Metronome: a pendulum swinging to the beat with its weight set by the tempo, beats to accent, play or mute, a tempo from tapping or dragging the figure, and Space, ↑ and ↓. | [`examples/metronome`](examples/metronome) |
+| [`ui/mahjong`](ui/mahjong) | Mahjong tiles and a hand: dots, bamboo, characters, winds and dragons drawn on their faces, melds laid down beside the hand, the tile chosen raised and discarded on a second click, and the tiles that would complete the hand. | [`examples/mahjong`](examples/mahjong) |
+| [`ui/datadiff`](ui/datadiff) | Diff of two tables by key: rows added, removed and changed, the cells changed with their old values and a number's difference, unchanged rows folded, J and K between changes, and Show all rows. | [`examples/datadiff`](examples/datadiff) |
+| [`ui/starmap`](ui/starmap) | Star map of the sky over a place at a time: the bright stars and the lines of the constellations, the horizon and the compass, a sky that darkens with the sun, a star's name on hover, and a drag or the arrows through time. | [`examples/starmap`](examples/starmap) |
+| [`ui/fifths`](ui/fifths) | Circle of fifths: major keys, their relative minors and their signatures in three rings, a click to choose a key, the degrees of its chords marked around the circle, and its scale and chords beside it. | [`examples/fifths`](examples/fifths) |
+| [`ui/tablature`](ui/tablature) | Guitar tablature: frets on the six strings, beats with their lengths as stems and beams, hammer-ons, slides, bends, vibrato and dead notes, bars wrapping to the width, a playhead, and editing by keyboard. | [`examples/tablature`](examples/tablature) |
+| [`ui/levels`](ui/levels) | Levels adjustment, as photo editors: a histogram of the picture by channel, the input black, gray and white points and the output range dragged on sliders, Auto, Reset, and the picture adjusted. | [`examples/levels`](examples/levels) |
+| [`ui/voicenote`](ui/voicenote) | Voice message in a chat: a play button, the note's loudness as bars that fill as it plays, a click or drag along them to seek, 1×, 1.5× and 2× speeds, a transcript, and a dot until it is heard. | [`examples/voicenote`](examples/voicenote) |
+| [`ui/stories`](ui/stories) | Stories, as social apps: a tray of people ringed while they have unseen stories, and a viewer with a bar for each story filling as it plays, taps to step, holding to pause, and keys. | [`examples/stories`](examples/stories) |
+| [`ui/reversi`](ui/reversi) | Reversi board: dots on the squares that can be played, the move under the pointer shown faintly with the discs it would turn, discs turning one after another, passing, and the count of each side. | [`examples/reversi`](examples/reversi) |
+| [`ui/backgammon`](ui/backgammon) | Backgammon board for two players: the points, the bar and the tray for borne-off checkers, dice that fade as they are used, a click to light where a checker can go, hitting, entering, bearing off, and Undo. | [`examples/backgammon`](examples/backgammon) |
+| [`ui/jigsaw`](ui/jigsaw) | Jigsaw puzzle of a picture: pieces cut with tabs and blanks scattered around the frame, dragging a piece above the others, a snap into place near its spot, a count of the pieces in, and the cuts fading when it is whole. | [`examples/jigsaw`](examples/jigsaw) |
+| [`ui/spinwheel`](ui/spinwheel) | Wheel of chances: a slice for each choice with its label along it, a spin that slows to a stop with the pointer flicking at each slice, and the slice it lands on lit. | [`examples/spinwheel`](examples/spinwheel) |
+| [`ui/recipe`](ui/recipe) | Recipe to cook from: servings that scale every amount, metric and US units with fractions and °F, ingredients ticked off, steps marked done, and timers counting down around a ring, side by side. | [`examples/recipe`](examples/recipe) |
+| [`ui/pass`](ui/pass) | Wallet pass, a boarding pass or a ticket: the issuer and fields on its color, from and to with a plane between them, a tear line with notches over its barcode, and the details on its back, turned over in 3D. | [`examples/pass`](examples/pass) |
+| [`ui/clockpicker`](ui/clockpicker) | Time picker on a clock face: the hour and minute large above it, AM and PM, a hand dragged to the hour and then the minute, an inner ring of hours on a 24-hour clock, and the arrow keys. | [`examples/clockpicker`](examples/clockpicker) |
+| [`ui/patternlock`](ui/patternlock) | Pattern lock on a grid of nine dots: a line dragged through the dots and following the pointer, a dot passed over joining on the way, and a wrong pattern turning red and shaking before it clears. | [`examples/patternlock`](examples/patternlock) |
+| [`ui/ticker`](ui/ticker) | Tape of quotes running across a strip: each symbol with its price and its change up in green or down in red, a seamless loop, a flash when a price moves, a stop on hover, and a click to choose a quote. | [`examples/ticker`](examples/ticker) |
+| [`ui/calculator`](ui/calculator) | Calculator with a paper tape, as an adding machine: the keypad and its display, each number printed with its operation and each total under a rule, percent, a click on a line to enter it again, and the keyboard. | [`examples/calculator`](examples/calculator) |
+| [`ui/iconpicker`](ui/iconpicker) | Icon picker: a search over the icons' names and keywords, a grid of the icons found with their names on hover, the arrow keys and Enter from the search, and the icon chosen large with its name. | [`examples/iconpicker`](examples/iconpicker) |
+| [`ui/typescale`](ui/typescale) | Modular type scale: a base size and a ratio by its musical name, a row for each step with its name, pixels, rems and a line of sample text at its size, and the steps as CSS custom properties with Copy. | [`examples/typescale`](examples/typescale) |
+| [`ui/msa`](ui/msa) | Multiple sequence alignment viewer: names down the left, residues in Clustal or base colors scrolling sideways under a ruler, a consensus with a bar of its share, identity shading, a residue's place on hover, and a column to choose. | [`examples/msa`](examples/msa) |
 
 ### Menu bar
 
@@ -302,6 +324,11 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/runs`](ui/runs) | Training curves of runs, as W&B and TensorBoard: a line a run smoothed by an exponential moving average over the raw values, a log scale, each run's value at the step under the pointer, and a legend that hides and shows runs. | [`examples/runs`](examples/runs) |
 | [`ui/redline`](ui/redline) | Suggested edits to prose, as Track Changes: removals struck in red and insertions underlined in green, a pinned card with who suggested an edit and why, Accept and Reject, Accept all, Reject all and Undo, J and K, Y and N, and a word diff to make the edits from two texts. | [`examples/redline`](examples/redline) |
 | [`ui/maskpaint`](ui/maskpaint) | Mask painter for inpainting: the masked part tinted over the picture, a brush and an eraser with soft edges, a ring cursor as wide as they paint, `[` and `]` to size them, Invert, Clear and Undo, and how much is masked. | [`examples/maskpaint`](examples/maskpaint) |
+| [`ui/keypoints`](ui/keypoints) | Keypoint labeler for pose data, as COCO's: the joints of each person on a picture joined by their bones, dragging a joint or a whole skeleton, joints marked hidden or missing, a click to place a missing one, flipping, and a list of the joints. | [`examples/keypoints`](examples/keypoints) |
+| [`ui/polygonlabel`](ui/polygonlabel) | Polygon labeler for segmentation data: clicks laying down a polygon's points closed on the first, polygons filled in their class's colors and tagged, points dragged, added at an edge's middle and removed, and classes by number keys. | [`examples/polygonlabel`](examples/polygonlabel) |
+| [`ui/triage`](ui/triage) | Labeling queue, one item at a time: a strip of the items filled as they get labels, the item on a card, labels by click or number key going on to the next unlabeled item, ← and →, Skip, and the counts when all are done. | [`examples/triage`](examples/triage) |
+| [`ui/xyplot`](ui/xyplot) | X/Y plot comparing pictures over two settings, as seeds by guidance: a grid headed by their values, spinners for pictures still coming, the row and column lit on hover, a cell opened large with the arrows through the grid, Swap axes, and a size slider. | [`examples/xyplot`](examples/xyplot) |
+| [`ui/tooltoggles`](ui/tooltoggles) | Tool switches grouped by the server that gives them, as an agent's MCP servers: a switch for all of a server's tools and one for each, how many are on, a tag on tools that write, and a search. | [`examples/tooltoggles`](examples/tooltoggles) |
 
 Each package's doc comment shows how to use it.
 
@@ -563,6 +590,33 @@ go run ./examples/plasmid
 go run ./examples/cardinput
 go run ./examples/cards
 go run ./examples/dice
+go run ./examples/metronome
+go run ./examples/mahjong
+go run ./examples/keypoints
+go run ./examples/datadiff
+go run ./examples/starmap
+go run ./examples/fifths
+go run ./examples/tablature
+go run ./examples/levels
+go run ./examples/voicenote
+go run ./examples/stories
+go run ./examples/reversi
+go run ./examples/backgammon
+go run ./examples/jigsaw
+go run ./examples/spinwheel
+go run ./examples/polygonlabel
+go run ./examples/triage
+go run ./examples/xyplot
+go run ./examples/tooltoggles
+go run ./examples/recipe
+go run ./examples/pass
+go run ./examples/clockpicker
+go run ./examples/patternlock
+go run ./examples/ticker
+go run ./examples/calculator
+go run ./examples/iconpicker
+go run ./examples/typescale
+go run ./examples/msa
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
