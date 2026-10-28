@@ -6,7 +6,7 @@ Native UI components for [mygo](https://github.com/egoist/mygo), built only on i
 go get github.com/xingkaixin/mygo-native-ui
 ```
 
-Requires mygo v0.5.5 and Go 1.27.1 or later.
+Requires mygo v0.7.1 and Go 1.27.3 or later.
 
 ## Components
 
