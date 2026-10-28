@@ -320,6 +320,37 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/mancala`](ui/mancala) | Mancala by the rules of Kalah: pits that can be played lit under the pointer, seeds sown one at a time, extra turns and captures, and each store's count with the result. | [`examples/mancala`](examples/mancala) |
 | [`ui/draughts`](ui/draughts) | English draughts: forced and multiple jumps, kings crowned on the far row, a lifted piece's landing squares marked, moves sliding with taken pieces fading, and each side's count with the result. | [`examples/draughts`](examples/draughts) |
 | [`ui/tangram`](ui/tangram) | Tangram: the seven tans dragged onto a silhouette, snapping corner to corner, turned an eighth by a click and over by a right-click, and run together into one shape once they fill it. | [`examples/tangram`](examples/tangram) |
+| [`ui/address`](ui/address) | Postal address form, as checkout forms have one: the country's fields in its order and with its labels, its states or provinces to choose from, the postal code checked against its pattern and tidied once left, and the address as an envelope carries it. | [`examples/address`](examples/address) |
+| [`ui/clipboard`](ui/clipboard) | Clipboard history, as clipboard managers show it: a search, pinned clips first, colors as swatches and images as thumbnails, ⌘1 to ⌘9 by the first nine, the arrows and Enter, and the chosen clip in full with its counts, host or color values. | [`examples/clipboard`](examples/clipboard) |
+| [`ui/vectorscope`](ui/vectorscope) | Scopes of color grading, as video editors show them: a vectorscope with 75% bar targets, the skin tone line and a 2× zoom, a luma waveform in IRE and an RGB parade, traces brighter where more pixels fall, and the pointer reading out the angle and saturation or the level. | [`examples/vectorscope`](examples/vectorscope) |
+| [`ui/solitaire`](ui/solitaire) | Klondike solitaire built from `cards`: the stock dealing one or three, cards dragged between piles with those on them, a double click sending a card home, cards turning over and flying where they land, the game finishing itself once all are face up, and the moves, time and Undo. | [`examples/solitaire`](examples/solitaire) |
+| [`ui/wifi`](ui/wifi) | Wi-Fi menu of a menu bar panel, as macOS shows it: a switch, the network joined in an accent circle, known networks and other networks under a disclosure with signal bars and locks, a password field opening in place, a spinner while joining, and the app's failure shown above the field. | [`examples/wifi`](examples/wifi) |
+| [`ui/snaplayout`](ui/snaplayout) | Snap layouts, as a window's zoom button offers them: miniature screens split into halves, thirds and quarters, each zone lighting up under the pointer and chosen with a click or Space, and the window's frame for a zone with gaps between windows. | [`examples/snaplayout`](examples/snaplayout) |
+| [`ui/sharesheet`](ui/sharesheet) | Share sheet, as iOS and macOS show one: the item with its picture and detail, a row of people with the app it goes through on their picture, a row of apps, and a list of actions with their symbols, the rows scrolling sideways. | [`examples/sharesheet`](examples/sharesheet) |
+| [`ui/battery`](ui/battery) | Battery over the last day, as macOS's Battery settings show it: the level now with its glyph and when it last charged, the level in quarter-hour bars, red at 20% and below, with charging shaded behind, the screen time of each hour, and a time picked across both charts. | [`examples/battery`](examples/battery) |
+| [`ui/quicklook`](ui/quicklook) | File previews over the window, as Quick Look shows them: a picture fitted with its size in pixels, text with numbered lines, other files as their kind's icon with name, size and date, the arrows and buttons moving between files, and Space, Escape or × closing it. | [`examples/quicklook`](examples/quicklook) |
+| [`ui/envfile`](ui/envfile) | .env files side by side, a column for each environment: values edited in place, secrets as dots until their eye reveals them, missing values in the warning color with a click to add, keys set twice or not valid names flagged, and a variable added to every file. | [`examples/envfile`](examples/envfile) |
+| [`ui/semver`](ui/semver) | Version range tester, as npm's semver calculator: a range in npm's syntax with carets, tildes, x-ranges, hyphen ranges and ||, the bounds it means or its error, and the versions by major with those matched lit, the highest ringed, and prereleases dimmed. | [`examples/semver`](examples/semver) |
+| [`ui/containers`](ui/containers) | Container list with status, ports, CPU sparklines and memory, grouped by Compose project | [`examples/containers`](examples/containers) |
+| [`ui/sprite`](ui/sprite) | Sprite sheet player with onion skin, mirror, ping-pong and frame ranges dragged on the sheet | [`examples/sprite`](examples/sprite) |
+| [`ui/glyph`](ui/glyph) | Font glyph browser with metric lines, outline points and search by character, code point or name | [`examples/glyph`](examples/glyph) |
+| [`ui/trimbar`](ui/trimbar) | Clip trim bar over a filmstrip with in and out handles, playhead, and I/O keys | [`examples/trimbar`](examples/trimbar) |
+| [`ui/drumpad`](ui/drumpad) | MPC-style drum pads: velocity by where a pad is hit, keyboard layout from 1–4 to Z–V, Full Level, and glow that fades | [`examples/drumpad`](examples/drumpad) |
+| [`ui/fifteen`](ui/fifteen) | Fifteen puzzle: row and column slides, arrow keys, tiles in place lit, moves and a timer, and solvable shuffles | [`examples/fifteen`](examples/fifteen) |
+| [`ui/gomoku`](ui/gomoku) | Gomoku on a goban board: five in a row struck through, undo, and a suggested move for a computer side | [`examples/gomoku`](examples/gomoku) |
+| [`ui/dominoes`](ui/dominoes) | Draw dominoes for two: a double-six line with doubles across, lifted playable tiles, end picking, drawing and passing, and scoring | [`examples/dominoes`](examples/dominoes) |
+| [`ui/morris`](ui/morris) | Nine men's morris: placing, moving and flying, mills lit, pieces to take ringed, and a computer side | [`examples/morris`](examples/morris) |
+| [`ui/kakuro`](ui/kakuro) | Kakuro: digits typed into runs, the sets of digits that make each run's sum, the digits a cell could take, and mistakes in red | [`examples/kakuro`](examples/kakuro) |
+| [`ui/wordsearch`](ui/wordsearch) | Word search: words hidden in eight directions, a band dragged along the nearest one, found words kept in their own colors and struck from the list | [`examples/wordsearch`](examples/wordsearch) |
+| [`ui/resistor`](ui/resistor) | Resistor color bands: four, five or six bands picked on a drawn resistor, value, tolerance range and tempco, and bands from a typed value | [`examples/resistor`](examples/resistor) |
+| [`ui/punnett`](ui/punnett) | Punnett square for up to three genes: gametes crossed, children tinted by phenotype, phenotype and genotype ratios, and the pointed child marked | [`examples/punnett`](examples/punnett) |
+| [`ui/morse`](ui/morse) | Morse code: letters drawn as dots and dashes, played as a tone at a set speed with each letter lit, and a key whose presses read back into letters | [`examples/morse`](examples/morse) |
+| [`ui/braille`](ui/braille) | Braille, uncontracted: each character's six-dot cell over what it reads with capital and number signs, and a Perkins-style writer chorded on F D S J K L or clicked | [`examples/braille`](examples/braille) |
+| [`ui/sliderule`](ui/sliderule) | Slide rule with K, A, B, CI, C, D and L scales: the slide and hairline cursor dragged, and each scale read under the hairline | [`examples/sliderule`](examples/sliderule) |
+| [`ui/unitconv`](ui/unitconv) | Unit converter for ten quantities: a value typed in one unit read in every other, and a unit clicked to type in it | [`examples/unitconv`](examples/unitconv) |
+| [`ui/slopegraph`](ui/slopegraph) | Slope graph and dumbbell chart of before and after values: lines colored by rise or fall with labels kept apart, or a row each on a shared axis, the item pointed at marked with its change | [`examples/slopegraph`](examples/slopegraph) |
+| [`ui/hexbin`](ui/hexbin) | Hexagonal binning of many points: bins of a set radius shaded by count on a log scale, a key of the shades, and the bin pointed at outlined with its count | [`examples/hexbin`](examples/hexbin) |
+| [`ui/voronoi`](ui/voronoi) | Voronoi diagram of sites dragged, added and removed, each cell shaded and the one pointed at lit, with the Delaunay triangulation drawn over it | [`examples/voronoi`](examples/voronoi) |
 
 ### Menu bar
 
@@ -715,6 +746,37 @@ go run ./examples/storymap
 go run ./examples/mancala
 go run ./examples/draughts
 go run ./examples/tangram
+go run ./examples/address
+go run ./examples/clipboard
+go run ./examples/vectorscope
+go run ./examples/solitaire
+go run ./examples/wifi
+go run ./examples/snaplayout
+go run ./examples/sharesheet
+go run ./examples/battery
+go run ./examples/quicklook
+go run ./examples/envfile
+go run ./examples/semver
+go run ./examples/containers
+go run ./examples/sprite
+go run ./examples/glyph
+go run ./examples/trimbar
+go run ./examples/drumpad
+go run ./examples/fifteen
+go run ./examples/gomoku
+go run ./examples/dominoes
+go run ./examples/morris
+go run ./examples/kakuro
+go run ./examples/wordsearch
+go run ./examples/resistor
+go run ./examples/punnett
+go run ./examples/morse
+go run ./examples/braille
+go run ./examples/sliderule
+go run ./examples/unitconv
+go run ./examples/slopegraph
+go run ./examples/hexbin
+go run ./examples/voronoi
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
