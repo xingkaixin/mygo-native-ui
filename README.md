@@ -217,6 +217,25 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/notebook`](ui/notebook) | Notebook, as Jupyter: code cells with execution counts, editors and outputs, Markdown cells rendered until double-clicked, Shift+Enter and Cmd+Enter to run, and cells added, moved and deleted. The app runs the code. | [`examples/notebook`](examples/notebook) |
 | [`ui/ramp`](ui/ramp) | OKLCH color ramp editor, as Radix Colors are made: swatches with WCAG contrast, curves of lightness, chroma and hue whose points are dragged, the sRGB gamut shaded on the chroma curve, and steps fitted into it. | [`examples/ramp`](examples/ramp) |
 | [`ui/crossword`](ui/crossword) | Crossword, as the NYT Mini: numbered squares, the word and square being filled lit, typing that moves on through words, arrows, Tab and Space, clue lists that go to a word, Check, and Solved in the frame the last letter is right. | [`examples/crossword`](examples/crossword) |
+| [`ui/querybar`](ui/querybar) | Search query input, as GitHub's issue search: `key:value` terms colored as typed, a value it does not know in red, `-` to exclude, suggestions for keys and values, and the query parsed into terms and free text. | [`examples/querybar`](examples/querybar) |
+| [`ui/explorer`](ui/explorer) | File explorer, as VS Code's: a tree of paths with single-folder chains compacted, git status colors and letters, renaming and new files in place, rows dragged into folders, a context menu, and revealing a path. | [`examples/explorer`](examples/explorer) |
+| [`ui/findinfiles`](ui/findinfiles) | Find in files, as VS Code's search: match case, whole word and regular expression toggles, results grouped by file with folding headers, replace with `$1` groups previewed, and replacing one match, a file or all. | [`examples/findinfiles`](examples/findinfiles) |
+| [`ui/debugger`](ui/debugger) | Debugger panels: a toolbar with F5 to F11 shortcuts, threads and their call stacks, variables in scopes that unfold and edit in place with changed values lit, and breakpoints turned on and off with conditions. | [`examples/debugger`](examples/debugger) |
+| [`ui/presence`](ui/presence) | Multiplayer presence, as Figma: other people's cursors smoothed between updates with name tags that fade, their selections, faces that follow a person when clicked, and a frame in their color while following. | [`examples/presence`](examples/presence) |
+| [`ui/bracket`](ui/bracket) | Tournament bracket: rounds of matches joined by lines, seeds and scores, winners bold, live matches and start times marked, a team's path lit under the pointer, and the champion at the end. | [`examples/bracket`](examples/bracket) |
+| [`ui/sudoku`](ui/sudoku) | Sudoku: givens bold, entries in the accent color, notes, clashes in red, the row, column, box and digit of the square chosen tinted, keyboard entry, undo, and Solved in the frame it is. | [`examples/sudoku`](examples/sudoku) |
+| [`ui/loupe`](ui/loupe) | Eyedropper over an image: a loupe of magnified pixels with a grid following the pointer, the hex of the pixel under it, a click or Enter to pick, arrows to move a pixel, and Cmd+C to copy. | [`examples/loupe`](examples/loupe) |
+| [`ui/cohort`](ui/cohort) | Retention table: a row for each cohort with its size and the share still active in each period, shaded against the best after the first, a row for all users, and the row and column of a share lit. | [`examples/cohort`](examples/cohort) |
+| [`ui/circlepack`](ui/circlepack) | Zoomable circle packing, as d3's: a tree as circles in circles colored by branch, names where they fit, a click to zoom in, Escape or a click outside to zoom out, and the path down shown in the corner. | [`examples/circlepack`](examples/circlepack) |
+| [`ui/windrose`](ui/windrose) | Wind rose: sixteen directions stacked by speed band, rings of the share of time, the calm share in the middle, a tooltip per wedge, and a legend whose bands hide and show. | [`examples/windrose`](examples/windrose) |
+| [`ui/elevation`](ui/elevation) | Elevation profile of a route, as cycling apps: the ground colored by grade, climbs marked with their length and grade, a readout under the pointer, and a stretch dragged to measure its gain, loss and grade. | [`examples/elevation`](examples/elevation) |
+| [`ui/timecode`](ui/timecode) | Timecode field, as video editors: frames written as hours, minutes, seconds and frames at the footage's rate with drop-frame, scrubbing by dragging, Up and Down to step, and typing digits or `+`/`-` offsets from the right. | [`examples/timecode`](examples/timecode) |
+| [`ui/currency`](ui/currency) | Money field: the currency's symbol, digits grouped as typed or pasted, its own number of decimals, a list to pick another currency, and amounts kept in minor units. | [`examples/currency`](examples/currency) |
+| [`ui/duration`](ui/duration) | Duration field that reads time as people write it, `1h 30m`, `90m`, `1.5h`, `1:30`, `2d 4h`: what the text reads as shown while typing, text it cannot read in red, and Up and Down by 15 minutes. | [`examples/duration`](examples/duration) |
+| [`ui/shogi`](ui/shogi) | Shogi board: pentagonal pieces facing the opponent, pieces in hand with counts, drops, a choice to promote where a piece may and promotion where it must, the last move and check lit, and the board turned for gote. The app supplies the rules. | [`examples/shogi`](examples/shogi) |
+| [`ui/nonogram`](ui/nonogram) | Nonogram, as picross: clues for each row and column dimmed once met, clicks and drags along a line to fill or cross out, the line under the pointer tinted, keyboard play, and the picture shown when solved. | [`examples/nonogram`](examples/nonogram) |
+| [`ui/problems`](ui/problems) | Problems panel, as VS Code's: diagnostics grouped by file with severity marks, sources and codes, line and column, a text filter, toggles with counts for each severity, folding files, and opening a problem. | [`examples/problems`](examples/problems) |
+| [`ui/poll`](ui/poll) | Chat poll: one or several choices, a vote by click or Vote, results that fill with each share and check the user's choices, a retract button, and a closed poll with its leader bold. | [`examples/poll`](examples/poll) |
 
 ### Menu bar
 
@@ -489,6 +508,25 @@ go run ./examples/hud
 go run ./examples/notebook
 go run ./examples/ramp
 go run ./examples/crossword
+go run ./examples/querybar
+go run ./examples/explorer
+go run ./examples/findinfiles
+go run ./examples/debugger
+go run ./examples/presence
+go run ./examples/bracket
+go run ./examples/sudoku
+go run ./examples/loupe
+go run ./examples/cohort
+go run ./examples/circlepack
+go run ./examples/windrose
+go run ./examples/elevation
+go run ./examples/timecode
+go run ./examples/currency
+go run ./examples/duration
+go run ./examples/shogi
+go run ./examples/nonogram
+go run ./examples/problems
+go run ./examples/poll
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
