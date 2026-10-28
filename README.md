@@ -236,6 +236,22 @@ Requires mygo v0.5.5 and Go 1.27.1 or later.
 | [`ui/nonogram`](ui/nonogram) | Nonogram, as picross: clues for each row and column dimmed once met, clicks and drags along a line to fill or cross out, the line under the pointer tinted, keyboard play, and the picture shown when solved. | [`examples/nonogram`](examples/nonogram) |
 | [`ui/problems`](ui/problems) | Problems panel, as VS Code's: diagnostics grouped by file with severity marks, sources and codes, line and column, a text filter, toggles with counts for each severity, folding files, and opening a problem. | [`examples/problems`](examples/problems) |
 | [`ui/poll`](ui/poll) | Chat poll: one or several choices, a vote by click or Vote, results that fill with each share and check the user's choices, a retract button, and a closed poll with its leader bold. | [`examples/poll`](examples/poll) |
+| [`ui/cloze`](ui/cloze) | Fill-in-the-blank exercise, as language courses set them: blanks as wide as their longest answer written `{colour|color}` in the text, Enter to the next blank, Check marking each right or wrong with the answer on hover, Reveal and Reset. | [`examples/cloze`](examples/cloze) |
+| [`ui/typing`](ui/typing) | Typing test: the passage turning from muted to the text color as it is typed right and red where wrong, a gliding caret, words a minute and accuracy as they go, and a result with a line of the speed and a mark at each error. | [`examples/typing`](examples/typing) |
+| [`ui/confetti`](ui/confetti) | Confetti thrown over the window: squares, strips and dots burst from a point or showered from the top, tumbling, drifting and fading as they fall, letting the pointer through, and none where the desktop asks for less motion. | [`examples/confetti`](examples/confetti) |
+| [`ui/island`](ui/island) | Live activities in a black capsule at the top of the window, as the Dynamic Island: a glance at each end, a circle for a second activity, a click springing it open to the activity in full, and Escape or a click outside springing it back. | [`examples/island`](examples/island) |
+| [`ui/thermostat`](ui/thermostat) | Thermostat dial: a ring of ticks around the target in large figures, the stretch to the room's temperature lit orange or blue, handles dragged round the ring, a heat-to and cool-to range in Auto, keys and scrolling, and the modes below. | [`examples/thermostat`](examples/thermostat) |
+| [`ui/swatches`](ui/swatches) | Palette from a picture: its main colors by k-means, a ring where each is found, a bar of how much each takes, swatches with hex and share, the rest of the picture dimmed for the one pointed at, and a click to copy its hex. | [`examples/swatches`](examples/swatches) |
+| [`ui/shadows`](ui/shadows) | Box shadow stack editor: a card casting the shadows on a stage dragged to move the light, layers to show, hide, add and remove, fields for the offsets, blur, spread, color and inset, and the stack as CSS with Copy. | [`examples/shadows`](examples/shadows) |
+| [`ui/filters`](ui/filters) | Photo adjustments drawn by a shader: exposure, contrast, saturation, warmth, tint, vignette and blur, sliders that fill from zero and reset on a double click, and After, Split with a line dragged across, and Before. | [`examples/filters`](examples/filters) |
+| [`ui/rebase`](ui/rebase) | Interactive rebase todo, as `git rebase -i`: a row a commit on a line with its action, pick, reword, edit, squash, fixup or drop, from a menu or its letter, squashes set in, drops struck through, rewording in place, drag or Alt+Up and Alt+Down to reorder, and the todo written out. | [`examples/rebase`](examples/rebase) |
+| [`ui/flags`](ui/flags) | Feature flags across environments: a row a flag, a switch and a pie of its rollout in each environment, a slider in a popover to roll it out, a confirmation before a switch in production, and a search. | [`examples/flags`](examples/flags) |
+| [`ui/daylight`](ui/daylight) | Daylight of a place on a day: sunrise, sunset, day length and its change since yesterday, the sun's path over the sky's light through the day with the time and height under the pointer, and the year's daylight to pick another day. | [`examples/daylight`](examples/daylight) |
+| [`ui/metro`](ui/metro) | Ride along a metro line: the stops down the line in its color, the train between them, minutes to each stop ahead, transfer badges, stops passed and past the destination folded, and a click to get off elsewhere. | [`examples/metro`](examples/metro) |
+| [`ui/plasmid`](ui/plasmid) | Circular plasmid map: base pairs counted around the ring, features as arcs pointing the way their strand reads, cut sites as ticks, labels pushed apart where they crowd, a feature's range on hover, and a selection by click or drag around the ring. | [`examples/plasmid`](examples/plasmid) |
+| [`ui/cardinput`](ui/cardinput) | Payment card field: a card that shows what is typed in its brand's colors and turns over for the security code, digits grouped by brand, the Luhn check, the expiry checked against the month, and focus moving on as each field is whole. | [`examples/cardinput`](examples/cardinput) |
+| [`ui/cards`](ui/cards) | Playing cards and a hand: corner indices, pips and framed court cards, a back that turns over, and a fanned hand where the card pointed at rises, a dragged card takes a new place, and a card dragged up or double-clicked is played. | [`examples/cards`](examples/cards) |
+| [`ui/dice`](ui/dice) | Dice tray: six-sided dice with pips and the others as shapes with numbers, tumbling one after another on Roll or Space, a click to hold a die through a roll, and the total. | [`examples/dice`](examples/dice) |
 
 ### Menu bar
 
@@ -284,6 +300,8 @@ Parts of an AI chat or coding agent, after [AI Elements](https://ui.shadcn.com/d
 | [`ui/arena`](ui/arena) | Two answers side by side to vote between, as model arenas: A, B, a tie or both bad by button or key, then the models named and the vote marked. | [`examples/arena`](examples/arena) |
 | [`ui/bboxlabel`](ui/bboxlabel) | Bounding box labeler for object detection data: boxes dragged across a picture with guides, moved and resized by their corners, classes chosen with number keys, and a tag on each box. | [`examples/bboxlabel`](examples/bboxlabel) |
 | [`ui/runs`](ui/runs) | Training curves of runs, as W&B and TensorBoard: a line a run smoothed by an exponential moving average over the raw values, a log scale, each run's value at the step under the pointer, and a legend that hides and shows runs. | [`examples/runs`](examples/runs) |
+| [`ui/redline`](ui/redline) | Suggested edits to prose, as Track Changes: removals struck in red and insertions underlined in green, a pinned card with who suggested an edit and why, Accept and Reject, Accept all, Reject all and Undo, J and K, Y and N, and a word diff to make the edits from two texts. | [`examples/redline`](examples/redline) |
+| [`ui/maskpaint`](ui/maskpaint) | Mask painter for inpainting: the masked part tinted over the picture, a brush and an eraser with soft edges, a ring cursor as wide as they paint, `[` and `]` to size them, Invert, Clear and Undo, and how much is masked. | [`examples/maskpaint`](examples/maskpaint) |
 
 Each package's doc comment shows how to use it.
 
@@ -527,6 +545,24 @@ go run ./examples/shogi
 go run ./examples/nonogram
 go run ./examples/problems
 go run ./examples/poll
+go run ./examples/redline
+go run ./examples/maskpaint
+go run ./examples/cloze
+go run ./examples/typing
+go run ./examples/confetti
+go run ./examples/island
+go run ./examples/thermostat
+go run ./examples/swatches
+go run ./examples/shadows
+go run ./examples/filters
+go run ./examples/rebase
+go run ./examples/flags
+go run ./examples/daylight
+go run ./examples/metro
+go run ./examples/plasmid
+go run ./examples/cardinput
+go run ./examples/cards
+go run ./examples/dice
 go run ./examples/menubar
 go run ./examples/agent
 go run ./examples/chat
