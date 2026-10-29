@@ -36,8 +36,9 @@ type Resolver interface {
 }
 
 // variable is a variable as a template writes it, "{{name}}", with spaces
-// inside the braces or without.
-var variable = regexp.MustCompile(`\{\{ *([\w.-]+) *\}\}`)
+// inside the braces or without. A name may start with "$", as API clients
+// name the values they make as they send, as {{$uuid}}.
+var variable = regexp.MustCompile(`\{\{ *(\$?[\w.-]+) *\}\}`)
 
 // span is a variable in a text: its runes start up to end, and its name.
 type span struct {
@@ -215,7 +216,7 @@ func (s *state) pick(text, name string) string {
 
 // nameRune reports whether r may be in a variable's name.
 func nameRune(r rune) bool {
-	return unicode.IsLetter(r) || unicode.IsDigit(r) || r == '_' || r == '.' || r == '-'
+	return unicode.IsLetter(r) || unicode.IsDigit(r) || r == '_' || r == '.' || r == '-' || r == '$'
 }
 
 // rank returns the names matching query, ignoring case, best first: those
